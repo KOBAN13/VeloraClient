@@ -1,8 +1,10 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Extensions;
 using Google.Protobuf;
 using NativeWebSocket;
 using Packets;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Connections
@@ -45,26 +47,19 @@ namespace Connections
         
         private void OnOpenWebSocketConnection()
         {
-            var chatMessage = new ChatMessage
-            {
-                Msg = "Hello from Unity!"
-            };
-
-            var id = new IdMessage
-            {
-                Id = 150
-            };
-
             var request = new Packet
             {
-                Chat = chatMessage,
-                Id = id,
+                Chat = new ChatMessage
+                {
+                    Msg = "Hello from Unity!"
+                },
                 SenderId = 500
             };
 
             var bytes = request.ToByteArray();
             
-            Debug.Log("Sending bytes: " + bytes.Length);
+            Debug.Log(
+                $"bytes={bytes.Length}, hex={bytes.ToHexString()}, utf8={bytes.ToUtf8Preview()}.");
             
             _webSocket.Send(bytes);
         }
@@ -76,7 +71,13 @@ namespace Connections
             try
             {
                 var packet = Packet.Parser.ParseFrom(data);
-                Debug.Log($"Server response: id={packet.Id}, message={packet.Chat.Msg}");
+                Debug.Log($"Server response: senderId={packet.SenderId}, payload={packet.DescribePacket()}");
+            }
+            catch (InvalidProtocolBufferException e)
+            {
+                Debug.LogError(
+                    "Parse error: payload is not a complete Packet protobuf. " +
+                    $"bytes={data.Length}, hex={data.ToHexString()}, utf8={data.ToUtf8Preview()}. Exception: {e}");
             }
             catch (Exception e)
             {
