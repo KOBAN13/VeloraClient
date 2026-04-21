@@ -1,5 +1,5 @@
 using Core.Utils.Factory.Base;
-using UI.Base;
+using UI.Core;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

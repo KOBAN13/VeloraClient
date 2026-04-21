@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using UI.Base;
+using UI.Core;
 
 namespace Core.Utils.Screens
 {

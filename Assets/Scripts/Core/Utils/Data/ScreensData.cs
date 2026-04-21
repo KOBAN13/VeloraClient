@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Core.Utils.Addressable;
 using Sirenix.OdinInspector;
-using UI.Base;
+using UI.Core;
 using UnityEngine;
 
 namespace Core.Utils.Data

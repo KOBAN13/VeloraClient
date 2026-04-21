@@ -3,7 +3,7 @@ using Core.Utils.Data;
 using Cysharp.Threading.Tasks;
 using Factories;
 using Services.SceneManagement;
-using UI.Base;
+using UI.Core;
 using UnityEngine;
 using VContainer;
 

@@ -1,6 +1,6 @@
 using System;
 using TMPro;
-using UI.Base;
+using UI.Core;
 using UnityEngine;
 
 namespace UI.Binders

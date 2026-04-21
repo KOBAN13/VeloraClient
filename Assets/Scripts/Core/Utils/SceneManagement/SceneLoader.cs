@@ -3,7 +3,7 @@ using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
 using R3;
 using Services.SceneManagement.Enums;
-using UI.View;
+using UI.Views;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;

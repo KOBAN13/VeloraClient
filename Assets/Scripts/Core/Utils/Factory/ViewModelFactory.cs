@@ -1,21 +1,21 @@
-using UI.Base;
+using UI.Core;
 using VContainer;
-using VContainer.Unity;
 
 namespace Core.Utils.Factory
 {
     public class ViewModelFactory : Base.Factory
     {
-        private IObjectResolver _resolver;
-        
-        public T Create<T, TK>(params ViewBinder[] viewBinders) where T : ViewModel, new() where TK: LifetimeScope
+        private readonly IObjectResolver _resolver;
+
+        public ViewModelFactory(IObjectResolver resolver)
         {
-            _resolver = LifetimeScope.Find<TK>().Container;
-            
+            _resolver = resolver;
+        }
+        
+        public T Create<T>() where T : ViewModel, new()
+        {
             var viewModel = new T();
-            
             _resolver.Inject(viewModel);
-            
             return viewModel;
         }
     }

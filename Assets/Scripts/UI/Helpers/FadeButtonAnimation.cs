@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using VContainer;
 
 namespace UI.Helpers
 {

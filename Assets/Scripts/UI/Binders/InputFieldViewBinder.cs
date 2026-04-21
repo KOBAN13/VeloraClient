@@ -1,7 +1,7 @@
 using System;
 using R3;
 using TMPro;
-using UI.Base;
+using UI.Core;
 using UnityEngine;
 
 namespace UI.Binders

@@ -1,6 +1,6 @@
 using System;
 using R3;
-using UI.Base;
+using UI.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
