@@ -7,7 +7,6 @@ namespace UI.Views
     {
         public override void Initialize()
         {
-            
         }
     }
 }
