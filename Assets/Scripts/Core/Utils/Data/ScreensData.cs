@@ -1,0 +1,18 @@
+using System.Collections.Generic;
+using Core.Utils.Addressable;
+using Sirenix.OdinInspector;
+using UI.Base;
+using UnityEngine;
+
+namespace Core.Utils.Data
+{
+    [CreateAssetMenu(fileName = "SceneConfig", menuName = "Db/SceneConfig")]
+    public class ScreensData : SerializedScriptableObject
+    {
+        [field: SerializeField] public Transform Root { get; private set; }
+        
+        [SerializeField] private List<AddressablePrefabByType<View>> _screens;
+
+        public IReadOnlyList<AddressablePrefabByType<View>> Screens => _screens;
+    }
+}
