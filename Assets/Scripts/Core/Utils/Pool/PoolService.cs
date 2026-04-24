@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Utils.Pool;
 using UnityEngine;
+using Utils.Pool;
 using VContainer;
 
-namespace Utils.Pool
+namespace Core.Utils.Pool
 {
     public class PoolService : IPoolService
     {
@@ -23,24 +23,24 @@ namespace Utils.Pool
             RegisterPool();
         }
 
-        public bool TrySpawn<T>(EObjectInPoolName id, bool isActive, out T obj) where T : Component
+        public T Spawn<T>(EObjectInPoolName id, bool isActive) where T : Component
         {
-            obj = Spawn<T>(id);
+            var obj = Spawn<T>(id);
 
             if (obj != null)
                 obj.gameObject.SetActive(isActive);
 
-            return obj != null;
+            return obj;
         }
 
-        public bool TrySpawn<T>(EObjectInPoolName id, bool isActive, Vector3 position, out T obj) where T : Component
+        public T Spawn<T>(EObjectInPoolName id, bool isActive, Vector3 position) where T : Component
         {
-            obj = Spawn<T>(id, position);
+            var obj = Spawn<T>(id, position);
 
             if (obj != null)
                 obj.gameObject.SetActive(isActive);
 
-            return obj != null;
+            return obj;
         }
 
         public void ReturnToPool<T>(EObjectInPoolName id, T obj) where T : Component

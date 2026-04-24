@@ -4,8 +4,8 @@ namespace Core.Utils.Pool
 {
     public interface IPoolService
     {
-        bool TrySpawn<T>(EObjectInPoolName id, bool isActive, out T obj) where T : Component;
-        bool TrySpawn<T>(EObjectInPoolName id, bool isActive, Vector3 position, out T obj) where T : Component;
+        T Spawn<T>(EObjectInPoolName id, bool isActive) where T : Component;
+        T Spawn<T>(EObjectInPoolName id, bool isActive, Vector3 position) where T : Component;
         void ReturnToPool<T>(EObjectInPoolName id, T obj) where T : Component;
     }
 }

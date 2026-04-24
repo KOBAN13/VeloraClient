@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace UI.Views
 {
-    public class MessageVIew
+    public class MessageView : MonoBehaviour
     {
         
     }

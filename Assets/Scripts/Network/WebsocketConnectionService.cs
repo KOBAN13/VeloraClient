@@ -6,31 +6,33 @@ using NativeWebSocket;
 using Packets;
 using Unity.VisualScripting;
 using UnityEngine;
+using VContainer.Unity;
+using IInitializable = Unity.VisualScripting.IInitializable;
 
 namespace Network
 {
-    public class WebsocketConnection : MonoBehaviour
+    public class WebsocketConnectionService : IInitializable, ITickable, IDisposable, IWebsocketConnectionService
     {
         private WebSocket _webSocket;
-
-        private async void Awake()
+        
+        public void Initialize()
         {
             CreateWebSocket().Forget();
         }
-
-        private void Update()
-        {
-#if !UNITY_WEBGL || UNITY_EDITOR
-            _webSocket?.DispatchMessageQueue();
-#endif
-        }
-
-        private async void OnApplicationQuit()
+        
+        public async void Dispose()
         {
             if (_webSocket != null)
             {
                 await _webSocket.Close();
             }
+        }
+
+        public void Tick()
+        {
+#if !UNITY_WEBGL || UNITY_EDITOR
+            _webSocket?.DispatchMessageQueue();
+#endif
         }
 
         private async UniTaskVoid CreateWebSocket()
