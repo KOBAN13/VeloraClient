@@ -7,7 +7,7 @@ using Packets;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Connections
+namespace Network
 {
     public class WebsocketConnection : MonoBehaviour
     {
