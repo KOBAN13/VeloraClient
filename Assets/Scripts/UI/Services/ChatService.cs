@@ -7,9 +7,12 @@ namespace UI.Services
 {
     public class ChatService : IChatService
     {
-        private Queue<MessageView> _queue = new();
-        
+        private readonly Queue<MessageView> _queue = new();
+        private readonly List<ChatMessageData> _messages = new();
         private readonly PoolService _poolService;
+
+        public event System.Action<ChatMessageData> MessageAdded;
+        public IReadOnlyCollection<ChatMessageData> Messages => _messages;
 
         public ChatService(PoolService poolService)
         {
@@ -18,12 +21,13 @@ namespace UI.Services
 
         public void AddMessage(ChatMessageData data)
         {
-            var message = _poolService.Spawn<MessageView>(EObjectInPoolName.ChatMessage, true);
+            _messages.Add(data);
+            MessageAdded?.Invoke(data);
         }
 
         public void SendMessage(ChatMessageData data)
         {
-            
+            AddMessage(data);
         }
     }
 }
