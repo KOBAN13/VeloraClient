@@ -7,7 +7,7 @@ namespace Core.Utils.Logger
 {
     public class LoggerService : ILoggerService
     {
-        private ILoggerParameters _parameters;
+        private readonly ILoggerParameters _parameters;
 
         private readonly IChatService _chatService;
 
@@ -21,7 +21,7 @@ namespace Core.Utils.Logger
         {
             PushMessage(source, message, _parameters.InfoColor, ChatMessageType.Info);
         }
-
+                    
         public void Warning(string message, string source = "System")
         {
             PushMessage(source, message, _parameters.WarningColor, ChatMessageType.Warning);

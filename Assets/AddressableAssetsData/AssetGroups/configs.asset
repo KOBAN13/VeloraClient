@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: configs
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: configs
+  m_GUID: 6ebfc9e2a870cbdfa804d2402483884a
+  m_SerializeEntries:
+  - m_GUID: 17c1e166eed38060f964556b785b405b
+    m_Address: Assets/Configs/SceneConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6f4072fd6d8e72da9f63d05d2adf206
+    m_Address: Assets/Configs/PoolParameters.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 81a2d59450c071884b57e6ffc031f935, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 762cb91f371cab15abbb71e2bf17968b, type: 2}
+    - {fileID: 11400000, guid: f37a38e8d8b2d8fdb947d43d4901dfe2, type: 2}

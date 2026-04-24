@@ -1,4 +1,5 @@
 using System;
+using Core.Utils.Logger;
 using Cysharp.Threading.Tasks;
 using Extensions;
 using Google.Protobuf;
@@ -14,7 +15,13 @@ namespace Network
     public class WebsocketConnectionService : IInitializable, ITickable, IDisposable, IWebsocketConnectionService
     {
         private WebSocket _webSocket;
-        
+        private ILoggerService _logger;
+
+        public WebsocketConnectionService(ILoggerService logger)
+        {
+            _logger = logger;
+        }
+
         public void Initialize()
         {
             CreateWebSocket().Forget();
@@ -43,12 +50,16 @@ namespace Network
             _webSocket.OnMessage += OnMessageWebSocket;
             _webSocket.OnError += OnWebSocketError;
             _webSocket.OnClose += OnWebSocketClose;
+            
+            _logger.Log("Connecting...");
 
             await _webSocket.Connect();
         }
         
         private void OnOpenWebSocketConnection()
         {
+            _logger.Log("Connect successfully!");
+            
             var request = new Packet
             {
                 Chat = new ChatMessage
@@ -60,20 +71,20 @@ namespace Network
 
             var bytes = request.ToByteArray();
             
-            Debug.Log(
-                $"bytes={bytes.Length}, hex={bytes.ToHexString()}, utf8={bytes.ToUtf8Preview()}.");
-            
             _webSocket.Send(bytes);
         }
         
         private void OnMessageWebSocket(byte[] data)
         {
-            Debug.Log("Received bytes: " + data.Length);
-
             try
             {
                 var packet = Packet.Parser.ParseFrom(data);
-                Debug.Log($"Server response: senderId={packet.SenderId}, payload={packet.DescribePacket()}");
+                var senderId = packet.SenderId;
+                
+                if (senderId != 0)
+                    HandleIdMessage(senderId, packet.Id);
+                else
+                    HandleChatMessage(senderId, packet.Chat);
             }
             catch (InvalidProtocolBufferException e)
             {
@@ -87,14 +98,26 @@ namespace Network
             }
         }
 
+        private void HandleIdMessage(ulong senderId, IdMessage msg)
+        {
+            var clientId = msg.Id;
+            
+            _logger.Log("Received clientId: " + clientId);
+        }
+
+        private void HandleChatMessage(ulong senderId, ChatMessage msg)
+        {
+            _logger.Log($"Client {senderId} received message: {msg.Msg}");
+        }
+
         private void OnWebSocketError(string errorMsg)
         {
-            Debug.LogError(errorMsg);
+            _logger.Error($"WebSocket error: {errorMsg}");
         }
         
         private void OnWebSocketClose(WebSocketCloseCode closeCode)
         {
-            Debug.Log(closeCode.ToString());
+            _logger.Warning($"WebSocket closed with code {closeCode}");
         }
     }
 }
