@@ -104,9 +104,9 @@ namespace Core.Utils.Pool
                 if (entry.Key == EObjectInPoolName.None)
                 {
                     var pool = new ObjectPool<Component>(null, component, _objectResolver);
-                    await pool.PrewarmAsync(entry.Value.prewarmCount);
-
                     _pools.Add(entry.Key, pool);
+
+                    await pool.PrewarmAsync(entry.Value.prewarmCount);
                 }
                 else
                 {
@@ -114,9 +114,9 @@ namespace Core.Utils.Pool
                         continue;
 
                     var pool = new ObjectPool<Component>(rootObject, component, _objectResolver);
-                    await pool.PrewarmAsync(entry.Value.prewarmCount);
-
                     _pools.Add(entry.Key, pool);
+
+                    await pool.PrewarmAsync(entry.Value.prewarmCount);
                 }
             }
         }

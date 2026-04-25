@@ -92,6 +92,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daeae0c245354bd2907a833c79ca5994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _messageAddedBinder:
+    _content: {fileID: 8032314276130906134}
+  _inputChangedBinder:
+    InputField: {fileID: 131005}
+  _inputTextBinder:
+    InputField: {fileID: 131005}
+  _sendButtonBinder:
+    _button: {fileID: 133004}
 --- !u!114 &100005
 MonoBehaviour:
   m_ObjectHideFlags: 0

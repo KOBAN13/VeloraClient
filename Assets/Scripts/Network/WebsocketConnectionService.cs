@@ -1,21 +1,19 @@
 using System;
+using Core.Utils.Extensions;
 using Core.Utils.Logger;
 using Cysharp.Threading.Tasks;
-using Extensions;
 using Google.Protobuf;
 using NativeWebSocket;
 using Packets;
-using Unity.VisualScripting;
 using UnityEngine;
 using VContainer.Unity;
-using IInitializable = Unity.VisualScripting.IInitializable;
 
 namespace Network
 {
     public class WebsocketConnectionService : IInitializable, ITickable, IDisposable, IWebsocketConnectionService
     {
         private WebSocket _webSocket;
-        private ILoggerService _logger;
+        private readonly ILoggerService _logger;
 
         public WebsocketConnectionService(ILoggerService logger)
         {
@@ -33,6 +31,23 @@ namespace Network
             {
                 await _webSocket.Close();
             }
+        }
+
+        public void PrepareNewPackage(string newMsg)
+        {
+            var chat = new ChatMessage
+            {
+                Msg = newMsg
+            };
+
+            var packet = new Packet
+            {
+                Chat = chat
+            };
+            
+            var bytes = packet.ToByteArray();
+
+            _webSocket.Send(bytes);
         }
 
         public void Tick()
@@ -59,19 +74,6 @@ namespace Network
         private void OnOpenWebSocketConnection()
         {
             _logger.Log("Connect successfully!");
-            
-            var request = new Packet
-            {
-                Chat = new ChatMessage
-                {
-                    Msg = "Hello from Unity!"
-                },
-                SenderId = 500
-            };
-
-            var bytes = request.ToByteArray();
-            
-            _webSocket.Send(bytes);
         }
         
         private void OnMessageWebSocket(byte[] data)
@@ -82,7 +84,7 @@ namespace Network
                 var senderId = packet.SenderId;
                 
                 if (senderId != 0)
-                    HandleIdMessage(senderId, packet.Id);
+                    HandleIdMessage(senderId, packet.Id);       
                 else
                     HandleChatMessage(senderId, packet.Chat);
             }

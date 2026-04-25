@@ -1,4 +1,5 @@
-﻿using Core.Utils.SceneManagement.Interfaces;
+﻿using System;
+using Core.Utils.SceneManagement.Interfaces;
 using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -18,6 +19,7 @@ namespace Services.SceneManagement
         private IScenesService _scenesService;
         private IScreenService _screenService;
         private float _targetProgress;
+        private IDisposable _sceneLoadedSubscription;
         
         private readonly LoadingProgress _loadingProgress = new();
         
@@ -30,6 +32,7 @@ namespace Services.SceneManagement
             _scenesService = scenesService;
             _screenService = screenService;
             _scenesService.Construct(this, sceneResources);
+            _sceneLoadedSubscription = _scenesService.SceneIsLoad.Subscribe(_ => _screenService.Close());
         }
         
         public async UniTask LoadScene(TypeScene typeScene)
@@ -58,9 +61,9 @@ namespace Services.SceneManagement
             _scenesService.UnloadResources();
         }
         
-        private void OnEnable()
+        private void OnDestroy()
         {
-            _scenesService.SceneIsLoad.Subscribe(_ => _screenService.Close());
+            _sceneLoadedSubscription?.Dispose();
         }
 
         private void Update()

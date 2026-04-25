@@ -1,11 +1,22 @@
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace DI
+namespace Core.DI
 {
     public class BaseLifeTimeScope : LifetimeScope
     {
         protected IContainerBuilder Builder;
+
+        protected void RegisterComponent<T>(T component) where T : Component
+        {
+            Builder.RegisterComponent(component).AsImplementedInterfaces().AsSelf();
+        }
+
+        protected void RegisterEntryPoint<T>(Lifetime lifetime = Lifetime.Singleton) where T : class
+        {
+            Builder.RegisterEntryPoint<T>(lifetime).AsSelf();
+        }
 
         protected void RegisterWithArgument<T, TParam>(Lifetime lifetime, TParam param) where T : class
         {
@@ -19,7 +30,8 @@ namespace DI
         
         protected void RegisterInstance<T>(T instance) where T : class
         {
-            Builder.RegisterInstance(instance).AsImplementedInterfaces().AsSelf();
+            var implementationType = instance.GetType();
+            Builder.RegisterInstance(instance, implementationType).AsImplementedInterfaces();
         }
     }
 }
