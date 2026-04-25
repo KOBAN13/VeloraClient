@@ -1,15 +1,17 @@
+using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
+using UI.Views;
 using VContainer;
 
 namespace Core.DI.Bootstraps
 {
-    public class StartBootstrup
+    public class StartBootstraps : Bootstrap<RootLifeTimeScope>
     {
-        [Inject] private ScreensService _screensService;
+        [Inject] private IScreenService _screensService;
         
-        private async UniTask Initialize()
+        protected override async UniTask Initialize()
         {
-            await _screensService.OpenAsync<MainMenuScreen>();
+            await _screensService.OpenAsync<ChatScreen>();
         }
     }
 }

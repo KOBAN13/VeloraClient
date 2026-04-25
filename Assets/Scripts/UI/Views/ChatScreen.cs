@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UI.Views
 {
-    public class ChatView : Screen<ChatViewModel>
+    public class ChatScreen : Screen<ChatViewModel>
     {
         [SerializeField, AutoBind] private ChatMessageBinder _messageAddedBinder = new();
         [SerializeField, AutoBind] private InputFieldTextChangedViewBinder _inputChangedBinder = new();
