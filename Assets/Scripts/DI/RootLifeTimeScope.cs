@@ -1,4 +1,5 @@
 using System.Linq;
+using Core.Utils.Logger;
 using Network;
 using Services.SceneManagement;
 using UnityEngine;
@@ -41,6 +42,7 @@ namespace DI
 
         private void RegisterServices()
         {
+            Register<LoggerService>(Lifetime.Singleton);
             Register<WebsocketConnectionService>(Lifetime.Singleton);
         }
     }
