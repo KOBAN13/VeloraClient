@@ -9,7 +9,7 @@ namespace Core.Utils.Data
     [CreateAssetMenu(fileName = "SceneConfig", menuName = "Db/SceneConfig")]
     public class ScreensData : SerializedScriptableObject
     {
-        [field: SerializeField] public Transform Root { get; private set; }
+        [field: SerializeField] public Canvas Canvas { get; private set; }
         
         [SerializeField] private List<AddressablePrefabByType<View>> _screens;
 

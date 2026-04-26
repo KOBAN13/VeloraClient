@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using VContainer.Unity;
-using ITickable = Core.Utils.Services.ITickable;
 
-namespace Core.Utils
+namespace Core.Utils.Services
 {
     public class TickService
     {
-        private List<ITickable> _tickables = new();
+        private readonly List<ITickable> _tickables = new();
         
         public void RegisterTick(ITickable tickable)
         {
@@ -15,9 +13,9 @@ namespace Core.Utils
 
         public void Tick(float deltaTime)
         {
-            for (int i = 0; i < _tickables.Count; i++)
+            foreach (var tickable in _tickables)
             {
-                _tickables[i].Tick(deltaTime);
+                tickable.Tick(deltaTime);
             }
         }
 

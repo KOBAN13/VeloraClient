@@ -3,13 +3,14 @@ using Core.Utils.SceneManagement.Interfaces;
 using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
 using R3;
+using Services.SceneManagement;
 using Services.SceneManagement.Enums;
 using UI.Views;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
 
-namespace Services.SceneManagement
+namespace Core.Utils.SceneManagement
 {
     public class SceneLoader : MonoBehaviour
     {

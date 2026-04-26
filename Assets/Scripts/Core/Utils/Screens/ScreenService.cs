@@ -58,9 +58,6 @@ namespace Core.Utils.Screens
         public void Close()
         {
             var screen = _screens.Last.Value;
-
-            if (screen == null) 
-                return;
             
             _screens.RemoveLast();
             screen.Close();

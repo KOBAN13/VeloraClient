@@ -5,9 +5,9 @@ using Core.Utils.Logger.Data;
 using Core.Utils.Pool;
 using Core.Utils.SceneManagement;
 using Core.Utils.Screens;
+using Core.Utils.Services;
 using Factories;
 using Network;
-using Services.SceneManagement;
 using UI.Services;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -26,7 +26,6 @@ namespace Core.DI
             
             RegisterComponents();
             RegisterConfigs();
-            RegisterFallbackConfigs();
             RegisterFactories();
             RegisterServices();
             RegisterEntryPoints();
@@ -46,18 +45,7 @@ namespace Core.DI
 
             foreach (var config in configs)
             {
-                if (config == null)
-                    continue;
-
                 RegisterInstance(config);
-            }
-        }
-
-        private void RegisterFallbackConfigs()
-        {
-            if (!Builder.Exists(typeof(ILoggerParameters), true))
-            {
-                Register<DefaultLoggerParameters>(Lifetime.Singleton);
             }
         }
 
@@ -73,6 +61,7 @@ namespace Core.DI
             Register<SceneResources>(Lifetime.Singleton);
             Register<SceneService>(Lifetime.Singleton);
             Register<ScreenService>(Lifetime.Singleton);
+            Register<TickService>(Lifetime.Singleton);
             Register<PoolService>(Lifetime.Singleton);
             Register<ChatService>(Lifetime.Singleton);
             Register<LoggerService>(Lifetime.Singleton);

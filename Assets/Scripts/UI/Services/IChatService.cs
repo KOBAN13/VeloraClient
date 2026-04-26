@@ -9,6 +9,5 @@ namespace UI.Services
         Observable<ChatMessageDataView> OnMessageAdded { get; }
         IReadOnlyCollection<ChatMessageData> Messages { get; }
         void AddMessage(ChatMessageData data);
-        void SendMessage(ChatMessageData data);
     }
 }

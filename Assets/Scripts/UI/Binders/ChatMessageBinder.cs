@@ -23,6 +23,8 @@ namespace UI.Binders
         {
             data.InstantiateView.transform.SetParent(_content, false);
             data.InstantiateView.transform.SetAsFirstSibling();
+            
+            data.InstantiateView.gameObject.SetActive(true);
 
             data.InstantiateView.SetMessage(FormatMessage(data.Data));
             data.InstantiateView.SetColor(data.Data.Color);

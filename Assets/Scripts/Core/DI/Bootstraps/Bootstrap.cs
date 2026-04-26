@@ -25,6 +25,10 @@ namespace Core.DI.Bootstraps
         {
             LifetimeScope.Build();
 
+            ObjectResolver = LifetimeScope.Container;
+            
+            ObjectResolver.Inject(this);
+
             await Initialize();
 
             _isTicked = true;

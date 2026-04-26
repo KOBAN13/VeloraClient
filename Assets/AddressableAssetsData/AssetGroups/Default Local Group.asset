@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: 83f31759486804c91a998f96f2ba5e61
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: e7e2fda994d3401bb5468cad29f49314
+    m_Address: Assets/Prefabs/UI/ChatView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 81a2d59450c071884b57e6ffc031f935, type: 2}
   m_SchemaSet:

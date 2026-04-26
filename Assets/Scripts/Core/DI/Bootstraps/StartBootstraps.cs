@@ -11,6 +11,10 @@ namespace Core.DI.Bootstraps
         
         protected override async UniTask Initialize()
         {
+            InitializeServices();
+            
+            DontDestroyOnLoad(gameObject);
+            
             await _screensService.OpenAsync<ChatScreen>();
         }
     }

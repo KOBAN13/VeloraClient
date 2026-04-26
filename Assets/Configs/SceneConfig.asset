@@ -21,12 +21,13 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  <Root>k__BackingField: {fileID: 0}
+  <Root>k__BackingField: {fileID: 7212959087471981516, guid: 96716fa6b803f421ba630c5250f300f7, type: 3}
+  <Canvas>k__BackingField: {fileID: 1210442436558223213, guid: 96716fa6b803f421ba630c5250f300f7, type: 3}
   _screens:
-  - type: UI.Views.AuthorizationErrorScreen
+  - type: UI.Views.ChatScreen
     asset:
-      m_AssetGUID: 
+      m_AssetGUID: e7e2fda994d3401bb5468cad29f49314
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
-      m_EditorAssetChanged: 0
+      m_EditorAssetChanged: 1

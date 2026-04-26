@@ -1,4 +1,5 @@
 using R3;
+using Network;
 using UI.Core;
 using UI.Helpers;
 using UI.Services;
@@ -20,12 +21,14 @@ namespace UI.ViewModels
         private readonly ReactiveCommand _sendButtonClicked = new();
         
         private IChatService _chatService;
+        private IWebsocketConnectionService _websocketConnectionService;
         private string _inputText = string.Empty;
 
         [Inject]
-        private void Construct(IChatService chatService)
+        private void Construct(IChatService chatService, IWebsocketConnectionService websocketConnectionService)
         {
             _chatService = chatService;
+            _websocketConnectionService = websocketConnectionService;
         }
         
         public override void Initialize()
@@ -56,8 +59,10 @@ namespace UI.ViewModels
                 return;
 
             var message = _inputText.Trim();
+            var messageData = new ChatMessageData("Player", message, Color.white);
 
-            _chatService.SendMessage(new ChatMessageData("Player", message, Color.white));
+            _chatService.AddMessage(messageData);
+            _websocketConnectionService.PrepareNewPackage(message);
 
             _inputText = string.Empty;
             _inputTextBinder.Value = string.Empty;

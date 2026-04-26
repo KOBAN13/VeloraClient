@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Core.Utils.Pool;
-using Network;
 using R3;
 using UI.Services.Data;
 using UI.Views;
@@ -9,8 +8,6 @@ namespace UI.Services
 {
     public class ChatService : IChatService
     {
-        private readonly IWebsocketConnectionService _websocketConnectionService;
-        
         private readonly List<ChatMessageData> _messages = new();
         private readonly IPoolService _poolService;
         
@@ -19,10 +16,9 @@ namespace UI.Services
         public Observable<ChatMessageDataView> OnMessageAdded => _subject.AsObservable();
         public IReadOnlyCollection<ChatMessageData> Messages => _messages;
 
-        public ChatService(IPoolService poolService, IWebsocketConnectionService websocketConnectionService)
+        public ChatService(IPoolService poolService)
         {
             _poolService = poolService;
-            _websocketConnectionService = websocketConnectionService;
         }
 
         public void AddMessage(ChatMessageData data)
@@ -33,13 +29,6 @@ namespace UI.Services
             
             _messages.Add(data);
             _subject.OnNext(dataView);
-        }
-
-        public void SendMessage(ChatMessageData data)
-        {
-            AddMessage(data);
-            
-            _websocketConnectionService.PrepareNewPackage(data.Text);
         }
     }
 }

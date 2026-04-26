@@ -81,6 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3228874202640729696}
   - component: {fileID: 6165444137893680660}
+  - component: {fileID: 2027414337873780152}
   m_Layer: 0
   m_Name: RootLifeTime
   m_TagString: Untagged
@@ -121,5 +122,18 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _sceneLoader: {fileID: 2988701618814772345}
-  _configLable:
+  _configLabel:
     m_LabelString: config
+--- !u!114 &2027414337873780152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7455905850574111929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664cc36cd91b4f21aac9b8c2142c20ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.DI.Bootstraps.StartBootstraps
+  LifetimeScope: {fileID: 6165444137893680660}

@@ -1,12 +1,12 @@
 using System;
 using Core.Utils.Extensions;
 using Core.Utils.Logger;
+using Core.Utils.Services;
 using Cysharp.Threading.Tasks;
 using Google.Protobuf;
 using NativeWebSocket;
 using Packets;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace Network
 {
@@ -14,6 +14,8 @@ namespace Network
     {
         private WebSocket _webSocket;
         private readonly ILoggerService _logger;
+
+        public bool IsInitialized { get; set; }
 
         public WebsocketConnectionService(ILoggerService logger)
         {
@@ -50,7 +52,7 @@ namespace Network
             _webSocket.Send(bytes);
         }
 
-        public void Tick()
+        public void Tick(float deltaTime)
         {
 #if !UNITY_WEBGL || UNITY_EDITOR
             _webSocket?.DispatchMessageQueue();

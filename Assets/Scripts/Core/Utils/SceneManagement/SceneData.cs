@@ -2,7 +2,7 @@
 using Eflatun.SceneReference;
 using Services.SceneManagement.Enums;
 
-namespace Services.SceneManagement
+namespace Core.Utils.SceneManagement
 {
     [Serializable]
     public struct SceneData

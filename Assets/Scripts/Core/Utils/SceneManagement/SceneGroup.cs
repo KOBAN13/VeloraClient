@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Eflatun.SceneReference;
+using Services.SceneManagement;
 using Services.SceneManagement.Enums;
 using UnityEngine;
 
-namespace Services.SceneManagement
+namespace Core.Utils.SceneManagement
 {
     [Serializable]
     public class SceneGroup

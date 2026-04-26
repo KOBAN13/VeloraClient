@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Services.SceneManagement
+namespace Core.Utils.SceneManagement
 {
     public class SceneResources
     {

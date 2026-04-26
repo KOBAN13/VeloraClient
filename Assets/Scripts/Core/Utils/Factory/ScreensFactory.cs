@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Core.Utils.Data;
+using Core.Utils.SceneManagement;
+using Core.Utils.Services;
 using Cysharp.Threading.Tasks;
 using Factories;
 using Services.SceneManagement;
 using UI.Core;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Core.Utils.Factory
 {
@@ -16,18 +17,18 @@ namespace Core.Utils.Factory
         [Inject] private ScreensData _screensData;
         [Inject] private SceneResources _sceneResources;
         
-        private Transform _parent;
-        private bool _isInitialized;
+        private Canvas _canvas;
+
+        public bool IsInitialized { get; set; }
 
         public void Initialize()
         {
-            if (_isInitialized)
+            if (IsInitialized)
                 return;
 
-            _isInitialized = true;
+            IsInitialized = true;
 
-            if (_screensData.Root != null)
-                _parent = Object.Instantiate(_screensData.Root, null).transform;
+            _canvas = Object.Instantiate(_screensData.Canvas, null);
         }
 
         public async UniTask<TView> CreateAsync<TView>() where TView : View
@@ -36,10 +37,12 @@ namespace Core.Utils.Factory
 
             var data = _screensData.Screens.
                 FirstOrDefault(d => d.Type == typeof(TView));
+            
             var handle = await data.Asset.LoadAssetAsync<GameObject>();
+            
             _sceneResources.AddObjectToRelease(handle);
             var prefab = handle.GetComponent<TView>();
-            var screen = _viewsFactory.Create(prefab, _parent);
+            var screen = _viewsFactory.Create(prefab, _canvas.transform);
             screen.gameObject.SetActive(false);
             return screen;
         }
@@ -53,7 +56,7 @@ namespace Core.Utils.Factory
             var handle = data.Asset.LoadAssetAsync<GameObject>();
             var obj = handle.WaitForCompletion();
             var prefab = obj.GetComponent<TView>();
-            var screen = _viewsFactory.Create(prefab, _parent);
+            var screen = _viewsFactory.Create(prefab, _canvas.transform);
             screen.gameObject.SetActive(false);
             return screen;
         }

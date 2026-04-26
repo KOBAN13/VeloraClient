@@ -10,11 +10,4 @@ namespace Core.Utils.Logger.Data
         [field: SerializeField] public Color WarningColor { get; private set; }
         [field: SerializeField] public Color ErrorColor { get; private set; }
     }
-
-    public sealed class DefaultLoggerParameters : ILoggerParameters
-    {
-        public Color InfoColor => Color.white;
-        public Color WarningColor => Color.yellow;
-        public Color ErrorColor => Color.red;
-    }
 }
