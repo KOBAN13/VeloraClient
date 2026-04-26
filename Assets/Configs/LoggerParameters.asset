@@ -21,6 +21,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  <InfoColor>k__BackingField: {r: 0.05724919, g: 1, b: 0, a: 0}
-  <WarningColor>k__BackingField: {r: 1, g: 0.7791244, b: 0, a: 0}
-  <ErrorColor>k__BackingField: {r: 1, g: 0, b: 0, a: 0}
+  <InfoColor>k__BackingField: {r: 1, g: 1, b: 0.9411765, a: 1}
+  <WarningColor>k__BackingField: {r: 1, g: 0.7791244, b: 0, a: 1}
+  <ErrorColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}

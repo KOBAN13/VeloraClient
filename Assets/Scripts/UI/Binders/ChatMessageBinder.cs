@@ -3,6 +3,7 @@ using R3;
 using UI.Core;
 using UI.Services.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Binders
 {
@@ -10,6 +11,7 @@ namespace UI.Binders
     public class ChatMessageBinder : ViewBinder<ReactiveCommand<ChatMessageDataView>>
     {
         [SerializeField] private RectTransform _content;
+        [SerializeField] private ScrollRect _scrollRect;
 
         private IDisposable _subscription;
 
@@ -21,13 +23,30 @@ namespace UI.Binders
 
         private void SpawnMessage(ChatMessageDataView data)
         {
+            if (_content == null)
+                throw new InvalidOperationException("Chat message content is not assigned.");
+
             data.InstantiateView.transform.SetParent(_content, false);
-            data.InstantiateView.transform.SetAsFirstSibling();
-            
             data.InstantiateView.gameObject.SetActive(true);
 
             data.InstantiateView.SetMessage(FormatMessage(data.Data));
             data.InstantiateView.SetColor(data.Data.Color);
+
+            data.InstantiateView.transform.SetAsLastSibling();
+
+            var messageRect = data.InstantiateView.transform as RectTransform;
+
+            if (messageRect != null)
+                LayoutRebuilder.ForceRebuildLayoutImmediate(messageRect);
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_content);
+            Canvas.ForceUpdateCanvases();
+
+            if (_scrollRect == null)
+                return;
+
+            _scrollRect.StopMovement();
+            _scrollRect.verticalNormalizedPosition = 0f;
         }
 
         private static string FormatMessage(ChatMessageData data)
