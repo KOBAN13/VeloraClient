@@ -59,7 +59,7 @@ namespace UI.ViewModels
                 return;
 
             var message = _inputText.Trim();
-            var messageData = new ChatMessageData("Player", message, Color.white);
+            var messageData = new ChatMessageData("You", message, Color.white);
 
             _chatService.AddMessage(messageData);
             _websocketConnectionService.PrepareNewPackage(message);

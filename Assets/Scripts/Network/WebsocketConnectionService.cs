@@ -80,15 +80,16 @@ namespace Network
         
         private void OnMessageWebSocket(byte[] data)
         {
+            Debug.LogError("Пришло сообщение!");
+            
             try
             {
                 var packet = Packet.Parser.ParseFrom(data);
-                var senderId = packet.SenderId;
                 
-                if (senderId != 0)
-                    HandleIdMessage(senderId, packet.Id);       
-                else
-                    HandleChatMessage(senderId, packet.Chat);
+                if (packet.Id != null)
+                    HandleIdMessage(packet.SenderId, packet.Id);       
+                else if (packet.Chat != null)
+                    HandleChatMessage(packet.SenderId, packet.Chat);
             }
             catch (InvalidProtocolBufferException e)
             {
@@ -111,7 +112,7 @@ namespace Network
 
         private void HandleChatMessage(ulong senderId, ChatMessage msg)
         {
-            _logger.Log($"Client {senderId} received message: {msg.Msg}");
+            _logger.Log($"Client {senderId} : {msg.Msg}");
         }
 
         private void OnWebSocketError(string errorMsg)
