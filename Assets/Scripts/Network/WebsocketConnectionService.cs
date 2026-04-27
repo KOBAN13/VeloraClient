@@ -80,8 +80,6 @@ namespace Network
         
         private void OnMessageWebSocket(byte[] data)
         {
-            Debug.LogError("Пришло сообщение!");
-            
             try
             {
                 var packet = Packet.Parser.ParseFrom(data);
@@ -112,7 +110,7 @@ namespace Network
 
         private void HandleChatMessage(ulong senderId, ChatMessage msg)
         {
-            _logger.Log($"Client {senderId} : {msg.Msg}");
+            _logger.Log($": {msg.Msg}", $"Client {senderId}");
         }
 
         private void OnWebSocketError(string errorMsg)

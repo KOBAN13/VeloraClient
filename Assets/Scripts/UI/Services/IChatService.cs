@@ -6,7 +6,7 @@ namespace UI.Services
 {
     public interface IChatService
     {
-        Observable<ChatMessageDataView> OnMessageAdded { get; }
+        Observable<ChatMessageData> OnMessageAdded { get; }
         IReadOnlyCollection<ChatMessageData> Messages { get; }
         void AddMessage(ChatMessageData data);
     }
