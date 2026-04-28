@@ -1,7 +1,6 @@
 using System.Linq;
 using Core.Utils.Factory;
 using Core.Utils.Logger;
-using Core.Utils.Logger.Data;
 using Core.Utils.Pool;
 using Core.Utils.SceneManagement;
 using Core.Utils.Screens;

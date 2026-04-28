@@ -55,10 +55,6 @@ MonoBehaviour:
         guid: 9fc0d4010bbf28b4594072e72b8655ab
       typeScene: 1
     - scene:
-        asset: {fileID: 102900000, guid: e7c33ffe4ef80cf4ba93f5b3cfcec405, type: 3}
-        guid: e7c33ffe4ef80cf4ba93f5b3cfcec405
-      typeScene: 3
-    - scene:
         asset: {fileID: 102900000, guid: e8517cec17d1aa3498c111f8db65022b, type: 3}
         guid: e8517cec17d1aa3498c111f8db65022b
       typeScene: 2
@@ -66,10 +62,6 @@ MonoBehaviour:
         asset: {fileID: 102900000, guid: aa806205c0e8c4f44aee425a1a4361ad, type: 3}
         guid: aa806205c0e8c4f44aee425a1a4361ad
       typeScene: 4
-    - scene:
-        asset: {fileID: 102900000, guid: e8517cec17d1aa3498c111f8db65022b, type: 3}
-        guid: e8517cec17d1aa3498c111f8db65022b
-      typeScene: 2
   _minSlider: 0.05
 --- !u!1 &7455905850574111929
 GameObject:
