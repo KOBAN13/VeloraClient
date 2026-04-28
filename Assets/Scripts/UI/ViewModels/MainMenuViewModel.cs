@@ -1,33 +1,21 @@
-using Core.Utils.SceneManagement;
-using Core.Utils.Screens;
+using Core.Utils.StateMachine.Project;
+using Core.Utils.StateMachine.Project.States;
 using R3;
-using Services.SceneManagement.Enums;
 using UI.Core;
 using UI.Helpers;
-using UI.Utils;
 using VContainer;
 
 namespace UI.ViewModels
 {
     public class MainMenuViewModel : ViewModel
     {
-        [Inject] private IScreenService _screenService;
-
-        [Inject] private SceneLoader _sceneLoader;
+        [Inject] private IProjectStateMachine _projectStateMachine;
 
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> SignInButtonViewBinder = new();
 
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> SignUpButtonViewBinder = new();
 
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> PlayButtonViewBinder = new();
-
-        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> AutoLoginButtonViewBinder = new();
-
-        [AutoBind] public readonly ViewModelBinder<string> UserNameBinder = new();
-
-        [AutoBind] public readonly ViewModelBinder<EUIObjectState> ObjectLoginPanel = new();
-
-        [AutoBind] public readonly ViewModelBinder<EUIObjectState> ObjectUsernamePanel = new();
 
         public override void Initialize()
         {
@@ -37,11 +25,11 @@ namespace UI.ViewModels
         }
 
         private void SignUp(Unit unit) {}
-        private async void SignIn(Unit unit) {}
+        private void SignIn(Unit unit) {}
 
-        private async void Play(Unit unit)
+        private void Play(Unit unit)
         {
-            await _sceneLoader.LoadScene(TypeScene.Lobby);
+            _projectStateMachine.Enter<ProjectGameState>();
         }
     }
 }

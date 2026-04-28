@@ -5,6 +5,9 @@ using Core.Utils.Pool;
 using Core.Utils.SceneManagement;
 using Core.Utils.Screens;
 using Core.Utils.Services;
+using Core.Utils.StateMachine.Project;
+using Core.Utils.StateMachine.Project.Factory;
+using Core.Utils.StateMachine.Project.States;
 using Factories;
 using Network;
 using UI.Services;
@@ -52,6 +55,7 @@ namespace Core.DI
         {
             Register<ViewsFactory>(Lifetime.Singleton);
             Register<ViewModelFactory>(Lifetime.Singleton);
+            Register<ProjectAStateFactory>(Lifetime.Singleton);
             RegisterEntryPoint<ScreensFactory>();
         }
 
@@ -64,6 +68,16 @@ namespace Core.DI
             Register<PoolService>(Lifetime.Singleton);
             Register<ChatService>(Lifetime.Singleton);
             Register<LoggerService>(Lifetime.Singleton);
+            RegisterStates();
+        }
+
+        private void RegisterStates()
+        {
+            Register<ProjectAStateMachine>(Lifetime.Singleton);
+
+            Register<ProjectBootstrapState>(Lifetime.Singleton);
+            Register<ProjectMainMenu>(Lifetime.Singleton);
+            Register<ProjectGameState>(Lifetime.Singleton);
         }
 
         private void RegisterEntryPoints()

@@ -26,13 +26,16 @@ MonoBehaviour:
   - type: UI.Views.ChatScreen
     asset:
       m_AssetGUID: e7e2fda994d3401bb5468cad29f49314
+  - type: UI.Views.LoadingScreen
+    asset:
+      m_AssetGUID: b89c91fbbe6ea1ce4a45f1a6a4fcee53
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 1
-  - type: UI.Views.LoadingScreen
+  - type: UI.Views.MainMenuScreen
     asset:
-      m_AssetGUID: b89c91fbbe6ea1ce4a45f1a6a4fcee53
+      m_AssetGUID: 33057ba1ee3800e4db4c9be103c92a5d
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

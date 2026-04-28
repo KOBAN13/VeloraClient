@@ -127,5 +127,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 664cc36cd91b4f21aac9b8c2142c20ea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Core.DI.Bootstraps.StartBootstraps
+  m_EditorClassIdentifier: Assembly-CSharp::Core.DI.Bootstraps.RootBootstrap
   LifetimeScope: {fileID: 6165444137893680660}
