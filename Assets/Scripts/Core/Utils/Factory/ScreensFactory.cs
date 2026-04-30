@@ -1,40 +1,36 @@
 ﻿using System.Linq;
 using Core.Utils.Data;
 using Core.Utils.SceneManagement;
-using Core.Utils.Services;
+using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
 using Factories;
-using Services.SceneManagement;
 using UI.Core;
 using UnityEngine;
-using VContainer;
 
 namespace Core.Utils.Factory
 {
-    public class ScreensFactory : Base.Factory, IInitializable
+    public class ScreensFactory : Base.Factory
     {
-        [Inject] private ViewsFactory _viewsFactory;
-        [Inject] private ScreensData _screensData;
-        [Inject] private SceneResources _sceneResources;
+        private readonly ViewsFactory _viewsFactory;
+        private readonly ScreensData _screensData;
+        private readonly SceneResources _sceneResources;
         
-        private Canvas _canvas;
+        private readonly IUiRootService _uiRootService;
 
-        public bool IsInitialized { get; set; }
-
-        public void Initialize()
+        public ScreensFactory(
+            IUiRootService uiRootService, 
+            SceneResources sceneResources, 
+            ScreensData screensData, 
+            ViewsFactory viewsFactory)
         {
-            if (IsInitialized)
-                return;
-
-            IsInitialized = true;
-
-            _canvas = Object.Instantiate(_screensData.Canvas, null);
+            _uiRootService = uiRootService;
+            _sceneResources = sceneResources;
+            _screensData = screensData;
+            _viewsFactory = viewsFactory;
         }
 
         public async UniTask<TView> CreateAsync<TView>() where TView : View
         {
-            Initialize();
-
             var data = _screensData.Screens.
                 FirstOrDefault(d => d.Type == typeof(TView));
             
@@ -42,21 +38,19 @@ namespace Core.Utils.Factory
             
             _sceneResources.AddObjectToRelease(handle);
             var prefab = handle.GetComponent<TView>();
-            var screen = _viewsFactory.Create(prefab, _canvas.transform);
+            var screen = _viewsFactory.Create(prefab, _uiRootService.Root);
             screen.gameObject.SetActive(false);
             return screen;
         }
         
         public TView CreateSync<TView>() where TView : View
         {
-            Initialize();
-
             var data = _screensData.Screens.
                 FirstOrDefault(d => d.Type == typeof(TView));
             var handle = data.Asset.LoadAssetAsync<GameObject>();
             var obj = handle.WaitForCompletion();
             var prefab = obj.GetComponent<TView>();
-            var screen = _viewsFactory.Create(prefab, _canvas.transform);
+            var screen = _viewsFactory.Create(prefab, _uiRootService.Root);
             screen.gameObject.SetActive(false);
             return screen;
         }

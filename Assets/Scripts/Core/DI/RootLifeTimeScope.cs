@@ -61,6 +61,7 @@ namespace Core.DI
 
         private void RegisterServices()
         {
+            Register<UiRootService>(Lifetime.Singleton);
             Register<SceneResources>(Lifetime.Singleton);
             Register<SceneService>(Lifetime.Singleton);
             Register<ScreenService>(Lifetime.Singleton);
