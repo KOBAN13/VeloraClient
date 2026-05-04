@@ -10,6 +10,7 @@ using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
 using Factories;
 using Network;
+using Network.Transport;
 using UI.Services;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
