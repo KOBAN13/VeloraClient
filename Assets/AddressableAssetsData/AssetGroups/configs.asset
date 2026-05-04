@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: configs
   m_GUID: 6ebfc9e2a870cbdfa804d2402483884a
   m_SerializeEntries:
+  - m_GUID: 07c6bc561cc1b312eb670153f9627838
+    m_Address: Assets/Configs/NetworkParameters.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 17c1e166eed38060f964556b785b405b
     m_Address: Assets/Configs/SceneConfig.asset
     m_ReadOnly: 0
