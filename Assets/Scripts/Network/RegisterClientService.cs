@@ -1,3 +1,4 @@
+using System;
 using Core.Utils.Services;
 using Network.Transport;
 using Packets;
@@ -6,20 +7,20 @@ using UnityEngine;
 
 namespace Network
 {
-    public class LoginClientService : ILoginClientService, IInitializable
+    public class RegisterClientService : IRegisterClientService, IInitializable, IDisposable
     {
         public bool IsInitialized { get; set; }
+
+        public Observable<Unit> SuccessRegister => _successRegister;
+        public Observable<string> RegisterErrorRequest => _registerErrorRequest;
         
         private readonly INetworkClient _networkClient;
         
-        private readonly Subject<Unit> _successLogin = new();
-        private readonly Subject<string> _loginErrorRequest = new();
+        private readonly Subject<Unit> _successRegister = new();
+        private readonly Subject<string> _registerErrorRequest = new();
         private readonly CompositeDisposable _disposables = new();
         
-        public Observable<Unit> SuccessLogin => _successLogin;
-        public Observable<string> LoginErrorRequest => _loginErrorRequest;
-
-        public LoginClientService(INetworkClient networkClient)
+        public RegisterClientService(INetworkClient networkClient)
         {
             _networkClient = networkClient;
         }
@@ -32,11 +33,11 @@ namespace Network
                 .AddTo(_disposables);
         }
 
-        public void Login(string username, string password)
+        public void Register(string username, string password)
         {
             var packet = new Packet()
             {
-                LoginRequest = new LoginRequestMessage()
+                RegisterRequest = new RegisterRequestMessage()
                 {
                     Username = username,
                     Password = password
@@ -53,7 +54,7 @@ namespace Network
 
         public void Dispose()
         {
-            
+            _disposables.Dispose();
         }
     }
 }

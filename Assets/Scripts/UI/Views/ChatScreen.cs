@@ -26,6 +26,7 @@ namespace UI.Views
         public override void Initialize()
         {
             _messageAddedBinder.SetPoolService(_poolService);
+            
             Bind();
         }
     }

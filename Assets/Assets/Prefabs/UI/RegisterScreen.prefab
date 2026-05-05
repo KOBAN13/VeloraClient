@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 100001}
   - component: {fileID: 100002}
   - component: {fileID: 912346000000000001}
+  - component: {fileID: 7253556458300006877}
   m_Layer: 5
   m_Name: RegisterScreen
   m_TagString: Untagged
@@ -72,6 +73,30 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &7253556458300006877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3b38f1a3904588802dfaa32679d915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.Views.RegisterScreen
+  _loginBinder:
+    InputField: {fileID: 2069779767663915860}
+  _passwordBinder:
+    InputField: {fileID: 3106354042709954436}
+  _errorBinder:
+    _testText: {fileID: 3932591486830440771}
+  _objectLoginError:
+    _gameObject: {fileID: 6190816159510305783}
+  _registerBinder:
+    _button: {fileID: 5880984627990544770}
+  _closeBinder:
+    _button: {fileID: 4397205772439347535}
 --- !u!1 &115766959724231999
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,10 +136,10 @@ RectTransform:
   - {fileID: 5192996681739756153}
   m_Father: {fileID: 100001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 550, y: 700}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5136885192782119694
 CanvasRenderer:

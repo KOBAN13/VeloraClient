@@ -1,6 +1,6 @@
 using Packets;
 
-namespace Extensions
+namespace Core.Utils.Extensions
 {
     public static class PacketExtension
     {

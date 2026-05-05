@@ -71,10 +71,12 @@ namespace Core.DI
             Register<ChatService>(Lifetime.Singleton);
             Register<LoggerService>(Lifetime.Singleton);
             Register<LoginClientService>(Lifetime.Singleton);
+            Register<RegisterClientService>(Lifetime.Singleton);
             Register<WebSocketTransport>(Lifetime.Singleton);
             Register<ProtobufPacketCodec>(Lifetime.Singleton);
             Register<WebSocketMessageFramer>(Lifetime.Singleton);
             Register<NetworkClient>(Lifetime.Singleton);
+            Register<ChatClientService>(Lifetime.Singleton);
             RegisterStates();
         }
 

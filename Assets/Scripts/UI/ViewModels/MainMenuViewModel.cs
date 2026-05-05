@@ -1,8 +1,10 @@
+using Core.Utils.Screens;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.States;
 using R3;
 using UI.Core;
 using UI.Helpers;
+using UI.Views;
 using VContainer;
 
 namespace UI.ViewModels
@@ -10,6 +12,7 @@ namespace UI.ViewModels
     public class MainMenuViewModel : ViewModel
     {
         [Inject] private IProjectStateMachine _projectStateMachine;
+        [Inject] private IScreenService _screenService;
 
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> SignInButtonViewBinder = new();
 
@@ -24,8 +27,15 @@ namespace UI.ViewModels
             PlayButtonViewBinder.Value.Subscribe(Play).AddTo(Disposable);
         }
 
-        private void SignUp(Unit unit) {}
-        private void SignIn(Unit unit) {}
+        private void SignUp(Unit unit)
+        {
+            _screenService.OpenSync<RegisterScreen>();
+        }
+
+        private void SignIn(Unit unit)
+        {
+            _screenService.OpenSync<LoginScreen>();
+        }
 
         private void Play(Unit unit)
         {

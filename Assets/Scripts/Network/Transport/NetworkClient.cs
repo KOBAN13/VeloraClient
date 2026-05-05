@@ -18,6 +18,8 @@ namespace Network.Transport
         private readonly CompositeDisposable _disposable = new();
         private readonly Subject<Packet> _received = new();
         private readonly Subject<string> _error = new();
+        
+        private readonly CancellationTokenSource _token = new();
 
         public bool IsInitialized { get; set; }
         
@@ -44,26 +46,21 @@ namespace Network.Transport
             _transport.Error.Subscribe(PublishError).AddTo(_disposable);
         }
 
-        public UniTask ConnectAsync(CancellationToken token)
-        {
-            return _transport.ConnectAsync(token);
-        }
-
         public UniTask DisconnectAsync()
         {
             return _transport.DisconnectAsync();
         }
 
-        public async UniTask SendAsync(Packet packet, CancellationToken token)
+        public async UniTaskVoid SendAsync(Packet packet)
         {
             try
             {
-                token.ThrowIfCancellationRequested();
+                _token.Token.ThrowIfCancellationRequested();
 
                 var payload = _packetCodec.Encode(packet);
                 var frame = _messageFramer.WriteFrame(payload);
 
-                await _transport.SendAsync(frame, token);
+                await _transport.SendAsync(frame, _token.Token);
             }
             catch (OperationCanceledException)
             {

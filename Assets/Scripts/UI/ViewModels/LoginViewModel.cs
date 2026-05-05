@@ -17,22 +17,22 @@ namespace UI.ViewModels
         private IScreenService _screenService;
         
         [AutoBind]
-        public readonly RefTypeViewModelBinder<ReactiveCommand<string>> _loginBinder = new();
+        public readonly RefTypeViewModelBinder<ReactiveCommand<string>> UsernameBinder = new();
         
         [AutoBind]
-        public readonly RefTypeViewModelBinder<ReactiveCommand<string>> _passwordBinder = new();
+        public readonly RefTypeViewModelBinder<ReactiveCommand<string>> PasswordBinder = new();
         
         [AutoBind]
-        public readonly RefTypeViewModelBinder<ReactiveCommand> _signInBinder = new();
+        public readonly RefTypeViewModelBinder<ReactiveCommand> LoginBinder = new();
         
         [AutoBind]
-        public readonly RefTypeViewModelBinder<ReactiveCommand> _closeBinder = new();
+        public readonly RefTypeViewModelBinder<ReactiveCommand> CloseBinder = new();
         
         [AutoBind]
-        public readonly ViewModelBinder<string> _errorBinder = new();
+        public readonly ViewModelBinder<string> ErrorBinder = new();
         
         [AutoBind]
-        public readonly ViewModelBinder<EUIObjectState> _objectLoginPanel = new();
+        public readonly ViewModelBinder<EUIObjectState> ObjectLoginPanel = new();
 
         private readonly ReactiveProperty<bool> _interactableSignInButton = new(true);
         
@@ -43,13 +43,13 @@ namespace UI.ViewModels
         
         public override void Initialize()
         {
-            _signInBinder.Value.Subscribe(OnLoginRequest).AddTo(Disposable);
+            UsernameBinder.Value.Subscribe(OnLoginChanged).AddTo(Disposable);
             
-            _loginBinder.Value.Subscribe(OnLoginChanged).AddTo(Disposable);
+            LoginBinder.Value.Subscribe(OnLoginRequest).AddTo(Disposable);
             
-            _passwordBinder.Value.Subscribe(OnPasswordChanged).AddTo(Disposable);
+            PasswordBinder.Value.Subscribe(OnPasswordChanged).AddTo(Disposable);
             
-            _closeBinder.Value.Subscribe(OnCloseScreen).AddTo(Disposable);
+            CloseBinder.Value.Subscribe(OnCloseScreen).AddTo(Disposable);
             
             _loginClientService.LoginErrorRequest.Subscribe(OnLoginToLobbyError).AddTo(Disposable);
             
@@ -70,14 +70,14 @@ namespace UI.ViewModels
             if (string.IsNullOrEmpty(error))
                 return;
             
-            _errorBinder.Value = error;
-            _objectLoginPanel.Value = EUIObjectState.Show;
+            ErrorBinder.Value = error;
+            ObjectLoginPanel.Value = EUIObjectState.Show;
             _interactableSignInButton.Value = true;
         }
 
         private void OnSuccessLoginToRoom(Unit unit)
         {
-            _objectLoginPanel.Value = EUIObjectState.Hide;
+            ObjectLoginPanel.Value = EUIObjectState.Hide;
             _interactableSignInButton.Value = true;
             _screenService.CloseScreen<LoginScreen>();
         }

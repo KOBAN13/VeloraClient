@@ -64,14 +64,6 @@ MonoBehaviour:
     _button: {fileID: 838124254091043459}
   _playButton:
     _button: {fileID: 6221595152386537162}
-  _usernameBinder:
-    _testText: {fileID: 0}
-  _objectLoginPanel:
-    _gameObject: {fileID: 0}
-  _objectUsernamePanel:
-    _gameObject: {fileID: 0}
-  _autoLoginButton:
-    _button: {fileID: 0}
 --- !u!1 &402632095435419374
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +679,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Login
+  m_text: Sign In
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -848,7 +840,7 @@ GameObject:
   - component: {fileID: 3691081141887969722}
   - component: {fileID: 7445908807803096250}
   m_Layer: 5
-  m_Name: Sign Up
+  m_Name: Register
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

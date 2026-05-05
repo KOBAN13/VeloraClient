@@ -26,6 +26,10 @@ MonoBehaviour:
   - type: UI.Views.ChatScreen
     asset:
       m_AssetGUID: e7e2fda994d3401bb5468cad29f49314
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - type: UI.Views.LoadingScreen
     asset:
       m_AssetGUID: b89c91fbbe6ea1ce4a45f1a6a4fcee53
@@ -36,6 +40,20 @@ MonoBehaviour:
   - type: UI.Views.MainMenuScreen
     asset:
       m_AssetGUID: 33057ba1ee3800e4db4c9be103c92a5d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+  - type: UI.Views.LoginScreen
+    asset:
+      m_AssetGUID: 0d12d5deecb52c98690ee86f709444d0
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+  - type: UI.Views.RegisterScreen
+    asset:
+      m_AssetGUID: 042eda837fffa100eb5d91eb5209443a
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

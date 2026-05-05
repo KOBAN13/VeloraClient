@@ -15,6 +15,16 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 83f31759486804c91a998f96f2ba5e61
   m_SerializeEntries:
+  - m_GUID: 042eda837fffa100eb5d91eb5209443a
+    m_Address: Assets/Assets/Prefabs/UI/RegisterScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d12d5deecb52c98690ee86f709444d0
+    m_Address: Assets/Assets/Prefabs/UI/LoginScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 33057ba1ee3800e4db4c9be103c92a5d
     m_Address: Assets/Assets/Prefabs/UI/MainMenuScreen.prefab
     m_ReadOnly: 0

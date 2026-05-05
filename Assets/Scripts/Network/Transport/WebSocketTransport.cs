@@ -58,8 +58,6 @@ namespace Network.Transport
         
         private void CreateWebSocket()
         {
-            UnsubscribeWebSocketEvents();
-
             _webSocket = new WebSocket(_networkParameters.WebsocketUrl);
             _webSocket.OnOpen += OnOpenWebSocketConnection;
             _webSocket.OnMessage += OnMessageWebSocket;
@@ -83,13 +81,16 @@ namespace Network.Transport
         {
             token.ThrowIfCancellationRequested();
 
-            switch (_webSocket.State)
+            if (_webSocket != null)
             {
-                case WebSocketState.Open:
-                    return;
-                case WebSocketState.Connecting:
-                    await _connectCompletionSource.Task.AttachExternalCancellation(token);
-                    return;
+                switch (_webSocket.State)
+                {
+                    case WebSocketState.Open:
+                        return;
+                    case WebSocketState.Connecting:
+                        await _connectCompletionSource.Task.AttachExternalCancellation(token);
+                        return;
+                }
             }
 
             CreateWebSocket();
