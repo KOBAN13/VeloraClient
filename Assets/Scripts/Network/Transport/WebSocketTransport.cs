@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Core.Utils.Logger;
 using Core.Utils.Services;
 using Cysharp.Threading.Tasks;
@@ -9,7 +10,7 @@ using R3;
 
 namespace Network.Transport
 {
-    public class WebSocketTransport : IInitializable, ITickable, IDisposable, INetworkTransport
+    public class WebSocketTransport : IInitializable, ITickable, IAsyncDisposable, INetworkTransport
     {
         private WebSocket _webSocket;
         private UniTaskCompletionSource _connectCompletionSource;
@@ -38,22 +39,39 @@ namespace Network.Transport
         {
             InitializeAsync().Forget();
         }
-        
-        public async void Dispose()
-        {
-            await DisconnectAsync();
-
-            _received.Dispose();
-            _connected.Dispose();
-            _disconnected.Dispose();
-            _error.Dispose();
-        }
 
         public void Tick(float deltaTime)
         {
 #if !UNITY_WEBGL || UNITY_EDITOR
             _webSocket?.DispatchMessageQueue();
 #endif
+        }
+        
+        public async ValueTask DisposeAsync()
+        {
+            if (_received != null) 
+                await CastAndDispose(_received);
+            
+            if (_connected != null) 
+                await CastAndDispose(_connected);
+            
+            if (_disconnected != null)
+                await CastAndDispose(_disconnected);
+            
+            if (_error != null)
+                await CastAndDispose(_error);
+
+            UnsubscribeWebSocketEvents();
+
+            return;
+
+            static async ValueTask CastAndDispose(IDisposable resource)
+            {
+                if (resource is IAsyncDisposable resourceAsyncDisposable)
+                    await resourceAsyncDisposable.DisposeAsync();
+                else
+                    resource.Dispose();
+            }
         }
         
         private void CreateWebSocket()

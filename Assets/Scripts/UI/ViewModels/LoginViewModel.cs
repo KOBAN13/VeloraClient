@@ -29,21 +29,21 @@ namespace UI.ViewModels
         public readonly RefTypeViewModelBinder<ReactiveCommand> CloseBinder = new();
         
         [AutoBind]
-        public readonly ViewModelBinder<string> ErrorBinder = new();
+        public readonly ViewModelBinder<string> ServerStateTextBinder = new();
         
         [AutoBind]
-        public readonly ViewModelBinder<EUIObjectState> ObjectLoginPanel = new();
+        public readonly ViewModelBinder<EUIObjectState> ServerStateBannerBinder = new();
 
         private readonly ReactiveProperty<bool> _interactableSignInButton = new(true);
         
         public Observable<bool> InteractableSignInButton => _interactableSignInButton;
 
-        private string _login;
+        private string _username;
         private string _password;
         
         public override void Initialize()
         {
-            UsernameBinder.Value.Subscribe(OnLoginChanged).AddTo(Disposable);
+            UsernameBinder.Value.Subscribe(OnUsernameChanged).AddTo(Disposable);
             
             LoginBinder.Value.Subscribe(OnLoginRequest).AddTo(Disposable);
             
@@ -51,12 +51,12 @@ namespace UI.ViewModels
             
             CloseBinder.Value.Subscribe(OnCloseScreen).AddTo(Disposable);
             
-            _loginClientService.LoginErrorRequest.Subscribe(OnLoginToLobbyError).AddTo(Disposable);
+            _loginClientService.LoginErrorRequest.Subscribe(OnLoginDenied).AddTo(Disposable);
             
-            _loginClientService.SuccessLogin.Subscribe(OnSuccessLoginToRoom).AddTo(Disposable);
+            _loginClientService.SuccessLogin.Subscribe(OnLoginSucceeded).AddTo(Disposable);
         }
         
-        private void OnLoginChanged(string login) => _login = login;
+        private void OnUsernameChanged(string username) => _username = username;
         
         private void OnPasswordChanged(string password) => _password = password;
 
@@ -65,31 +65,34 @@ namespace UI.ViewModels
             _screenService.CloseScreen<LoginScreen>();
         }
 
-        private void OnLoginToLobbyError(string error)
+        private void OnLoginDenied(string serverState)
         {
-            if (string.IsNullOrEmpty(error))
+            _interactableSignInButton.Value = true;
+
+            if (string.IsNullOrEmpty(serverState))
                 return;
             
-            ErrorBinder.Value = error;
-            ObjectLoginPanel.Value = EUIObjectState.Show;
-            _interactableSignInButton.Value = true;
+            ServerStateTextBinder.Value = serverState;
+            ServerStateBannerBinder.Value = EUIObjectState.Show;
         }
 
-        private void OnSuccessLoginToRoom(Unit unit)
+        private void OnLoginSucceeded(Unit unit)
         {
-            ObjectLoginPanel.Value = EUIObjectState.Hide;
-            _interactableSignInButton.Value = true;
+            ServerStateBannerBinder.Value = EUIObjectState.Hide;
             _screenService.CloseScreen<LoginScreen>();
         }
 
         private void OnLoginRequest(Unit unit)
-        { 
-            if (string.IsNullOrEmpty(_login) || string.IsNullOrEmpty(_password)) 
+        {
+            if (!_interactableSignInButton.Value)
+                return;
+
+            if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
                 return;
 
             _interactableSignInButton.Value = false;
             
-            _loginClientService.Login(_login, _password);
+            _loginClientService.Login(_username, _password);
         }
     }
 }

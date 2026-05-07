@@ -89,9 +89,9 @@ MonoBehaviour:
     InputField: {fileID: 403051846081233575}
   _passwordBinder:
     InputField: {fileID: 4601042667405078459}
-  _errorBinder:
+  _serverStateTextBinder:
     _testText: {fileID: 3129304277132726334}
-  _objectLoginError:
+  _serverStateBannerBinder:
     _gameObject: {fileID: 6974962549378608912}
   _loginBinder:
     _button: {fileID: 5130639490749064292}

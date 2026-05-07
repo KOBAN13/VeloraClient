@@ -1,25 +1,27 @@
 using System;
-using Core.Utils.Logger;
 using Core.Utils.Services;
 using Network.Transport;
 using Packets;
 using R3;
+using UI.Services;
+using UI.Services.Data;
+using UnityEngine;
 
 namespace Network
 {
     public class ChatClientService : IChatClientService, IInitializable, IDisposable
     {
         private readonly INetworkClient _networkClient;
-        private readonly ILoggerService _loggerService;
+        private readonly IChatService _chatService;
 
         private readonly CompositeDisposable _disposables = new();
 
         public bool IsInitialized { get; set; }
 
-        public ChatClientService(INetworkClient networkClient, ILoggerService loggerService)
+        public ChatClientService(INetworkClient networkClient, IChatService chatService)
         {
             _networkClient = networkClient;
-            _loggerService = loggerService;
+            _chatService = chatService;
         }
 
         public void Initialize()
@@ -45,7 +47,7 @@ namespace Network
 
         private void ReceiveMessage(Packet packet)
         {
-            _loggerService.Log(packet.Chat.Msg, $"Client: {packet.SenderId}");
+            _chatService.AddMessage(new ChatMessageData($"Client: {packet.SenderId}", packet.Chat.Msg, Color.white));
         }
 
         public void Dispose()

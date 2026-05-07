@@ -1,3 +1,4 @@
+using Network.Transport;
 using R3;
 using UI.Core;
 using UI.Helpers;
@@ -19,12 +20,14 @@ namespace UI.ViewModels
         private readonly ReactiveCommand _sendButtonClicked = new();
         
         private IChatService _chatService;
+        private IChatClientService _chatClientService;
         private string _inputText = string.Empty;
 
         [Inject]
-        private void Construct(IChatService chatService)
+        private void Construct(IChatService chatService, IChatClientService chatClientService)
         {
             _chatService = chatService;
+            _chatClientService = chatClientService;
         }
         
         public override void Initialize()
@@ -52,6 +55,7 @@ namespace UI.ViewModels
             var messageData = new ChatMessageData("You", message, Color.white);
 
             _chatService.AddMessage(messageData);
+            _chatClientService.SendMessage(message);
 
             _inputText = string.Empty;
             _inputTextBinder.Value = string.Empty;

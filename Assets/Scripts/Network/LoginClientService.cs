@@ -1,12 +1,12 @@
+using System;
 using Core.Utils.Services;
 using Network.Transport;
 using Packets;
 using R3;
-using UnityEngine;
 
 namespace Network
 {
-    public class LoginClientService : ILoginClientService, IInitializable
+    public class LoginClientService : ILoginClientService, IInitializable, IDisposable
     {
         public bool IsInitialized { get; set; }
         
@@ -34,9 +34,9 @@ namespace Network
 
         public void Login(string username, string password)
         {
-            var packet = new Packet()
+            var packet = new Packet
             {
-                LoginRequest = new LoginRequestMessage()
+                LoginRequest = new LoginRequestMessage
                 {
                     Username = username,
                     Password = password
@@ -48,12 +48,20 @@ namespace Network
         
         private void ReceiveMessage(Packet packet)
         {
-            Debug.LogError("Прикол");
+            switch (packet.MsgCase)
+            {
+                case Packet.MsgOneofCase.OkResponse:
+                    _successLogin.OnNext(Unit.Default);
+                    break;
+                case Packet.MsgOneofCase.DenyResponse:
+                    _loginErrorRequest.OnNext(packet.DenyResponse.Reason);
+                    break;
+            }
         }
 
         public void Dispose()
         {
-            
+            _disposables.Dispose();
         }
     }
 }

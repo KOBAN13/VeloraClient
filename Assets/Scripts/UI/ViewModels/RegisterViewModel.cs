@@ -30,16 +30,15 @@ namespace UI.ViewModels
         public readonly RefTypeViewModelBinder<ReactiveCommand> CloseBinder = new();
         
         [AutoBind]
-        public readonly ViewModelBinder<string> ErrorBinder = new();
+        public readonly ViewModelBinder<string> ServerStateTextBinder = new();
         
         [AutoBind]
-        public readonly ViewModelBinder<EUIObjectState> ObjectLoginPanel = new();
+        public readonly ViewModelBinder<EUIObjectState> ServerStateBannerBinder = new();
         
-        private readonly ReactiveProperty<bool> _interactableSignInButton = new(true);
+        private readonly ReactiveProperty<bool> _interactableRegisterButton = new(true);
         
-        public ReadOnlyReactiveProperty<bool> InteractableSignInButton => _interactableSignInButton;
+        public ReadOnlyReactiveProperty<bool> InteractableRegisterButton => _interactableRegisterButton;
         
-        private string _email = string.Empty;
         private string _login = string.Empty;
         private string _password = string.Empty;
         
@@ -50,24 +49,24 @@ namespace UI.ViewModels
             RegisterBinder.Value.Subscribe(OnRegisterRequest).AddTo(Disposable);
             CloseBinder.Value.Subscribe(OnCloseScreen).AddTo(Disposable);
             
-            _registrationService.RegisterErrorRequest.Subscribe(OnError).AddTo(Disposable);
-            _registrationService.SuccessRegister.Subscribe(OnRegistration).AddTo(Disposable);
+            _registrationService.RegisterErrorRequest.Subscribe(OnRegisterDenied).AddTo(Disposable);
+            _registrationService.SuccessRegister.Subscribe(OnRegisterSucceeded).AddTo(Disposable);
         }
 
-        private void OnError(string error)
+        private void OnRegisterDenied(string serverState)
         {
-            if (string.IsNullOrEmpty(error))
+            _interactableRegisterButton.Value = true;
+
+            if (string.IsNullOrEmpty(serverState))
                 return;
             
-            ErrorBinder.Value = error;
-            ObjectLoginPanel.Value = EUIObjectState.Show;
-            _interactableSignInButton.Value = true;
+            ServerStateTextBinder.Value = serverState;
+            ServerStateBannerBinder.Value = EUIObjectState.Show;
         }
 
-        private void OnRegistration(Unit unit)
+        private void OnRegisterSucceeded(Unit unit)
         {
-            ObjectLoginPanel.Value = EUIObjectState.Hide;
-            _interactableSignInButton.Value = true;
+            ServerStateBannerBinder.Value = EUIObjectState.Hide;
             _screenService.CloseScreen<RegisterScreen>();
         }
         
@@ -77,7 +76,10 @@ namespace UI.ViewModels
 
         private void OnRegisterRequest(Unit unit)
         {
-            _interactableSignInButton.Value = false;
+            if (!_interactableRegisterButton.Value)
+                return;
+
+            _interactableRegisterButton.Value = false;
             
             _registrationService.Register(_login, _password);
         }

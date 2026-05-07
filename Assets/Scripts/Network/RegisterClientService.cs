@@ -3,7 +3,6 @@ using Core.Utils.Services;
 using Network.Transport;
 using Packets;
 using R3;
-using UnityEngine;
 
 namespace Network
 {
@@ -35,9 +34,9 @@ namespace Network
 
         public void Register(string username, string password)
         {
-            var packet = new Packet()
+            var packet = new Packet
             {
-                RegisterRequest = new RegisterRequestMessage()
+                RegisterRequest = new RegisterRequestMessage
                 {
                     Username = username,
                     Password = password
@@ -49,7 +48,15 @@ namespace Network
         
         private void ReceiveMessage(Packet packet)
         {
-            Debug.LogError("Прикол");
+            switch (packet.MsgCase)
+            {
+                case Packet.MsgOneofCase.OkResponse:
+                    _successRegister.OnNext(Unit.Default);
+                    break;
+                case Packet.MsgOneofCase.DenyResponse:
+                    _registerErrorRequest.OnNext(packet.DenyResponse.Reason);
+                    break;
+            }
         }
 
         public void Dispose()
