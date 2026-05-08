@@ -23,7 +23,12 @@ namespace Core.DI.Bootstraps
 
         private async void Awake()
         {
-            LifetimeScope.Build();
+            LifetimeScope = GetComponent<TLifetimeScope>();
+
+            if (LifetimeScope.Container == null)
+            {
+                LifetimeScope.Build();
+            }
 
             ObjectResolver = LifetimeScope.Container;
             

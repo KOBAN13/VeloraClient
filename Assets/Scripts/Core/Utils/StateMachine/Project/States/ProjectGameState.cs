@@ -29,7 +29,7 @@ namespace Core.Utils.StateMachine.Project.States
 
         private async UniTaskVoid LoadGame()
         {
-            await _sceneLoader.LoadScene(TypeScene.Game);
+            await _sceneLoader.LoadScene(TypeScene.Game, typeof(ChatScreen));
             await _screenService.OpenAsync<ChatScreen>();
         }
     }

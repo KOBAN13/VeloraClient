@@ -3,7 +3,6 @@ using Core.Utils.SceneManagement.Interfaces;
 using Cysharp.Threading.Tasks;
 using Eflatun.SceneReference;
 using R3;
-using Services.SceneManagement;
 using Services.SceneManagement.Enums;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,7 +15,6 @@ namespace Core.Utils.SceneManagement
     public class SceneService : IScenesService
     {
         private SceneResources _resources;
-        private SceneLoader _sceneLoader;
         private AsyncOperationHandle<SceneInstance> _currentSceneHandle;
         private readonly Subject<Unit> _sceneIsLoadSubject = new();
 
@@ -25,7 +23,6 @@ namespace Core.Utils.SceneManagement
         public void Construct(SceneLoader sceneLoader, SceneResources resources)
         {
             _resources = resources;
-            _sceneLoader = sceneLoader;
         }
 
         public async UniTask LoadScene(SceneGroup sceneGroup, IProgress<float> progress, TypeScene typeScene)
@@ -84,7 +81,7 @@ namespace Core.Utils.SceneManagement
         public void UnloadResources()
         {
             foreach (var resource in _resources.ObjectToRelease)
-                Addressables.ReleaseInstance(resource);
+                Addressables.Release(resource);
             
             _resources.ClearObject();
         }
@@ -106,7 +103,7 @@ namespace Core.Utils.SceneManagement
 
             var fakeProgress = 0f;
             
-            while (_sceneLoader.Progress.Value < 1 || ! handle.IsDone)
+            while (!handle.IsDone)
             {
                 var target = Mathf.Clamp01(handle.PercentComplete);
                 fakeProgress = Mathf.MoveTowards(fakeProgress, target, 0.01f);
@@ -131,15 +128,14 @@ namespace Core.Utils.SceneManagement
             await sceneInstance.ActivateAsync();
             
             SceneManager.SetActiveScene(sceneInstance.Scene);
-            
-            _sceneLoader.IsLoading.Value = false;
+
+            progress.Report(1f);
             
             if (hadInit)
             {
                 await SceneManager.UnloadSceneAsync(initScene);
             }
 
-            _sceneLoader.IsLoading.Value = false;
             _sceneIsLoadSubject.OnNext(Unit.Default);
             
             return true;

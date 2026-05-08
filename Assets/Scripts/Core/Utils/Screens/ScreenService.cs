@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using Core.Utils.Factory;
 using Cysharp.Threading.Tasks;
 using UI.Core;
+using UnityEngine;
+using UnityEngine.Pool;
 using VContainer;
+using Object = System.Object;
 
 namespace Core.Utils.Screens
 {
@@ -26,6 +29,37 @@ namespace Core.Utils.Screens
             return await OpenAsyncInternal<TScreen, TPayload>(payload, true);
         }
 
+        public async UniTask PreloadAsync(IProgress<float> progress = null, params Type[] screenTypes)
+        {
+            var targets = _screensFactory.ScreenTypes;
+
+            if (targets.Count == 0)
+            {
+                progress?.Report(1f);
+                return;
+            }
+
+            var completed = 0;
+            
+            using var _ = ListPool<UniTask>.Get(out var preloadTasks);
+
+            foreach (var screenType in targets)
+            {
+                preloadTasks.Add(PreloadAndReportAsync(screenType));
+            }
+
+            await UniTask.WhenAll(preloadTasks);
+
+            return;
+
+            async UniTask PreloadAndReportAsync(Type screenType)
+            {
+                await PreloadAsync(screenType);
+                completed++;
+                progress?.Report(completed / (float)targets.Count);
+            }
+        }
+
         public TScreen OpenSync<TScreen>() where TScreen : View
         {
             return OpenSyncInternal<TScreen, object>(default, false);
@@ -38,35 +72,41 @@ namespace Core.Utils.Screens
 
         public void ClearCollections()
         {
+            foreach (var screen in _screensByType.Values)
+            {
+                screen.Dispose();
+                UnityEngine.Object.Destroy(screen.gameObject);
+            }
+
             _screensByType.Clear();
             _screens.Clear();
+            CurrentScreen = null;
         }
 
         public void CloseScreen<TScreen>() where TScreen : View
         {
             if (_screensByType.TryGetValue(typeof(TScreen), out var screen))
             {
-                _screens.Remove(screen);
+                RemoveFromStack(screen);
                 screen.Close();
                 screen.gameObject.SetActive(false);
                 
-                if (_screens.Count > 0)
-                    CurrentScreen = _screens.Last.Value;
+                CurrentScreen = _screens.Count > 0 ? _screens.Last.Value : null;
             }
         }
 
         public void Close()
         {
+            if (_screens.Count == 0)
+                return;
+
             var screen = _screens.Last.Value;
             
             _screens.RemoveLast();
             screen.Close();
             screen.gameObject.SetActive(false);
             
-            if (_screens.Count > 0)
-            {
-                CurrentScreen = screen;
-            }
+            CurrentScreen = _screens.Count > 0 ? _screens.Last.Value : null;
         }
 
         private async UniTask<TScreen> OpenAsyncInternal<TScreen, TPayload>(TPayload payload, bool hasPayload)
@@ -92,6 +132,15 @@ namespace Core.Utils.Screens
             }
 
             return OpenScreen(newScreen, true);
+        }
+
+        private async UniTask PreloadAsync(Type screenType)
+        {
+            if (_screensByType.ContainsKey(screenType))
+                return;
+
+            var screen = await _screensFactory.CreateAsync(screenType);
+            _screensByType.Add(screenType, screen);
         }
 
         private TScreen OpenSyncInternal<TScreen, TPayload>(TPayload payload, bool hasPayload) where TScreen : View
@@ -126,11 +175,22 @@ namespace Core.Utils.Screens
             {
                 _screensByType.Add(typeof(TScreen), screen);
             }
+            else
+            {
+                RemoveFromStack(screen);
+            }
 
             _screens.AddLast(screen);
             CurrentScreen = screen;
 
             return screen;
+        }
+
+        private void RemoveFromStack(View screen)
+        {
+            while (_screens.Remove(screen))
+            {
+            }
         }
     }
 }

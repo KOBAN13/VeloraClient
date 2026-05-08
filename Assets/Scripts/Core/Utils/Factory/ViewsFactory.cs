@@ -23,6 +23,13 @@ namespace Factories
             return view;
         }
 
+        public View Create(View prefab, Transform parent)
+        {
+            var view = Object.Instantiate(prefab, parent);
+            InitializeView(view);
+            return view;
+        }
+
         public void InitializeView(View view)
         {
             _resolver.Inject(view);

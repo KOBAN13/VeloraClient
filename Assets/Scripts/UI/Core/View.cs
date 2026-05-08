@@ -6,8 +6,7 @@ using VContainer;
 
 namespace UI.Core
 {
-    public abstract class View<TViewModel> : View
-        where TViewModel : ViewModel, new()
+    public abstract class View<TViewModel> : View where TViewModel : ViewModel, new()
     {
         [Inject] private ViewModelFactory _viewModelFactory;
 
@@ -44,6 +43,8 @@ namespace UI.Core
             {
                 viewBinder.Dispose();
             }
+
+            ViewModel?.Dispose();
         }
     }
 

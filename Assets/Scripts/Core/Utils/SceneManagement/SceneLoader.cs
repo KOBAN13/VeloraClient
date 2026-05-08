@@ -3,7 +3,6 @@ using Core.Utils.SceneManagement.Interfaces;
 using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
 using R3;
-using Services.SceneManagement;
 using Services.SceneManagement.Enums;
 using UI.Views;
 using UnityEngine;
@@ -16,13 +15,11 @@ namespace Core.Utils.SceneManagement
     {
         [SerializeField] private SceneGroup _sceneGroup;
         [SerializeField] private float _minSlider = 0.05f;
+        [SerializeField, Range(0.1f, 0.95f)] private float _sceneProgressLimit = 0.85f;
 
         private IScenesService _scenesService;
         private IScreenService _screenService;
         private float _targetProgress;
-        private IDisposable _sceneLoadedSubscription;
-        
-        private readonly LoadingProgress _loadingProgress = new();
         
         public readonly ReactiveProperty<bool> IsLoading = new();
         public readonly ReactiveProperty<float> Progress = new();
@@ -33,10 +30,9 @@ namespace Core.Utils.SceneManagement
             _scenesService = scenesService;
             _screenService = screenService;
             _scenesService.Construct(this, sceneResources);
-            _sceneLoadedSubscription = _scenesService.SceneIsLoad.Subscribe(_ => _screenService.Close());
         }
         
-        public async UniTask LoadScene(TypeScene typeScene)
+        public async UniTask LoadScene(TypeScene typeScene, params Type[] screensToPreload)
         {
             ChangeParameters();
             
@@ -46,30 +42,31 @@ namespace Core.Utils.SceneManagement
             
             var loadingScene = await _scenesService.LoadLoadingScene(_sceneGroup);
             
-            var loadingScreen = await _screenService.OpenAsync<LoadingScreen>();
+            await _screenService.OpenAsync<LoadingScreen>();
             
-            _loadingProgress.Progressed += value => _targetProgress = value;
             IsLoading.Value = true;
+
+            var sceneProgress = new LoadingProgress(_minSlider, _sceneProgressLimit);
+            var screensProgress = new LoadingProgress(_sceneProgressLimit, 1f);
+            sceneProgress.Progressed += SetTargetProgress;
+            screensProgress.Progressed += SetTargetProgress;
             
             await _scenesService.UnloadScene();
             
-            await _scenesService.LoadScene(_sceneGroup, _loadingProgress, typeScene);
+            await _scenesService.LoadScene(_sceneGroup, sceneProgress, typeScene);
+            await _screenService.PreloadAsync(screensProgress, screensToPreload);
             
-            loadingScreen.Dispose();
+            SetTargetProgress(1f);
+            Progress.Value = 1f;
+            _screenService.CloseScreen<LoadingScreen>();
             
             await Addressables.UnloadSceneAsync(loadingScene);
-            
-            _scenesService.UnloadResources();
-        }
-        
-        private void OnDestroy()
-        {
-            _sceneLoadedSubscription?.Dispose();
+            IsLoading.Value = false;
         }
 
         private void Update()
         {
-            if(IsLoading.Value == false) 
+            if(!IsLoading.Value) 
                 return;
 
             Progress.Value = _targetProgress;
@@ -78,6 +75,12 @@ namespace Core.Utils.SceneManagement
         private void ChangeParameters()
         {
             Progress.Value = _minSlider;
+            _targetProgress = _minSlider;
+        }
+
+        private void SetTargetProgress(float value)
+        {
+            _targetProgress = Mathf.Clamp01(value);
         }
     }
 }

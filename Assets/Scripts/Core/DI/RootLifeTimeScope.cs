@@ -1,7 +1,6 @@
 using System.Linq;
 using Core.Utils.Factory;
 using Core.Utils.Logger;
-using Core.Utils.Pool;
 using Core.Utils.SceneManagement;
 using Core.Utils.Screens;
 using Core.Utils.Services;
@@ -9,9 +8,7 @@ using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
 using Factories;
-using Network;
 using Network.Transport;
-using UI.Services;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
@@ -30,8 +27,9 @@ namespace Core.DI
             RegisterComponents();
             RegisterConfigs();
             RegisterFactories();
-            RegisterServices();
-            RegisterEntryPoints();
+            RegisterRootServices();
+            RegisterNetworkServices();
+            RegisterProjectStates();
         }
 
         private void RegisterComponents()
@@ -60,37 +58,31 @@ namespace Core.DI
             RegisterEntryPoint<ScreensFactory>();
         }
 
-        private void RegisterServices()
+        private void RegisterRootServices()
         {
             Register<UiRootService>(Lifetime.Singleton);
             Register<SceneResources>(Lifetime.Singleton);
             Register<SceneService>(Lifetime.Singleton);
             Register<ScreenService>(Lifetime.Singleton);
             Register<TickService>(Lifetime.Singleton);
-            Register<PoolService>(Lifetime.Singleton);
-            Register<ChatService>(Lifetime.Singleton);
             Register<LoggerService>(Lifetime.Singleton);
-            Register<LoginClientService>(Lifetime.Singleton);
-            Register<RegisterClientService>(Lifetime.Singleton);
+        }
+
+        private void RegisterNetworkServices()
+        {
             Register<WebSocketTransport>(Lifetime.Singleton);
             Register<ProtobufPacketCodec>(Lifetime.Singleton);
             Register<WebSocketMessageFramer>(Lifetime.Singleton);
             Register<NetworkClient>(Lifetime.Singleton);
-            Register<ChatClientService>(Lifetime.Singleton);
-            RegisterStates();
         }
 
-        private void RegisterStates()
+        private void RegisterProjectStates()
         {
             Register<ProjectAStateMachine>(Lifetime.Singleton);
 
             Register<ProjectBootstrapState>(Lifetime.Singleton);
             Register<ProjectMainMenu>(Lifetime.Singleton);
             Register<ProjectGameState>(Lifetime.Singleton);
-        }
-
-        private void RegisterEntryPoints()
-        {
         }
     }
 }
