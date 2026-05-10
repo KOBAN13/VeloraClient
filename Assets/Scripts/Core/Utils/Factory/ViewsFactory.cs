@@ -1,18 +1,15 @@
-using Core.Utils.Factory.Base;
 using UI.Core;
 using UnityEngine;
-using VContainer;
-using VContainer.Unity;
 
-namespace Factories
+namespace Core.Utils.Factory
 {
-    public class ViewsFactory : Factory
+    public class ViewsFactory : Base.Factory
     {
-        private readonly IObjectResolver _resolver;
+        private readonly SceneScopeResolver _sceneScopeResolver;
         
-        public ViewsFactory(LifetimeScope scope)
+        public ViewsFactory(SceneScopeResolver sceneScopeResolver)
         {
-            _resolver = scope.Container;
+            _sceneScopeResolver = sceneScopeResolver;
         }
         
         public TView Create<TView>(TView prefab, Transform parent)
@@ -32,7 +29,7 @@ namespace Factories
 
         public void InitializeView(View view)
         {
-            _resolver.Inject(view);
+            _sceneScopeResolver.Resolve().Inject(view);
             view.Initialize();
         }
     }

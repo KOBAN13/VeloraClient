@@ -6,7 +6,6 @@ using Core.Utils.Data;
 using Core.Utils.SceneManagement;
 using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
-using Factories;
 using UI.Core;
 using UnityEngine;
 
@@ -44,11 +43,11 @@ namespace Core.Utils.Factory
         public async UniTask<View> CreateAsync(Type viewType)
         {
             var data = FindData(viewType);
+
             var prefabObject = await data.Asset.LoadAssetAsync<GameObject>();
 
             _sceneResources.AddObjectToRelease(prefabObject);
             var prefab = prefabObject.GetComponent(viewType) as View;
-            
             var screen = _viewsFactory.Create(prefab, _uiRootService.Root);
             screen.gameObject.SetActive(false);
             return screen;

@@ -1,5 +1,6 @@
+using System.Collections.Generic;
 using Core.Utils.Logger.Data;
-using UI.Services;
+using R3;
 using UI.Services.Data;
 using UnityEngine;
 
@@ -8,12 +9,14 @@ namespace Core.Utils.Logger
     public class LoggerService : ILoggerService
     {
         private readonly ILoggerParameters _parameters;
+        private readonly List<ChatMessageData> _messages = new();
+        private readonly Subject<ChatMessageData> _messageAdded = new();
 
-        private readonly IChatService _chatService;
+        public Observable<ChatMessageData> MessageAdded => _messageAdded;
+        public IReadOnlyCollection<ChatMessageData> Messages => _messages;
 
-        public LoggerService(IChatService chatService, ILoggerParameters parameters)
+        public LoggerService(ILoggerParameters parameters)
         {
-            _chatService = chatService;
             _parameters = parameters;
         }
 
@@ -34,7 +37,22 @@ namespace Core.Utils.Logger
 
         private void PushMessage(string source, string message, Color color, ChatMessageType type)
         {
-            _chatService.AddMessage(new ChatMessageData(source, message, color, type));
+            var data = new ChatMessageData(source, message, color, type);
+            _messages.Add(data);
+            _messageAdded.OnNext(data);
+
+            switch (type)
+            {
+                case ChatMessageType.Warning:
+                    Debug.LogWarning($"[{source}] {message}");
+                    break;
+                case ChatMessageType.Error:
+                    Debug.LogError($"[{source}] {message}");
+                    break;
+                default:
+                    Debug.Log($"[{source}] {message}");
+                    break;
+            }
         }
     }
 }

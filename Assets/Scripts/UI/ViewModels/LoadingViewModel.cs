@@ -16,7 +16,7 @@ namespace UI.ViewModels
         
         public override void Initialize()
         {
-            _sceneLoader.Progress.Skip(1)
+            _sceneLoader.Progress
                 .Subscribe(value => _progressBinder.Value = value)
                 .AddTo(Disposable);
         }

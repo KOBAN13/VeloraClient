@@ -9,13 +9,13 @@ namespace Core.DI
         {
             Builder = builder;
 
-            RegisterMainMenuServices(builder);
+            RegisterMainMenuServices();
         }
 
-        private static void RegisterMainMenuServices(IContainerBuilder builder)
+        private void RegisterMainMenuServices()
         {
-            builder.Register<LoginClientService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<RegisterClientService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            RegisterEntryPoint<LoginClientService>();
+            RegisterEntryPoint<RegisterClientService>();
         }
     }
 }

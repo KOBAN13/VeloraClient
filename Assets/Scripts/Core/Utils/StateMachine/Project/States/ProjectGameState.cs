@@ -4,6 +4,7 @@ using Core.Utils.StateMachine.Abstract.States;
 using Cysharp.Threading.Tasks;
 using Services.SceneManagement.Enums;
 using UI.Views;
+using UnityEngine;
 
 namespace Core.Utils.StateMachine.Project.States
 {
@@ -20,14 +21,14 @@ namespace Core.Utils.StateMachine.Project.States
 
         public void Enter()
         {
-            LoadGame().Forget();
+            LoadGame().Forget(Debug.LogException);
         }
 
         public void Exit()
         {
         }
 
-        private async UniTaskVoid LoadGame()
+        private async UniTask LoadGame()
         {
             await _sceneLoader.LoadScene(TypeScene.Game, typeof(ChatScreen));
             await _screenService.OpenAsync<ChatScreen>();

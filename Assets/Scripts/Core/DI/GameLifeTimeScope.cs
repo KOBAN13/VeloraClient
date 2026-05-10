@@ -14,18 +14,18 @@ namespace Core.DI
         {
             Builder = builder;
 
-            RegisterGameServices(builder);
+            RegisterGameServices();
         }
 
-        private static void RegisterGameServices(IContainerBuilder builder)
+        private void RegisterGameServices()
         {
-            builder.Register<PoolService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<ChatService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<ChatClientService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<GameAStateFactory>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<GameAStateMachine>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<GameBootstrapState>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<GameMainState>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            Register<PoolService>(Lifetime.Singleton);
+            Register<ChatService>(Lifetime.Singleton);
+            RegisterEntryPoint<ChatClientService>();
+            Register<GameAStateFactory>(Lifetime.Singleton);
+            Register<GameAStateMachine>(Lifetime.Singleton);
+            Register<GameBootstrapState>(Lifetime.Singleton);
+            Register<GameMainState>(Lifetime.Singleton);
         }
     }
 }

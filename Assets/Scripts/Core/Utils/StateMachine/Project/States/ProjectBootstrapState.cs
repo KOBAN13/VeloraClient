@@ -3,6 +3,7 @@ using Core.Utils.StateMachine.Abstract.States;
 using Cysharp.Threading.Tasks;
 using Services.SceneManagement.Enums;
 using UI.Views;
+using UnityEngine;
 
 namespace Core.Utils.StateMachine.Project.States
 {
@@ -19,21 +20,20 @@ namespace Core.Utils.StateMachine.Project.States
 
         public void Enter()
         {
-            LoadMainMenu().Forget();
+            LoadMainMenu().Forget(Debug.LogException);
         }
 
         public void Exit()
         {
         }
 
-        private async UniTaskVoid LoadMainMenu()
+        private async UniTask LoadMainMenu()
         {
             await _sceneLoader.LoadScene(
                 TypeScene.MainMenu,
                 typeof(MainMenuScreen),
                 typeof(LoginScreen),
-                typeof(RegisterScreen),
-                typeof(AuthorizationErrorScreen));
+                typeof(RegisterScreen));
 
             _projectStateMachine.Enter<ProjectMainMenu>();
         }

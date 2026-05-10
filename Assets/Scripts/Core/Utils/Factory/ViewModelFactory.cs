@@ -1,21 +1,20 @@
 using UI.Core;
-using VContainer;
 
 namespace Core.Utils.Factory
 {
     public class ViewModelFactory : Base.Factory
     {
-        private readonly IObjectResolver _resolver;
+        private readonly SceneScopeResolver _sceneScopeResolver;
 
-        public ViewModelFactory(IObjectResolver resolver)
+        public ViewModelFactory(SceneScopeResolver sceneScopeResolver)
         {
-            _resolver = resolver;
+            _sceneScopeResolver = sceneScopeResolver;
         }
         
         public T Create<T>() where T : ViewModel, new()
         {
             var viewModel = new T();
-            _resolver.Inject(viewModel);
+            _sceneScopeResolver.Resolve().Inject(viewModel);
             return viewModel;
         }
     }

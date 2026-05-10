@@ -45,6 +45,7 @@ namespace Core.Utils.SceneManagement
             await _screenService.OpenAsync<LoadingScreen>();
             
             IsLoading.Value = true;
+            await UniTask.Yield();
 
             var sceneProgress = new LoadingProgress(_minSlider, _sceneProgressLimit);
             var screensProgress = new LoadingProgress(_sceneProgressLimit, 1f);
@@ -58,6 +59,8 @@ namespace Core.Utils.SceneManagement
             
             SetTargetProgress(1f);
             Progress.Value = 1f;
+            await UniTask.Yield();
+
             _screenService.CloseScreen<LoadingScreen>();
             
             await Addressables.UnloadSceneAsync(loadingScene);

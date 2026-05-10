@@ -7,7 +7,6 @@ using Core.Utils.Services;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
-using Factories;
 using Network.Transport;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -52,6 +51,7 @@ namespace Core.DI
 
         private void RegisterFactories()
         {
+            Register<SceneScopeResolver>(Lifetime.Singleton);
             Register<ViewsFactory>(Lifetime.Singleton);
             Register<ViewModelFactory>(Lifetime.Singleton);
             Register<ProjectAStateFactory>(Lifetime.Singleton);

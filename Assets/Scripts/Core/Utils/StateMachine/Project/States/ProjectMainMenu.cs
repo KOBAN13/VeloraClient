@@ -2,6 +2,7 @@ using Core.Utils.Screens;
 using Core.Utils.StateMachine.Abstract.States;
 using Cysharp.Threading.Tasks;
 using UI.Views;
+using UnityEngine;
 
 namespace Core.Utils.StateMachine.Project.States
 {
@@ -21,10 +22,10 @@ namespace Core.Utils.StateMachine.Project.States
 
         public void Enter()
         {
-            OpenMainMenu().Forget();
+            OpenMainMenu().Forget(Debug.LogException);
         }
 
-        private async UniTaskVoid OpenMainMenu()
+        private async UniTask OpenMainMenu()
         {
             await _screenService.OpenAsync<MainMenuScreen>();
         }

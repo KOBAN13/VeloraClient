@@ -4,9 +4,7 @@ using Core.Utils.Factory;
 using Cysharp.Threading.Tasks;
 using UI.Core;
 using UnityEngine;
-using UnityEngine.Pool;
 using VContainer;
-using Object = System.Object;
 
 namespace Core.Utils.Screens
 {
@@ -31,7 +29,9 @@ namespace Core.Utils.Screens
 
         public async UniTask PreloadAsync(IProgress<float> progress = null, params Type[] screenTypes)
         {
-            var targets = _screensFactory.ScreenTypes;
+            var targets = screenTypes is { Length: > 0 }
+                ? screenTypes
+                : _screensFactory.ScreenTypes;
 
             if (targets.Count == 0)
             {
@@ -40,19 +40,8 @@ namespace Core.Utils.Screens
             }
 
             var completed = 0;
-            
-            using var _ = ListPool<UniTask>.Get(out var preloadTasks);
 
             foreach (var screenType in targets)
-            {
-                preloadTasks.Add(PreloadAndReportAsync(screenType));
-            }
-
-            await UniTask.WhenAll(preloadTasks);
-
-            return;
-
-            async UniTask PreloadAndReportAsync(Type screenType)
             {
                 await PreloadAsync(screenType);
                 completed++;
@@ -170,6 +159,7 @@ namespace Core.Utils.Screens
         private TScreen OpenScreen<TScreen>(TScreen screen, bool addToCache) where TScreen : View
         {
             screen.Open();
+            screen.transform.SetAsLastSibling();
 
             if (addToCache)
             {
