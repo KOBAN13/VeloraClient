@@ -6,4 +6,4 @@ services:
     container_name: velora-client-build
     restart: always
     ports:
-      - "8080:80"
+      - "8090:80"
