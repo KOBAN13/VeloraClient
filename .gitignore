@@ -18,6 +18,8 @@
 *.blend1.meta
 
 AGENTS.md
+github-actions-unity-deploy.pub
+github-actions-unity-deploy
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

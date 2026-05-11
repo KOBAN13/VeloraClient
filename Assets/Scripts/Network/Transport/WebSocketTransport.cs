@@ -76,7 +76,11 @@ namespace Network.Transport
         
         private void CreateWebSocket()
         {
-            _webSocket = new WebSocket(_networkParameters.WebsocketUrl);
+#if UNITY_WEBGL && !UNITY_EDITOR 
+            _webSocket = new WebSocket(_networkParameters.WebsocketUrlInHttps);
+#else
+            _webSocket = new WebSocket(_networkParameters.WebsocketUrlInEditor);
+#endif
             _webSocket.OnOpen += OnOpenWebSocketConnection;
             _webSocket.OnMessage += OnMessageWebSocket;
             _webSocket.OnError += OnWebSocketError;
@@ -117,7 +121,7 @@ namespace Network.Transport
 
             await using var cancellation = token.Register(CancelConnection);
 
-            _logger.Log($"Connecting to {_networkParameters.WebsocketUrl}", nameof(WebSocketTransport));
+            _logger.Log($"Connecting to {_networkParameters.WebsocketUrlInEditor}", nameof(WebSocketTransport));
             
             RunWebSocketAsync(_webSocket).Forget();
 
