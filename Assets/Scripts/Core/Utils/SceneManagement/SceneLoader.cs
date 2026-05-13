@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Utils.Factory;
 using Core.Utils.SceneManagement.Interfaces;
 using Core.Utils.Screens;
 using Cysharp.Threading.Tasks;
@@ -19,16 +20,22 @@ namespace Core.Utils.SceneManagement
 
         private IScenesService _scenesService;
         private IScreenService _screenService;
+        private SceneScopeResolver _sceneScopeResolver;
         private float _targetProgress;
         
         public readonly ReactiveProperty<bool> IsLoading = new();
         public readonly ReactiveProperty<float> Progress = new();
         
         [Inject]
-        private void Construct(SceneResources sceneResources, IScenesService scenesService, IScreenService screenService)
+        private void Construct(
+            SceneResources sceneResources,
+            IScenesService scenesService,
+            IScreenService screenService,
+            SceneScopeResolver sceneScopeResolver)
         {
             _scenesService = scenesService;
             _screenService = screenService;
+            _sceneScopeResolver = sceneScopeResolver;
             _scenesService.Construct(this, sceneResources);
         }
         
@@ -54,7 +61,8 @@ namespace Core.Utils.SceneManagement
             
             await _scenesService.UnloadScene();
             
-            await _scenesService.LoadScene(_sceneGroup, sceneProgress, typeScene);
+            var loadedScene = await _scenesService.LoadScene(_sceneGroup, sceneProgress, typeScene);
+            _sceneScopeResolver.ResolveRequired(loadedScene);
             await _screenService.PreloadAsync(screensProgress, screensToPreload);
             
             SetTargetProgress(1f);

@@ -16,6 +16,7 @@ namespace Core.Utils.SceneManagement
     {
         private SceneResources _resources;
         private AsyncOperationHandle<SceneInstance> _currentSceneHandle;
+        private Scene _currentRegularScene;
         private readonly Subject<Unit> _sceneIsLoadSubject = new();
 
         public Observable<Unit> SceneIsLoad => _sceneIsLoadSubject;
@@ -25,13 +26,19 @@ namespace Core.Utils.SceneManagement
             _resources = resources;
         }
 
-        public async UniTask LoadScene(SceneGroup sceneGroup, IProgress<float> progress, TypeScene typeScene)
+        public async UniTask<Scene> LoadScene(SceneGroup sceneGroup, IProgress<float> progress, TypeScene typeScene)
         {
             var sceneRef = sceneGroup.FindSceneByReference(typeScene);
-            
-            if (sceneRef.State == SceneReferenceState.Addressable)
+
+            switch (sceneRef.State)
             {
-                await LoadAddressableScene(sceneRef.Path, sceneGroup, progress);
+                case SceneReferenceState.Regular:
+                    return await LoadRegularScene(sceneRef, sceneGroup, progress);
+                case SceneReferenceState.Addressable:
+                    return await LoadAddressableScene(sceneRef.Path, sceneGroup, progress);
+                default:
+                    Debug.LogError($"[SceneService] Scene {typeScene} is not safe to load: {sceneRef.UnsafeReason}");
+                    return default;
             }
         }
 
@@ -76,6 +83,15 @@ namespace Core.Utils.SceneManagement
                 
                 await Resources.UnloadUnusedAssets();
             }
+
+            if (_currentRegularScene.IsValid() && _currentRegularScene.isLoaded)
+            {
+                await SceneManager.UnloadSceneAsync(_currentRegularScene);
+
+                _currentRegularScene = default;
+
+                await Resources.UnloadUnusedAssets();
+            }
         }
 
         public void UnloadResources()
@@ -86,7 +102,56 @@ namespace Core.Utils.SceneManagement
             _resources.ClearObject();
         }
 
-        private async UniTask<bool> LoadAddressableScene(string scenePath, SceneGroup sceneGroup, IProgress<float> progress)
+        private async UniTask<Scene> LoadRegularScene(SceneReference sceneRef, SceneGroup sceneGroup, IProgress<float> progress)
+        {
+            var initSceneName = sceneGroup.FindSceneByReference(TypeScene.InitialScene).Name;
+
+            var initScene = SceneManager.GetSceneByName(initSceneName);
+            var hadInit = initScene.IsValid() && initScene.isLoaded;
+
+            var operation = SceneManager.LoadSceneAsync(sceneRef.Path, LoadSceneMode.Additive);
+
+            if (operation == null)
+            {
+                Debug.LogError($"[SceneService] Failed to load scene: {sceneRef.Path}");
+                return default;
+            }
+
+            while (!operation.isDone)
+            {
+                progress.Report(Mathf.Clamp01(operation.progress));
+                await UniTask.Yield();
+            }
+
+            var loadedScene = SceneManager.GetSceneByPath(sceneRef.Path);
+
+            if (!loadedScene.IsValid())
+            {
+                loadedScene = SceneManager.GetSceneByName(sceneRef.Name);
+            }
+
+            if (!loadedScene.IsValid())
+            {
+                Debug.LogWarning("Invalid scene instance loaded.");
+                return default;
+            }
+
+            SceneManager.SetActiveScene(loadedScene);
+
+            progress.Report(1f);
+
+            if (hadInit)
+            {
+                await SceneManager.UnloadSceneAsync(initScene);
+            }
+
+            _currentRegularScene = loadedScene;
+            _sceneIsLoadSubject.OnNext(Unit.Default);
+
+            return loadedScene;
+        }
+
+        private async UniTask<Scene> LoadAddressableScene(string scenePath, SceneGroup sceneGroup, IProgress<float> progress)
         {
             var initSceneName = sceneGroup.FindSceneByReference(TypeScene.InitialScene).Name;
             
@@ -115,14 +180,14 @@ namespace Core.Utils.SceneManagement
             if (handle.Status == AsyncOperationStatus.Failed)
             {
                 Debug.LogError($"[SceneService] Failed to load scene: {scenePath}");
-                return false;
+                return default;
             }
             
             var sceneInstance = handle.Result;
             if (!sceneInstance.Scene.IsValid())
             {
                 Debug.LogWarning("Invalid scene instance loaded.");
-                return false;
+                return default;
             }
 
             await sceneInstance.ActivateAsync();
@@ -136,9 +201,10 @@ namespace Core.Utils.SceneManagement
                 await SceneManager.UnloadSceneAsync(initScene);
             }
 
+            _currentRegularScene = default;
             _sceneIsLoadSubject.OnNext(Unit.Default);
             
-            return true;
+            return sceneInstance.Scene;
         }
     }
 }
