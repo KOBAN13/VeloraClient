@@ -1,13 +1,17 @@
+using System.Collections.Generic;
 using System.Linq;
 using Core.Utils.Factory;
 using Core.Utils.Logger;
+using Core.Utils.Pool;
 using Core.Utils.SceneManagement;
 using Core.Utils.Screens;
 using Core.Utils.Services;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
+using Network;
 using Network.Transport;
+using UI.Services;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
@@ -38,12 +42,12 @@ namespace Core.DI
 
         private void RegisterConfigs()
         {
-            var configs = Addressables
+            List<ScriptableObject> configs = Addressables
                 .LoadAssetsAsync<ScriptableObject>(_configLabel, null)
                 .WaitForCompletion()
                 .ToList();
 
-            foreach (var config in configs)
+            foreach (ScriptableObject config in configs)
             {
                 RegisterInstance(config);
             }
@@ -66,6 +70,8 @@ namespace Core.DI
             Register<ScreenService>(Lifetime.Singleton);
             Register<TickService>(Lifetime.Singleton);
             Register<LoggerService>(Lifetime.Singleton);
+            Register<PoolService>(Lifetime.Singleton);
+            Register<ChatService>(Lifetime.Singleton);
         }
 
         private void RegisterNetworkServices()
@@ -74,6 +80,9 @@ namespace Core.DI
             Register<ProtobufPacketCodec>(Lifetime.Singleton);
             Register<WebSocketMessageFramer>(Lifetime.Singleton);
             Register<NetworkClient>(Lifetime.Singleton);
+            RegisterEntryPoint<LoginClientService>();
+            RegisterEntryPoint<RegisterClientService>();
+            RegisterEntryPoint<ChatClientService>();
         }
 
         private void RegisterProjectStates()
