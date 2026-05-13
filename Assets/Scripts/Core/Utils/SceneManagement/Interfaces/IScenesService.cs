@@ -5,6 +5,7 @@ using Services.SceneManagement;
 using Services.SceneManagement.Enums;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 
 namespace Core.Utils.SceneManagement.Interfaces
 {
@@ -13,7 +14,7 @@ namespace Core.Utils.SceneManagement.Interfaces
         UniTask<AsyncOperationHandle<SceneInstance>> LoadLoadingScene(SceneGroup sceneGroup);
         void UnloadResources();
         UniTask UnloadScene();
-        UniTask LoadScene(SceneGroup sceneGroup, IProgress<float> progress, TypeScene typeScene);
+        UniTask<Scene> LoadScene(SceneGroup sceneGroup, IProgress<float> progress, TypeScene typeScene);
         void Construct(SceneLoader loader, SceneResources resources);
         Observable<Unit> SceneIsLoad { get; }
     }
