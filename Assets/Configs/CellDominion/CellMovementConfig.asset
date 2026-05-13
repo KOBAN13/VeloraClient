@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa70aacad43b244d927195f93f8042a, type: 3}
+  m_Name: CellMovementConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.CellDominion.Runtime.Config.CellMovementConfig
+  movementLevels:
+  - Level: 1
+    MaxSpeed: 2.2
+    Acceleration: 7
+    Drag: 3.2
+    DashImpulse: 4.8
+    DashInterval: 0.7
+    DashControl: 0
+    Size: 0.8
+  - Level: 3
+    MaxSpeed: 2.8
+    Acceleration: 8.5
+    Drag: 4
+    DashImpulse: 3.5
+    DashInterval: 0.55
+    DashControl: 0.22
+    Size: 0.92
+  - Level: 6
+    MaxSpeed: 3.6
+    Acceleration: 11
+    Drag: 5.2
+    DashImpulse: 1.8
+    DashInterval: 0.35
+    DashControl: 0.65
+    Size: 1.08
+  - Level: 10
+    MaxSpeed: 4.6
+    Acceleration: 14
+    Drag: 7
+    DashImpulse: 0.35
+    DashInterval: 0.2
+    DashControl: 1
+    Size: 1.25
