@@ -1,3 +1,4 @@
+using Network;
 using VContainer;
 
 namespace Core.DI
@@ -13,6 +14,8 @@ namespace Core.DI
 
         private void RegisterMainMenuServices()
         {
+            RegisterEntryPoint<LoginClientService>();
+            RegisterEntryPoint<RegisterClientService>();
         }
     }
 }
