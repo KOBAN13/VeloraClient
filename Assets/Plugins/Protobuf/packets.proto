@@ -6,8 +6,7 @@ option go_package = "./proto";
 
 enum RoomStatus {
   ROOM_STATUS_WAITING = 0;
-  ROOM_STATUS_STARTING = 1;
-  ROOM_STATUS_STARTED = 2;
+  ROOM_STATUS_STARTED = 1;
 }
 
 message ChatMessage {
@@ -16,6 +15,10 @@ message ChatMessage {
 
 message IdMessage {
   uint64 id = 1;
+}
+
+message StartGameRequestMessage {
+
 }
 
 message LoginRequestMessage {
@@ -30,10 +33,11 @@ message RegisterRequestMessage {
 
 message CreateRoomRequestMessage {
   uint32 maxPlayer = 1;
+  string roomName = 2;
 }
 
 message JoinRoomRequestMessage {
-  uint32 roomId = 1;
+  uint64 roomId = 1;
 }
 
 message LeaveRoomRequestMessage {
@@ -42,6 +46,21 @@ message LeaveRoomRequestMessage {
 
 message ReadyRequestMessage {
   bool isReady = 1;
+}
+
+message RoomListRequestMessage {
+
+}
+
+message RoomSummaryMessage {
+  uint64 roomId = 1;
+  uint32 playersCount = 2;
+  uint32 maxPlayer = 3;
+  RoomStatus status = 4;
+}
+
+message RoomListSnapshotMessage {
+  repeated RoomSummaryMessage rooms = 1;
 }
 
 message RoomPlayerMessage {
@@ -91,7 +110,9 @@ message Packet {
     LeaveRoomRequestMessage leave_room_request = 10;
     ReadyRequestMessage ready_request = 11;
     RoomStateSnapshotMessage room_state_snapshot = 12;
-    MatchStartingMessage match_starting = 13;
-    MatchStartMessage match_started = 14;
+    MatchStartMessage match_started = 13;
+    StartGameRequestMessage start_game = 14;
+    RoomListRequestMessage room_list_request = 15;
+    RoomListSnapshotMessage room_list_snapshot = 16;
   }
 }

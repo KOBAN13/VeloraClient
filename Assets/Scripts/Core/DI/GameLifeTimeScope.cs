@@ -19,6 +19,7 @@ namespace Core.DI
 
         private void RegisterGameServices()
         {
+            Register<LobbyClientService>(Lifetime.Singleton);
             Register<PoolService>(Lifetime.Singleton);
             Register<ChatService>(Lifetime.Singleton);
             RegisterEntryPoint<ChatClientService>();
