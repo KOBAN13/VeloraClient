@@ -1,16 +1,14 @@
-using System.Collections.Generic;
 using Network.Transport.Data;
-using R3;
+using ObservableCollections;
 
 namespace Network
 {
     public interface IRoomStateService
-    {
-        Observable<IReadOnlyList<RoomSummaryData>> RoomsChanged { get; }
-        Observable<RoomStateData> CurrentRoomChanged { get; }
-        Observable<string> ErrorReceived { get; }
+    { 
+        IReadOnlyObservableList<RoomSummaryData> RoomSummaryData { get; }
+        R3.Observable<RoomStateData> CurrentRoomChanged { get; }
+        R3.Observable<string> ErrorReceived { get; }
         
-        IReadOnlyList<RoomSummaryData> Rooms { get; }
         RoomStateData CurrentRoom { get; }
         PlayerData LocalPLayer { get; }
         
@@ -20,7 +18,7 @@ namespace Network
         bool CanStart { get; }
         
         void RefreshRooms();
-        void CreateRoom(uint maxPlayers);
+        void CreateRoom(string roomName, uint maxPlayers);
         void JoinRoom(ulong roomId);
         void LeaveRoom();
         void SetReady(bool isReady);

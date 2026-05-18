@@ -13,14 +13,14 @@ namespace Network
         
         private readonly Subject<RoomStateSnapshotMessage> _roomStateSnapshotReceived = new();
         private readonly Subject<RoomListSnapshotMessage> _roomListSnapshotReceived = new();
-        private readonly Subject<string> _loginErrorRequest = new();
+        private readonly Subject<string> _lobbyErrorRequest = new();
         private readonly CompositeDisposable _disposables = new();
 
         public bool IsInitialized { get; set; }
 
         public Observable<RoomListSnapshotMessage> RoomListSnapshotReceived => _roomListSnapshotReceived;
         public Observable<RoomStateSnapshotMessage> RoomStateSnapshotReceived => _roomStateSnapshotReceived;
-        public Observable<string> LobbyErrorReceived => _loginErrorRequest;
+        public Observable<string> LobbyErrorReceived => _lobbyErrorRequest;
         
         public LobbyClientService(INetworkClient networkClient)
         {
@@ -30,8 +30,13 @@ namespace Network
         public void Initialize()
         {
             _networkClient.Received
-                .Where(packets => packets.MsgCase is Packet.MsgOneofCase.DenyResponse or Packet.MsgOneofCase.OkResponse or Packet.MsgOneofCase.RoomStateSnapshot)
+                .Where(packets => packets.MsgCase is Packet.MsgOneofCase.DenyResponse or Packet.MsgOneofCase.RoomStateSnapshot)
                 .Subscribe(ReceiveMessage)
+                .AddTo(_disposables);
+            
+            _networkClient.Received.
+                Where(packets => packets.MsgCase is Packet.MsgOneofCase.RoomListSnapshot)
+                .Subscribe(packet => _roomListSnapshotReceived.OnNext(packet.RoomListSnapshot))
                 .AddTo(_disposables);
         }
         
@@ -75,7 +80,7 @@ namespace Network
             _networkClient.SendAsync(packet);
         }
         
-        public void JoinRoom(uint roomId)
+        public void JoinRoom(ulong roomId)
         {
             var packet = new Packet()
             {
@@ -118,11 +123,8 @@ namespace Network
         {
             switch (packet.MsgCase)
             {
-                case Packet.MsgOneofCase.OkResponse:
-                    Debug.Log(packet.OkResponse);
-                    break;
                 case Packet.MsgOneofCase.DenyResponse:
-                    _loginErrorRequest.OnNext(packet.DenyResponse.Reason);
+                    _lobbyErrorRequest.OnNext(packet.DenyResponse.Reason);
                     break;
                 case Packet.MsgOneofCase.RoomStateSnapshot:
                     _roomStateSnapshotReceived.OnNext(packet.RoomStateSnapshot);

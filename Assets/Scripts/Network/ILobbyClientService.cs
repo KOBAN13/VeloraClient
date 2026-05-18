@@ -12,7 +12,7 @@ namespace Network
         void RefreshRooms();
         void CreateRoom(string nameRoom, uint maxPlayers);
         void LeaveRoom();
-        void JoinRoom(uint roomId);
+        void JoinRoom(ulong roomId);
         void SetReady(bool isReady);
         void StartGame();
     }
