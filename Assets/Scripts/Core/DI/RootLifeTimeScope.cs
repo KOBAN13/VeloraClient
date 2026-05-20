@@ -7,6 +7,7 @@ using Core.Utils.Services;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
+using Network;
 using Network.Transport;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -74,6 +75,7 @@ namespace Core.DI
             Register<ProtobufPacketCodec>(Lifetime.Singleton);
             Register<WebSocketMessageFramer>(Lifetime.Singleton);
             Register<NetworkClient>(Lifetime.Singleton);
+            Register<ClientIdentityService>(Lifetime.Singleton);
         }
 
         private void RegisterProjectStates()
