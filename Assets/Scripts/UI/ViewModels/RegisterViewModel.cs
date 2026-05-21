@@ -1,5 +1,8 @@
+using System;
+using System.Threading;
 using Core.Utils.Screens;
-using Network;
+using Cysharp.Threading.Tasks;
+using Network.Contracts;
 using R3;
 using UI.Core;
 using UI.Helpers;
@@ -11,6 +14,9 @@ namespace UI.ViewModels
 {
     public class RegisterViewModel : ViewModel
     { 
+        private static readonly TimeSpan ResponseTimeout = TimeSpan.FromSeconds(3);
+        private const string ConnectionErrorMessage = "Нет стабильного подключения";
+        
         [Inject] 
         private IRegisterClientService _registrationService;
         
@@ -41,6 +47,7 @@ namespace UI.ViewModels
         
         private string _login = string.Empty;
         private string _password = string.Empty;
+        private CancellationTokenSource _responseTimeoutCancellation;
         
         public override void Initialize()
         {
@@ -55,22 +62,30 @@ namespace UI.ViewModels
 
         private void OnRegisterDenied(string serverState)
         {
-            _interactableRegisterButton.Value = true;
+            CompleteRegisterRequest();
 
             if (string.IsNullOrEmpty(serverState))
                 return;
             
-            ServerStateTextBinder.Value = serverState;
-            ServerStateBannerBinder.Value = EUIObjectState.Show;
+            ShowServerError(serverState);
         }
 
         private void OnRegisterSucceeded(Unit unit)
         {
+            CompleteRegisterRequest();
             ServerStateBannerBinder.Value = EUIObjectState.Hide;
             _screenService.CloseScreen<RegisterScreen>();
         }
         
-        private void OnCloseScreen(Unit unit) => _screenService.CloseScreen<RegisterScreen>();
+        private void OnCloseScreen(Unit unit)
+        {
+            CancelResponseTimeout();
+            _screenService.CloseScreen<RegisterScreen>();
+            
+            ServerStateTextBinder.Value = string.Empty;
+            ServerStateBannerBinder.Value = EUIObjectState.Hide;
+        }
+        
         private void OnLoginChanged(string login) => _login = login;
         private void OnPasswordChanged(string password) => _password = password;
 
@@ -80,8 +95,56 @@ namespace UI.ViewModels
                 return;
 
             _interactableRegisterButton.Value = false;
+            ServerStateBannerBinder.Value = EUIObjectState.Hide;
+            StartResponseTimeout();
             
             _registrationService.Register(_login, _password);
+        }
+
+        private void StartResponseTimeout()
+        {
+            CancelResponseTimeout();
+            _responseTimeoutCancellation = new CancellationTokenSource();
+            WaitForResponseTimeout(_responseTimeoutCancellation.Token).Forget();
+        }
+
+        private async UniTaskVoid WaitForResponseTimeout(CancellationToken token)
+        {
+            try
+            {
+                await UniTask.Delay(ResponseTimeout, cancellationToken: token);
+                
+                _interactableRegisterButton.Value = true;
+                ShowServerError(ConnectionErrorMessage);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
+
+        private void CompleteRegisterRequest()
+        {
+            _interactableRegisterButton.Value = true;
+            CancelResponseTimeout();
+        }
+
+        private void CancelResponseTimeout()
+        {
+            _responseTimeoutCancellation?.Cancel();
+            _responseTimeoutCancellation?.Dispose();
+            _responseTimeoutCancellation = null;
+        }
+
+        private void ShowServerError(string serverState)
+        {
+            ServerStateTextBinder.Value = serverState;
+            ServerStateBannerBinder.Value = EUIObjectState.Show;
+        }
+        
+        public override void Dispose()
+        {
+            CancelResponseTimeout();
+            base.Dispose();
         }
     }
 }

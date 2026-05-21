@@ -1,5 +1,6 @@
 using System;
 using Core.Utils.Services;
+using Network.Contracts;
 using Network.Transport;
 using Packets;
 using R3;
@@ -7,7 +8,7 @@ using UI.Services;
 using UI.Services.Data;
 using UnityEngine;
 
-namespace Network
+namespace Network.Services.Chat
 {
     public class ChatClientService : IChatClientService, IInitializable, IDisposable
     {

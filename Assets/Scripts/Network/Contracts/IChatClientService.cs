@@ -1,4 +1,4 @@
-namespace Network.Transport
+namespace Network.Contracts
 {
     public interface IChatClientService
     {

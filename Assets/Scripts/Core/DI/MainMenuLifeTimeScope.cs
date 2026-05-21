@@ -1,4 +1,4 @@
-using Network;
+using Network.Services.Auth;
 using VContainer;
 
 namespace Core.DI

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Packets;
 
-namespace Network.Transport.Data
+namespace Network.Data
 {
     public class RoomStateData
     {

@@ -1,7 +1,7 @@
 using Packets;
 using R3;
 
-namespace Network
+namespace Network.Contracts
 {
     public interface ILobbyClientService
     {

@@ -2,13 +2,14 @@ using System;
 using System.Linq;
 using Core.Utils.Logger;
 using Core.Utils.Services;
-using Network.Transport.Data;
+using Network.Contracts;
+using Network.Data;
 using ObservableCollections;
 using Packets;
 using R3;
 using UnityEngine;
 
-namespace Network
+namespace Network.Services.Lobby
 {
     public class RoomStateService : IRoomStateService, IInitializable, IDisposable
     {

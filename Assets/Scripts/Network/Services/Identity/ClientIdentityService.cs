@@ -1,10 +1,11 @@
 using System;
 using Core.Utils.Services;
+using Network.Contracts;
 using Network.Transport;
 using Packets;
 using R3;
 
-namespace Network
+namespace Network.Services.Identity
 {
     public class ClientIdentityService : IClientIdentityService, IInitializable, IDisposable
     {

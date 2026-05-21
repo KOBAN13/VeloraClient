@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using Core.Utils.Services;
+using Network.Contracts;
 using Network.Transport;
 using Packets;
 using R3;

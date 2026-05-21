@@ -1,6 +1,6 @@
 using System;
 
-namespace Network.Transport.Data
+namespace Network.Data
 {
     public readonly struct PlayerData : IEquatable<PlayerData>
     {

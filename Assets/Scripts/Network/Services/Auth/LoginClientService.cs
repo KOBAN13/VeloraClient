@@ -1,25 +1,26 @@
 using System;
 using Core.Utils.Services;
+using Network.Contracts;
 using Network.Transport;
 using Packets;
 using R3;
 
-namespace Network
+namespace Network.Services.Auth
 {
-    public class RegisterClientService : IRegisterClientService, IInitializable, IDisposable
+    public class LoginClientService : ILoginClientService, IInitializable, IDisposable
     {
         public bool IsInitialized { get; set; }
-
-        public Observable<Unit> SuccessRegister => _successRegister;
-        public Observable<string> RegisterErrorRequest => _registerErrorRequest;
         
         private readonly INetworkClient _networkClient;
         
-        private readonly Subject<Unit> _successRegister = new();
-        private readonly Subject<string> _registerErrorRequest = new();
+        private readonly Subject<Unit> _successLogin = new();
+        private readonly Subject<string> _loginErrorRequest = new();
         private readonly CompositeDisposable _disposables = new();
         
-        public RegisterClientService(INetworkClient networkClient)
+        public Observable<Unit> SuccessLogin => _successLogin;
+        public Observable<string> LoginErrorRequest => _loginErrorRequest;
+
+        public LoginClientService(INetworkClient networkClient)
         {
             _networkClient = networkClient;
         }
@@ -32,11 +33,11 @@ namespace Network
                 .AddTo(_disposables);
         }
 
-        public void Register(string username, string password)
+        public void Login(string username, string password)
         {
             var packet = new Packet
             {
-                RegisterRequest = new RegisterRequestMessage
+                LoginRequest = new LoginRequestMessage
                 {
                     Username = username,
                     Password = password
@@ -51,10 +52,10 @@ namespace Network
             switch (packet.MsgCase)
             {
                 case Packet.MsgOneofCase.OkResponse:
-                    _successRegister.OnNext(Unit.Default);
+                    _successLogin.OnNext(Unit.Default);
                     break;
                 case Packet.MsgOneofCase.DenyResponse:
-                    _registerErrorRequest.OnNext(packet.DenyResponse.Reason);
+                    _loginErrorRequest.OnNext(packet.DenyResponse.Reason);
                     break;
             }
         }

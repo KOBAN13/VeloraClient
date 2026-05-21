@@ -2,7 +2,9 @@ using Core.Utils.Pool;
 using Core.Utils.StateMachine.Game;
 using Core.Utils.StateMachine.Game.Factory;
 using Core.Utils.StateMachine.Game.States;
-using Network;
+using Network.Services.Chat;
+using Network.Services.Identity;
+using Network.Services.Lobby;
 using UI.Services;
 using VContainer;
 

@@ -1,11 +1,11 @@
 using System;
 using Core.Utils.Services;
+using Network.Contracts;
 using Network.Transport;
 using Packets;
 using R3;
-using UnityEngine;
 
-namespace Network
+namespace Network.Services.Lobby
 {
     public class LobbyClientService : ILobbyClientService, IInitializable, IDisposable
     {

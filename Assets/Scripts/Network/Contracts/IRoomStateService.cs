@@ -1,7 +1,7 @@
-using Network.Transport.Data;
+using Network.Data;
 using ObservableCollections;
 
-namespace Network
+namespace Network.Contracts
 {
     public interface IRoomStateService
     { 

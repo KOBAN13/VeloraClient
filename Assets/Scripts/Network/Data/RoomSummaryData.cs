@@ -1,7 +1,7 @@
 using System;
 using Packets;
 
-namespace Network.Transport.Data
+namespace Network.Data
 {
     public readonly struct RoomSummaryData : IEquatable<RoomSummaryData>, IComparable<RoomSummaryData>
     {

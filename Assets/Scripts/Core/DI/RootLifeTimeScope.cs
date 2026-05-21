@@ -7,7 +7,7 @@ using Core.Utils.Services;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
-using Network;
+using Network.Services.Identity;
 using Network.Transport;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

@@ -1,5 +1,8 @@
+using System;
+using System.Threading;
 using Core.Utils.Screens;
-using Network;
+using Cysharp.Threading.Tasks;
+using Network.Contracts;
 using R3;
 using UI.Core;
 using UI.Helpers;
@@ -11,6 +14,10 @@ namespace UI.ViewModels
 {
     public class LoginViewModel : ViewModel
     { 
+        private static readonly TimeSpan ResponseTimeout = TimeSpan.FromSeconds(3);
+        
+        private const string ConnectionErrorMessage = "Нет стабильного подключения";
+        
         [Inject] private ILoginClientService _loginClientService;
         
         [Inject]
@@ -40,6 +47,7 @@ namespace UI.ViewModels
 
         private string _username;
         private string _password;
+        private CancellationTokenSource _responseTimeoutCancellation;
         
         public override void Initialize()
         {
@@ -62,22 +70,26 @@ namespace UI.ViewModels
 
         private void OnCloseScreen(Unit unit)
         {
+            CancelResponseTimeout();
             _screenService.CloseScreen<LoginScreen>();
+            
+            ServerStateTextBinder.Value = string.Empty;
+            ServerStateBannerBinder.Value = EUIObjectState.Hide;
         }
 
         private void OnLoginDenied(string serverState)
         {
-            _interactableSignInButton.Value = true;
+            CompleteLoginRequest();
 
             if (string.IsNullOrEmpty(serverState))
                 return;
             
-            ServerStateTextBinder.Value = serverState;
-            ServerStateBannerBinder.Value = EUIObjectState.Show;
+            ShowServerError(serverState);
         }
 
         private void OnLoginSucceeded(Unit unit)
         {
+            CompleteLoginRequest();
             ServerStateBannerBinder.Value = EUIObjectState.Hide;
             _screenService.CloseScreen<LoginScreen>();
         }
@@ -91,8 +103,56 @@ namespace UI.ViewModels
                 return;
 
             _interactableSignInButton.Value = false;
+            ServerStateBannerBinder.Value = EUIObjectState.Hide;
+            StartResponseTimeout();
             
             _loginClientService.Login(_username, _password);
+        }
+
+        public override void Dispose()
+        {
+            CancelResponseTimeout();
+            base.Dispose();
+        }
+
+        private void StartResponseTimeout()
+        {
+            CancelResponseTimeout();
+            _responseTimeoutCancellation = new CancellationTokenSource();
+            WaitForResponseTimeout(_responseTimeoutCancellation.Token).Forget();
+        }
+
+        private async UniTaskVoid WaitForResponseTimeout(CancellationToken token)
+        {
+            try
+            {
+                await UniTask.Delay(ResponseTimeout, cancellationToken: token);
+                
+                _interactableSignInButton.Value = true;
+                ShowServerError(ConnectionErrorMessage);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
+
+        private void CompleteLoginRequest()
+        {
+            _interactableSignInButton.Value = true;
+            CancelResponseTimeout();
+        }
+
+        private void CancelResponseTimeout()
+        {
+            _responseTimeoutCancellation?.Cancel();
+            _responseTimeoutCancellation?.Dispose();
+            _responseTimeoutCancellation = null;
+        }
+
+        private void ShowServerError(string serverState)
+        {
+            ServerStateTextBinder.Value = serverState;
+            ServerStateBannerBinder.Value = EUIObjectState.Show;
         }
     }
 }
