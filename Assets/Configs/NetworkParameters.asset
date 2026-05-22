@@ -24,5 +24,6 @@ MonoBehaviour:
   <TransportType>k__BackingField: 1
   <WebsocketUrlInEditor>k__BackingField: ws://apisfs.ru:9999/velora
   <WebsocketUrlInHttps>k__BackingField: wss://apisfs.ru:9999/velora
+  <WebsocketUrlInLocal>k__BackingField: ws://localhost:8080/velora
   <TcpHost>k__BackingField: 
   <TcpPort>k__BackingField: 0

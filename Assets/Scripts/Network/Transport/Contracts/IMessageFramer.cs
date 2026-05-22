@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Network.Transport
+namespace Network.Transport.Contracts
 {
     public interface IMessageFramer
     {

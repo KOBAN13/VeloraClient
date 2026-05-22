@@ -5,6 +5,7 @@ namespace Network.Transport.Data
         ETransportType TransportType { get; }
         string WebsocketUrlInEditor { get; }
         string WebsocketUrlInHttps { get; }
+        string WebsocketUrlInLocal { get; }
         string TcpHost { get; }
         int TcpPort { get; }
     }

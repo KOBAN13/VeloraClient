@@ -3,11 +3,12 @@ using System.Threading;
 using Core.Utils.Logger;
 using Core.Utils.Services;
 using Cysharp.Threading.Tasks;
+using Network.Transport.Contracts;
 using Network.Transport.Data;
 using Packets;
 using R3;
 
-namespace Network.Transport
+namespace Network.Transport.Client
 {
     public class NetworkClient : INetworkClient, IInitializable, IDisposable
     {

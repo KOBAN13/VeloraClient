@@ -9,6 +9,7 @@ namespace Network.Transport.Data
         [field: SerializeField] public ETransportType TransportType { get; private set; }
         [field: SerializeField] public string WebsocketUrlInEditor { get; private set; }
         [field: SerializeField] public string WebsocketUrlInHttps { get; private set; }
+        [field: SerializeField] public string WebsocketUrlInLocal { get; private set; }
         [field: SerializeField] public string TcpHost { get; private set; }
         [field: SerializeField] public int TcpPort { get; private set; }
     }

@@ -1,6 +1,6 @@
 using Packets;
 
-namespace Network.Transport
+namespace Network.Transport.Contracts
 {
     public interface IPacketCodec
     {

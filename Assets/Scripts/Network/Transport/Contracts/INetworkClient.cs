@@ -3,7 +3,7 @@ using Network.Transport.Data;
 using Packets;
 using R3;
 
-namespace Network.Transport
+namespace Network.Transport.Contracts
 {
     public interface INetworkClient
     {

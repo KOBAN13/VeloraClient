@@ -5,6 +5,7 @@ using Core.Utils.Logger;
 using Core.Utils.Services;
 using Cysharp.Threading.Tasks;
 using NativeWebSocket;
+using Network.Transport.Contracts;
 using Network.Transport.Data;
 using R3;
 
@@ -76,17 +77,22 @@ namespace Network.Transport
         
         private void CreateWebSocket()
         {
-#if UNITY_WEBGL && !UNITY_EDITOR 
-            _webSocket = new WebSocket(_networkParameters.WebsocketUrlInHttps);
-#else
-            _webSocket = new WebSocket(_networkParameters.WebsocketUrlInEditor);
-#endif
+            _webSocket = new WebSocket(GetWebSocketUrl());
             _webSocket.OnOpen += OnOpenWebSocketConnection;
             _webSocket.OnMessage += OnMessageWebSocket;
             _webSocket.OnError += OnWebSocketError;
             _webSocket.OnClose += OnWebSocketClose;
-            //
-            //
+        }
+
+        private string GetWebSocketUrl()
+        {
+#if LOCAL_CONNECTION
+            return _networkParameters.WebsocketUrlInLocal;
+#elif UNITY_WEBGL && !UNITY_EDITOR
+            return _networkParameters.WebsocketUrlInHttps;
+#else
+            return _networkParameters.WebsocketUrlInEditor;
+#endif
         }
         
         private async UniTaskVoid InitializeAsync()
@@ -123,7 +129,7 @@ namespace Network.Transport
 
             await using var cancellation = token.Register(CancelConnection);
 
-            _logger.Log($"Connecting to {_networkParameters.WebsocketUrlInEditor}", nameof(WebSocketTransport));
+            _logger.Log($"Connecting to {GetWebSocketUrl()}", nameof(WebSocketTransport));
             
             RunWebSocketAsync(_webSocket).Forget();
 

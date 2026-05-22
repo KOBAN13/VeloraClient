@@ -40,14 +40,6 @@ message JoinRoomRequestMessage {
   uint64 roomId = 1;
 }
 
-message LeaveRoomRequestMessage {
-
-}
-
-message ReadyRequestMessage {
-  bool isReady = 1;
-}
-
 message RoomListRequestMessage {
 
 }
@@ -62,6 +54,14 @@ message RoomSummaryMessage {
 
 message RoomListSnapshotMessage {
   repeated RoomSummaryMessage rooms = 1;
+}
+
+message LeaveRoomRequestMessage {
+
+}
+
+message ReadyRequestMessage {
+  bool isReady = 1;
 }
 
 message RoomPlayerMessage {
@@ -113,7 +113,8 @@ message Packet {
     RoomStateSnapshotMessage room_state_snapshot = 12;
     MatchStartMessage match_started = 13;
     StartGameRequestMessage start_game = 14;
-    RoomListRequestMessage room_list_request = 15;
-    RoomListSnapshotMessage room_list_snapshot = 16;
+    RoomListRequestMessage room_list = 15;
+    RoomSummaryMessage room_summary_message = 16;
+    RoomListSnapshotMessage room_list_snapshot = 17;
   }
 }

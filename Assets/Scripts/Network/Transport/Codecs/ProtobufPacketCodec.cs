@@ -1,8 +1,9 @@
 using System;
 using Google.Protobuf;
+using Network.Transport.Contracts;
 using Packets;
 
-namespace Network.Transport
+namespace Network.Transport.Codecs
 {
     public class ProtobufPacketCodec : IPacketCodec
     {

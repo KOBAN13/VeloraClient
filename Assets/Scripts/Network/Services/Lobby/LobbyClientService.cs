@@ -2,6 +2,7 @@ using System;
 using Core.Utils.Services;
 using Network.Contracts;
 using Network.Transport;
+using Network.Transport.Contracts;
 using Packets;
 using R3;
 
@@ -34,8 +35,8 @@ namespace Network.Services.Lobby
                 .Subscribe(ReceiveMessage)
                 .AddTo(_disposables);
             
-            _networkClient.Received.
-                Where(packets => packets.MsgCase is Packet.MsgOneofCase.RoomListSnapshot)
+            _networkClient.Received
+                .Where(packets => packets.MsgCase is Packet.MsgOneofCase.RoomListSnapshot)
                 .Subscribe(packet => _roomListSnapshotReceived.OnNext(packet.RoomListSnapshot))
                 .AddTo(_disposables);
         }
@@ -44,7 +45,7 @@ namespace Network.Services.Lobby
         {
             var packet = new Packet()
             {
-                RoomListRequest = new RoomListRequestMessage()
+                RoomList = new RoomListRequestMessage()
                 {
 
                 }

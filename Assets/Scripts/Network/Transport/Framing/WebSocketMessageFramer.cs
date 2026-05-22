@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Network.Transport.Contracts;
 
-namespace Network.Transport
+namespace Network.Transport.Framing
 {
     public class WebSocketMessageFramer : IMessageFramer
     {
