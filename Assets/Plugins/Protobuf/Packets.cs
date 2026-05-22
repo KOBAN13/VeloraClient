@@ -31,45 +31,46 @@ namespace Packets {
             "c3RNZXNzYWdlEhAKCHVzZXJuYW1lGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJ",
             "Ij8KGENyZWF0ZVJvb21SZXF1ZXN0TWVzc2FnZRIRCgltYXhQbGF5ZXIYASAB",
             "KA0SEAoIcm9vbU5hbWUYAiABKAkiKAoWSm9pblJvb21SZXF1ZXN0TWVzc2Fn",
-            "ZRIOCgZyb29tSWQYASABKAQiGAoWUm9vbUxpc3RSZXF1ZXN0TWVzc2FnZSKA",
+            "ZRIOCgZyb29tSWQYASABKAQiGAoWUm9vbUxpc3RSZXF1ZXN0TWVzc2FnZSKX",
             "AQoSUm9vbVN1bW1hcnlNZXNzYWdlEgwKBG5hbWUYASABKAkSDgoGcm9vbUlk",
-            "GAIgASgEEhQKDHBsYXllcnNDb3VudBgDIAEoDRIRCgltYXhQbGF5ZXIYBCAB",
-            "KA0SIwoGc3RhdHVzGAUgASgOMhMucGFja2V0cy5Sb29tU3RhdHVzIkUKF1Jv",
-            "b21MaXN0U25hcHNob3RNZXNzYWdlEioKBXJvb21zGAEgAygLMhsucGFja2V0",
-            "cy5Sb29tU3VtbWFyeU1lc3NhZ2UiGQoXTGVhdmVSb29tUmVxdWVzdE1lc3Nh",
-            "Z2UiJgoTUmVhZHlSZXF1ZXN0TWVzc2FnZRIPCgdpc1JlYWR5GAEgASgIImcK",
-            "EVJvb21QbGF5ZXJNZXNzYWdlEg4KBnVzZXJJZBgBIAEoBBIQCghjbGllbnRJ",
-            "ZBgCIAEoBBIQCgh1c2VybmFtZRgDIAEoCRIPCgdpc1JlYWR5GAQgASgIEg0K",
-            "BW93bmVyGAUgASgIIo4BChhSb29tU3RhdGVTbmFwc2hvdE1lc3NhZ2USDgoG",
-            "cm9vbUlkGAEgASgEEhEKCW1heFBsYXllchgCIAEoDRIjCgZzdGF0dXMYAyAB",
-            "KA4yEy5wYWNrZXRzLlJvb21TdGF0dXMSKgoGUGxheWVyGAQgAygLMhoucGFj",
-            "a2V0cy5Sb29tUGxheWVyTWVzc2FnZSI+ChRNYXRjaFN0YXJ0aW5nTWVzc2Fn",
-            "ZRIOCgZyb29tSWQYASABKAQSFgoOc3RhcnRzQXRVbml4TXMYAiABKAMiNAoR",
-            "TWF0Y2hTdGFydE1lc3NhZ2USDgoGcm9vbUlkGAEgASgEEg8KB21hdGNoSWQY",
-            "AiABKAQiEwoRT2tSZXNwb25zZU1lc3NhZ2UiJQoTRGVueVJlc3BvbnNlTWVz",
-            "c2FnZRIOCgZyZWFzb24YASABKAkioQcKBlBhY2tldBIRCglzZW5kZXJfaWQY",
-            "ASABKAQSJAoEY2hhdBgCIAEoCzIULnBhY2tldHMuQ2hhdE1lc3NhZ2VIABIg",
-            "CgJpZBgDIAEoCzISLnBhY2tldHMuSWRNZXNzYWdlSAASNQoNbG9naW5fcmVx",
-            "dWVzdBgEIAEoCzIcLnBhY2tldHMuTG9naW5SZXF1ZXN0TWVzc2FnZUgAEjsK",
-            "EHJlZ2lzdGVyX3JlcXVlc3QYBSABKAsyHy5wYWNrZXRzLlJlZ2lzdGVyUmVx",
-            "dWVzdE1lc3NhZ2VIABIxCgtva19yZXNwb25zZRgGIAEoCzIaLnBhY2tldHMu",
-            "T2tSZXNwb25zZU1lc3NhZ2VIABI1Cg1kZW55X3Jlc3BvbnNlGAcgASgLMhwu",
-            "cGFja2V0cy5EZW55UmVzcG9uc2VNZXNzYWdlSAASQAoTY3JlYXRlX3Jvb21f",
-            "cmVxdWVzdBgIIAEoCzIhLnBhY2tldHMuQ3JlYXRlUm9vbVJlcXVlc3RNZXNz",
-            "YWdlSAASPAoRam9pbl9yb29tX3JlcXVlc3QYCSABKAsyHy5wYWNrZXRzLkpv",
-            "aW5Sb29tUmVxdWVzdE1lc3NhZ2VIABI+ChJsZWF2ZV9yb29tX3JlcXVlc3QY",
-            "CiABKAsyIC5wYWNrZXRzLkxlYXZlUm9vbVJlcXVlc3RNZXNzYWdlSAASNQoN",
-            "cmVhZHlfcmVxdWVzdBgLIAEoCzIcLnBhY2tldHMuUmVhZHlSZXF1ZXN0TWVz",
-            "c2FnZUgAEkAKE3Jvb21fc3RhdGVfc25hcHNob3QYDCABKAsyIS5wYWNrZXRz",
-            "LlJvb21TdGF0ZVNuYXBzaG90TWVzc2FnZUgAEjMKDW1hdGNoX3N0YXJ0ZWQY",
-            "DSABKAsyGi5wYWNrZXRzLk1hdGNoU3RhcnRNZXNzYWdlSAASNgoKc3RhcnRf",
-            "Z2FtZRgOIAEoCzIgLnBhY2tldHMuU3RhcnRHYW1lUmVxdWVzdE1lc3NhZ2VI",
-            "ABI0Cglyb29tX2xpc3QYDyABKAsyHy5wYWNrZXRzLlJvb21MaXN0UmVxdWVz",
-            "dE1lc3NhZ2VIABI7ChRyb29tX3N1bW1hcnlfbWVzc2FnZRgQIAEoCzIbLnBh",
-            "Y2tldHMuUm9vbVN1bW1hcnlNZXNzYWdlSAASPgoScm9vbV9saXN0X3NuYXBz",
-            "aG90GBEgASgLMiAucGFja2V0cy5Sb29tTGlzdFNuYXBzaG90TWVzc2FnZUgA",
-            "QgUKA21zZyo+CgpSb29tU3RhdHVzEhcKE1JPT01fU1RBVFVTX1dBSVRJTkcQ",
-            "ABIXChNST09NX1NUQVRVU19TVEFSVEVEEAFCCVoHLi9wcm90b2IGcHJvdG8z"));
+            "GAIgASgEEisKB1BsYXllcnMYAyADKAsyGi5wYWNrZXRzLlJvb21QbGF5ZXJN",
+            "ZXNzYWdlEhEKCW1heFBsYXllchgEIAEoDRIjCgZzdGF0dXMYBSABKA4yEy5w",
+            "YWNrZXRzLlJvb21TdGF0dXMiRQoXUm9vbUxpc3RTbmFwc2hvdE1lc3NhZ2US",
+            "KgoFcm9vbXMYASADKAsyGy5wYWNrZXRzLlJvb21TdW1tYXJ5TWVzc2FnZSIZ",
+            "ChdMZWF2ZVJvb21SZXF1ZXN0TWVzc2FnZSImChNSZWFkeVJlcXVlc3RNZXNz",
+            "YWdlEg8KB2lzUmVhZHkYASABKAgiZwoRUm9vbVBsYXllck1lc3NhZ2USDgoG",
+            "dXNlcklkGAEgASgEEhAKCGNsaWVudElkGAIgASgEEhAKCHVzZXJuYW1lGAMg",
+            "ASgJEg8KB2lzUmVhZHkYBCABKAgSDQoFb3duZXIYBSABKAgijgEKGFJvb21T",
+            "dGF0ZVNuYXBzaG90TWVzc2FnZRIOCgZyb29tSWQYASABKAQSEQoJbWF4UGxh",
+            "eWVyGAIgASgNEiMKBnN0YXR1cxgDIAEoDjITLnBhY2tldHMuUm9vbVN0YXR1",
+            "cxIqCgZQbGF5ZXIYBCADKAsyGi5wYWNrZXRzLlJvb21QbGF5ZXJNZXNzYWdl",
+            "Ij4KFE1hdGNoU3RhcnRpbmdNZXNzYWdlEg4KBnJvb21JZBgBIAEoBBIWCg5z",
+            "dGFydHNBdFVuaXhNcxgCIAEoAyI0ChFNYXRjaFN0YXJ0TWVzc2FnZRIOCgZy",
+            "b29tSWQYASABKAQSDwoHbWF0Y2hJZBgCIAEoBCITChFPa1Jlc3BvbnNlTWVz",
+            "c2FnZSIlChNEZW55UmVzcG9uc2VNZXNzYWdlEg4KBnJlYXNvbhgBIAEoCSKh",
+            "BwoGUGFja2V0EhEKCXNlbmRlcl9pZBgBIAEoBBIkCgRjaGF0GAIgASgLMhQu",
+            "cGFja2V0cy5DaGF0TWVzc2FnZUgAEiAKAmlkGAMgASgLMhIucGFja2V0cy5J",
+            "ZE1lc3NhZ2VIABI1Cg1sb2dpbl9yZXF1ZXN0GAQgASgLMhwucGFja2V0cy5M",
+            "b2dpblJlcXVlc3RNZXNzYWdlSAASOwoQcmVnaXN0ZXJfcmVxdWVzdBgFIAEo",
+            "CzIfLnBhY2tldHMuUmVnaXN0ZXJSZXF1ZXN0TWVzc2FnZUgAEjEKC29rX3Jl",
+            "c3BvbnNlGAYgASgLMhoucGFja2V0cy5Pa1Jlc3BvbnNlTWVzc2FnZUgAEjUK",
+            "DWRlbnlfcmVzcG9uc2UYByABKAsyHC5wYWNrZXRzLkRlbnlSZXNwb25zZU1l",
+            "c3NhZ2VIABJAChNjcmVhdGVfcm9vbV9yZXF1ZXN0GAggASgLMiEucGFja2V0",
+            "cy5DcmVhdGVSb29tUmVxdWVzdE1lc3NhZ2VIABI8ChFqb2luX3Jvb21fcmVx",
+            "dWVzdBgJIAEoCzIfLnBhY2tldHMuSm9pblJvb21SZXF1ZXN0TWVzc2FnZUgA",
+            "Ej4KEmxlYXZlX3Jvb21fcmVxdWVzdBgKIAEoCzIgLnBhY2tldHMuTGVhdmVS",
+            "b29tUmVxdWVzdE1lc3NhZ2VIABI1Cg1yZWFkeV9yZXF1ZXN0GAsgASgLMhwu",
+            "cGFja2V0cy5SZWFkeVJlcXVlc3RNZXNzYWdlSAASQAoTcm9vbV9zdGF0ZV9z",
+            "bmFwc2hvdBgMIAEoCzIhLnBhY2tldHMuUm9vbVN0YXRlU25hcHNob3RNZXNz",
+            "YWdlSAASMwoNbWF0Y2hfc3RhcnRlZBgNIAEoCzIaLnBhY2tldHMuTWF0Y2hT",
+            "dGFydE1lc3NhZ2VIABI2CgpzdGFydF9nYW1lGA4gASgLMiAucGFja2V0cy5T",
+            "dGFydEdhbWVSZXF1ZXN0TWVzc2FnZUgAEjQKCXJvb21fbGlzdBgPIAEoCzIf",
+            "LnBhY2tldHMuUm9vbUxpc3RSZXF1ZXN0TWVzc2FnZUgAEjsKFHJvb21fc3Vt",
+            "bWFyeV9tZXNzYWdlGBAgASgLMhsucGFja2V0cy5Sb29tU3VtbWFyeU1lc3Nh",
+            "Z2VIABI+ChJyb29tX2xpc3Rfc25hcHNob3QYESABKAsyIC5wYWNrZXRzLlJv",
+            "b21MaXN0U25hcHNob3RNZXNzYWdlSABCBQoDbXNnKj4KClJvb21TdGF0dXMS",
+            "FwoTUk9PTV9TVEFUVVNfV0FJVElORxAAEhcKE1JPT01fU1RBVFVTX1NUQVJU",
+            "RUQQAUIJWgcuL3Byb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Packets.RoomStatus), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -81,7 +82,7 @@ namespace Packets {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.CreateRoomRequestMessage), global::Packets.CreateRoomRequestMessage.Parser, new[]{ "MaxPlayer", "RoomName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.JoinRoomRequestMessage), global::Packets.JoinRoomRequestMessage.Parser, new[]{ "RoomId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.RoomListRequestMessage), global::Packets.RoomListRequestMessage.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Packets.RoomSummaryMessage), global::Packets.RoomSummaryMessage.Parser, new[]{ "Name", "RoomId", "PlayersCount", "MaxPlayer", "Status" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packets.RoomSummaryMessage), global::Packets.RoomSummaryMessage.Parser, new[]{ "Name", "RoomId", "Players", "MaxPlayer", "Status" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.RoomListSnapshotMessage), global::Packets.RoomListSnapshotMessage.Parser, new[]{ "Rooms" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.LeaveRoomRequestMessage), global::Packets.LeaveRoomRequestMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.ReadyRequestMessage), global::Packets.ReadyRequestMessage.Parser, new[]{ "IsReady" }, null, null, null, null),
@@ -1764,7 +1765,7 @@ namespace Packets {
     public RoomSummaryMessage(RoomSummaryMessage other) : this() {
       name_ = other.name_;
       roomId_ = other.roomId_;
-      playersCount_ = other.playersCount_;
+      players_ = other.players_.Clone();
       maxPlayer_ = other.maxPlayer_;
       status_ = other.status_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -1800,16 +1801,15 @@ namespace Packets {
       }
     }
 
-    /// <summary>Field number for the "playersCount" field.</summary>
-    public const int PlayersCountFieldNumber = 3;
-    private uint playersCount_;
+    /// <summary>Field number for the "Players" field.</summary>
+    public const int PlayersFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::Packets.RoomPlayerMessage> _repeated_players_codec
+        = pb::FieldCodec.ForMessage(26, global::Packets.RoomPlayerMessage.Parser);
+    private readonly pbc::RepeatedField<global::Packets.RoomPlayerMessage> players_ = new pbc::RepeatedField<global::Packets.RoomPlayerMessage>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public uint PlayersCount {
-      get { return playersCount_; }
-      set {
-        playersCount_ = value;
-      }
+    public pbc::RepeatedField<global::Packets.RoomPlayerMessage> Players {
+      get { return players_; }
     }
 
     /// <summary>Field number for the "maxPlayer" field.</summary>
@@ -1853,7 +1853,7 @@ namespace Packets {
       }
       if (Name != other.Name) return false;
       if (RoomId != other.RoomId) return false;
-      if (PlayersCount != other.PlayersCount) return false;
+      if(!players_.Equals(other.players_)) return false;
       if (MaxPlayer != other.MaxPlayer) return false;
       if (Status != other.Status) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -1865,7 +1865,7 @@ namespace Packets {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (RoomId != 0UL) hash ^= RoomId.GetHashCode();
-      if (PlayersCount != 0) hash ^= PlayersCount.GetHashCode();
+      hash ^= players_.GetHashCode();
       if (MaxPlayer != 0) hash ^= MaxPlayer.GetHashCode();
       if (Status != global::Packets.RoomStatus.Waiting) hash ^= Status.GetHashCode();
       if (_unknownFields != null) {
@@ -1894,10 +1894,7 @@ namespace Packets {
         output.WriteRawTag(16);
         output.WriteUInt64(RoomId);
       }
-      if (PlayersCount != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(PlayersCount);
-      }
+      players_.WriteTo(output, _repeated_players_codec);
       if (MaxPlayer != 0) {
         output.WriteRawTag(32);
         output.WriteUInt32(MaxPlayer);
@@ -1924,10 +1921,7 @@ namespace Packets {
         output.WriteRawTag(16);
         output.WriteUInt64(RoomId);
       }
-      if (PlayersCount != 0) {
-        output.WriteRawTag(24);
-        output.WriteUInt32(PlayersCount);
-      }
+      players_.WriteTo(ref output, _repeated_players_codec);
       if (MaxPlayer != 0) {
         output.WriteRawTag(32);
         output.WriteUInt32(MaxPlayer);
@@ -1952,9 +1946,7 @@ namespace Packets {
       if (RoomId != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(RoomId);
       }
-      if (PlayersCount != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PlayersCount);
-      }
+      size += players_.CalculateSize(_repeated_players_codec);
       if (MaxPlayer != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxPlayer);
       }
@@ -1979,9 +1971,7 @@ namespace Packets {
       if (other.RoomId != 0UL) {
         RoomId = other.RoomId;
       }
-      if (other.PlayersCount != 0) {
-        PlayersCount = other.PlayersCount;
-      }
+      players_.Add(other.players_);
       if (other.MaxPlayer != 0) {
         MaxPlayer = other.MaxPlayer;
       }
@@ -2015,8 +2005,8 @@ namespace Packets {
             RoomId = input.ReadUInt64();
             break;
           }
-          case 24: {
-            PlayersCount = input.ReadUInt32();
+          case 26: {
+            players_.AddEntriesFrom(input, _repeated_players_codec);
             break;
           }
           case 32: {
@@ -2054,8 +2044,8 @@ namespace Packets {
             RoomId = input.ReadUInt64();
             break;
           }
-          case 24: {
-            PlayersCount = input.ReadUInt32();
+          case 26: {
+            players_.AddEntriesFrom(ref input, _repeated_players_codec);
             break;
           }
           case 32: {

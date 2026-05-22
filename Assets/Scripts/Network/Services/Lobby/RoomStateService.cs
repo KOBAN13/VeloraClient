@@ -130,9 +130,24 @@ namespace Network.Services.Lobby
             for (var targetIndex = 0; targetIndex < roomsCount; targetIndex++)
             {
                 var room = rooms[targetIndex];
+
+                var players = new PlayerData[room.Players.Count];
+
+                for (var i = 0; i < room.Players.Count; i++)
+                {
+                    var playerData = new PlayerData(
+                        room.Players[i].UserId,
+                        room.Players[i].ClientId,
+                        room.Players[i].Username,
+                        room.Players[i].IsReady,
+                        room.Players[i].Owner);
+
+                    players[i] = playerData;
+                }
+
                 var roomSummaryData = new RoomSummaryData(
                     room.RoomId,
-                    room.PlayersCount,
+                    players,
                     room.MaxPlayer,
                     room.Status);
 

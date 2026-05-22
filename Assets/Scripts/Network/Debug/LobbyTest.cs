@@ -280,12 +280,14 @@ namespace Network
                     .Append(" \"")
                     .Append(room.Name)
                     .Append("\" players=")
-                    .Append(room.PlayersCount)
+                    .Append(room.Players.Count)
                     .Append("/")
                     .Append(room.MaxPlayer)
                     .Append(" status=")
                     .Append(room.Status)
                     .AppendLine();
+
+                AppendPlayers(builder, room.Players);
             }
 
             Log(builder.ToString());
@@ -313,13 +315,25 @@ namespace Network
                 return;
             }
 
+            AppendPlayers(builder, roomState.Player);
+
+            Log(builder.ToString());
+        }
+
+        private static void AppendPlayers(StringBuilder builder, Google.Protobuf.Collections.RepeatedField<RoomPlayerMessage> players)
+        {
+            if (players.Count == 0)
+            {
+                return;
+            }
+
             builder.AppendLine("Players:");
 
-            for (var i = 0; i < roomState.Player.Count; i++)
+            for (var i = 0; i < players.Count; i++)
             {
-                var player = roomState.Player[i];
+                var player = players[i];
                 builder
-                    .Append("  ")
+                    .Append("    ")
                     .Append(i + 1)
                     .Append(". ")
                     .Append(player.Username)
@@ -333,8 +347,6 @@ namespace Network
                     .Append(player.Owner)
                     .AppendLine();
             }
-
-            Log(builder.ToString());
         }
 
         private void EnsureInitialized(object service, string serviceName)
