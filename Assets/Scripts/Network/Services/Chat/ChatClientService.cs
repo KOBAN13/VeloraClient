@@ -1,8 +1,7 @@
 using System;
 using Core.Utils.Services;
 using Network.Contracts;
-using Network.Transport;
-using Network.Transport.Contracts;
+using Network.Messaging;
 using Packets;
 using R3;
 using UI.Services;
@@ -13,43 +12,38 @@ namespace Network.Services.Chat
 {
     public class ChatClientService : IChatClientService, IInitializable, IDisposable
     {
-        private readonly INetworkClient _networkClient;
+        private readonly INetworkMessageBus _networkMessageBus;
         private readonly IChatService _chatService;
 
         private readonly CompositeDisposable _disposables = new();
 
         public bool IsInitialized { get; set; }
 
-        public ChatClientService(INetworkClient networkClient, IChatService chatService)
+        public ChatClientService(IChatService chatService, INetworkMessageBus networkMessageBus)
         {
-            _networkClient = networkClient;
             _chatService = chatService;
+            _networkMessageBus = networkMessageBus;
         }
 
         public void Initialize()
         {
-            _networkClient.Received
-                .Where(packet => packet.MsgCase == Packet.MsgOneofCase.Chat)
+            _networkMessageBus
+                .On<ChatMessage>()
                 .Subscribe(ReceiveMessage)
                 .AddTo(_disposables);
         }
 
         public void SendMessage(string msg)
         {
-            var packet = new Packet
+            _networkMessageBus.Send(new ChatMessage
             {
-                Chat = new ChatMessage
-                {
-                    Msg = msg
-                }
-            };
-
-            _networkClient.SendAsync(packet).Forget();
+                Msg = msg
+            });
         }
 
-        private void ReceiveMessage(Packet packet)
+        private void ReceiveMessage(NetworkMessage<ChatMessage> message)
         {
-            _chatService.AddMessage(new ChatMessageData($"Client: {packet.SenderId}", packet.Chat.Msg, Color.white));
+            _chatService.AddMessage(new ChatMessageData($"Client: {message.SenderId}", message.Payload.Msg, Color.white));
         }
 
         public void Dispose()

@@ -1,8 +1,7 @@
 using System;
 using Core.Utils.Services;
 using Network.Contracts;
-using Network.Transport;
-using Network.Transport.Contracts;
+using Network.Messaging;
 using Packets;
 using R3;
 
@@ -12,7 +11,7 @@ namespace Network.Services.Auth
     {
         public bool IsInitialized { get; set; }
         
-        private readonly INetworkClient _networkClient;
+        private readonly INetworkMessageBus _messages;
         
         private readonly Subject<Unit> _successLogin = new();
         private readonly Subject<string> _loginErrorRequest = new();
@@ -21,44 +20,29 @@ namespace Network.Services.Auth
         public Observable<Unit> SuccessLogin => _successLogin;
         public Observable<string> LoginErrorRequest => _loginErrorRequest;
 
-        public LoginClientService(INetworkClient networkClient)
+        public LoginClientService(INetworkMessageBus messages)
         {
-            _networkClient = networkClient;
+            _messages = messages;
         }
 
         public void Initialize()
         {
-            _networkClient.Received
-                .Where(packet => packet.MsgCase is Packet.MsgOneofCase.OkResponse or Packet.MsgOneofCase.DenyResponse)
-                .Subscribe(ReceiveMessage)
+            _messages.On<OkResponseMessage>()
+                .Subscribe(_ => _successLogin.OnNext(Unit.Default))
+                .AddTo(_disposables);
+
+            _messages.On<DenyResponseMessage>()
+                .Subscribe(message => _loginErrorRequest.OnNext(message.Payload.Reason))
                 .AddTo(_disposables);
         }
 
         public void Login(string username, string password)
         {
-            var packet = new Packet
+            _messages.Send(new LoginRequestMessage
             {
-                LoginRequest = new LoginRequestMessage
-                {
-                    Username = username,
-                    Password = password
-                }
-            };
-            
-            _networkClient.SendAsync(packet).Forget();
-        }
-        
-        private void ReceiveMessage(Packet packet)
-        {
-            switch (packet.MsgCase)
-            {
-                case Packet.MsgOneofCase.OkResponse:
-                    _successLogin.OnNext(Unit.Default);
-                    break;
-                case Packet.MsgOneofCase.DenyResponse:
-                    _loginErrorRequest.OnNext(packet.DenyResponse.Reason);
-                    break;
-            }
+                Username = username,
+                Password = password
+            });
         }
 
         public void Dispose()

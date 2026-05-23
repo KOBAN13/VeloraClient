@@ -1,8 +1,7 @@
 using System;
 using Core.Utils.Services;
 using Network.Contracts;
-using Network.Transport;
-using Network.Transport.Contracts;
+using Network.Messaging;
 using Packets;
 using R3;
 
@@ -10,7 +9,7 @@ namespace Network.Services.Identity
 {
     public class ClientIdentityService : IClientIdentityService, IInitializable, IDisposable
     {
-        private readonly INetworkClient _networkClient;
+        private readonly INetworkMessageBus _messages;
         private readonly CompositeDisposable _disposables = new();
         private readonly Subject<ulong> _clientIdChanged = new();
 
@@ -20,15 +19,14 @@ namespace Network.Services.Identity
         
         public bool IsInitialized { get; set; }
 
-        public ClientIdentityService(INetworkClient networkClient)
+        public ClientIdentityService(INetworkMessageBus messages)
         {
-            _networkClient = networkClient;
+            _messages = messages;
         }
 
         public void Initialize()
         {
-            _networkClient.Received
-                .Where(packet => packet.MsgCase == Packet.MsgOneofCase.Id)
+            _messages.On<IdMessage>()
                 .Subscribe(OnIdReceived)
                 .AddTo(_disposables);
         }
@@ -38,9 +36,9 @@ namespace Network.Services.Identity
             _disposables.Dispose();
         }
 
-        private void OnIdReceived(Packet packet)
+        private void OnIdReceived(NetworkMessage<IdMessage> message)
         {
-            var clientId = packet.Id.Id;
+            var clientId = message.Payload.Id;
             
             if (ClientId == clientId)
             {

@@ -6,12 +6,17 @@ namespace Core.Utils.Extensions
     {
         public static string DescribePacket(this Packet packet)
         {
-            return packet.MsgCase switch
+            if (packet.Chat != null)
             {
-                Packet.MsgOneofCase.Chat => $"chat=\"{packet.Chat?.Msg}\"",
-                Packet.MsgOneofCase.Id => $"id={packet.Id?.Id}",
-                _ => "empty"
-            };
+                return $"chat=\"{packet.Chat.Msg}\"";
+            }
+
+            if (packet.Id != null)
+            {
+                return $"id={packet.Id.Id}";
+            }
+
+            return "empty";
         }
     }
 }

@@ -1,8 +1,7 @@
 using System;
 using Core.Utils.Services;
 using Network.Contracts;
-using Network.Transport;
-using Network.Transport.Contracts;
+using Network.Messaging;
 using Packets;
 using R3;
 
@@ -10,7 +9,7 @@ namespace Network.Services.Lobby
 {
     public class LobbyClientService : ILobbyClientService, IInitializable, IDisposable
     {
-        private readonly INetworkClient _networkClient;
+        private readonly INetworkMessageBus _messages;
         
         private readonly Subject<RoomStateSnapshotMessage> _roomStateSnapshotReceived = new();
         private readonly Subject<RoomListSnapshotMessage> _roomListSnapshotReceived = new();
@@ -23,114 +22,70 @@ namespace Network.Services.Lobby
         public Observable<RoomStateSnapshotMessage> RoomStateSnapshotReceived => _roomStateSnapshotReceived;
         public Observable<string> LobbyErrorReceived => _lobbyErrorRequest;
         
-        public LobbyClientService(INetworkClient networkClient)
+        public LobbyClientService(INetworkMessageBus messages)
         {
-            _networkClient = networkClient;
+            _messages = messages;
         }
         
         public void Initialize()
         {
-            _networkClient.Received
-                .Where(packets => packets.MsgCase is Packet.MsgOneofCase.DenyResponse or Packet.MsgOneofCase.RoomStateSnapshot)
-                .Subscribe(ReceiveMessage)
+            _messages.On<DenyResponseMessage>()
+                .Subscribe(message => _lobbyErrorRequest.OnNext(message.Payload.Reason))
                 .AddTo(_disposables);
             
-            _networkClient.Received
-                .Where(packets => packets.MsgCase is Packet.MsgOneofCase.RoomListSnapshot)
-                .Subscribe(packet => _roomListSnapshotReceived.OnNext(packet.RoomListSnapshot))
+            _messages.On<RoomStateSnapshotMessage>()
+                .Subscribe(message => _roomStateSnapshotReceived.OnNext(message.Payload))
+                .AddTo(_disposables);
+
+            _messages.On<RoomListSnapshotMessage>()
+                .Subscribe(message => _roomListSnapshotReceived.OnNext(message.Payload))
                 .AddTo(_disposables);
         }
         
         public void RefreshRooms()
         {
-            var packet = new Packet()
+            _messages.Send(new RoomListRequestMessage()
             {
-                RoomList = new RoomListRequestMessage()
-                {
-
-                }
-            };
-            
-            _networkClient.SendAsync(packet);
+            });
         }
 
         public void CreateRoom(string nameRoom, uint maxPlayers)
         {
-            var packet = new Packet()
+            _messages.Send(new CreateRoomRequestMessage()
             {
-                CreateRoomRequest = new CreateRoomRequestMessage()
-                {
-                    MaxPlayer =  maxPlayers,
-                    RoomName = nameRoom
-                }
-            };
-            
-            _networkClient.SendAsync(packet);
+                MaxPlayer = maxPlayers,
+                RoomName = nameRoom
+            });
         }
 
         public void LeaveRoom()
         {
-            var packet = new Packet()
+            _messages.Send(new LeaveRoomRequestMessage()
             {
-                LeaveRoomRequest = new LeaveRoomRequestMessage()
-                {
-                    
-                }
-            };
-            
-            _networkClient.SendAsync(packet);
+            });
         }
         
         public void JoinRoom(ulong roomId)
         {
-            var packet = new Packet()
+            _messages.Send(new JoinRoomRequestMessage()
             {
-                JoinRoomRequest = new JoinRoomRequestMessage()
-                {
-                    RoomId = roomId
-                }
-            };
-            
-            _networkClient.SendAsync(packet);
+                RoomId = roomId
+            });
         }
         
         public void SetReady(bool isReady)
         {
-            var packet = new Packet()
+            _messages.Send(new ReadyRequestMessage()
             {
-                ReadyRequest = new ReadyRequestMessage()
-                {
-                    IsReady = isReady
-                }
-            };
-            
-            _networkClient.SendAsync(packet);
+                IsReady = isReady
+            });
         }
 
         public void StartGame()
         {
-            var packet = new Packet()
+            _messages.Send(new StartGameRequestMessage()
             {
-                StartGame = new StartGameRequestMessage()
-                {
-
-                }
-            };
-            
-            _networkClient.SendAsync(packet);
-        }
-        
-        private void ReceiveMessage(Packet packet)
-        {
-            switch (packet.MsgCase)
-            {
-                case Packet.MsgOneofCase.DenyResponse:
-                    _lobbyErrorRequest.OnNext(packet.DenyResponse.Reason);
-                    break;
-                case Packet.MsgOneofCase.RoomStateSnapshot:
-                    _roomStateSnapshotReceived.OnNext(packet.RoomStateSnapshot);
-                    break;
-            }
+            });
         }
         
         public void Dispose()

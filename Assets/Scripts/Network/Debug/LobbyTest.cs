@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Core.Utils.Services;
 using Network.Contracts;
-using Network.Transport;
+using Network.Messaging;
 using Network.Transport.Contracts;
 using Packets;
 using R3;
@@ -33,17 +33,23 @@ namespace Network
 
         private ILobbyClientService _lobbyClientService;
         private INetworkClient _networkClient;
+        private INetworkMessageBus _messages;
         private RoomListSnapshotMessage _lastRoomList;
         private RoomStateSnapshotMessage _lastRoomState;
         private bool _isSubscribed;
 
         [Inject]
-        private void Construct(ILobbyClientService lobbyClientService, INetworkClient networkClient)
+        private void Construct(
+            ILobbyClientService lobbyClientService,
+            INetworkClient networkClient,
+            INetworkMessageBus messages)
         {
             _lobbyClientService = lobbyClientService;
             _networkClient = networkClient;
+            _messages = messages;
 
             EnsureInitialized(_networkClient, nameof(INetworkClient));
+            EnsureInitialized(_messages, nameof(INetworkMessageBus));
             EnsureInitialized(_lobbyClientService, nameof(ILobbyClientService));
             Subscribe();
         }
@@ -200,8 +206,7 @@ namespace Network
                 .Subscribe(error => LogError($"Network error.\nReason: {error}"))
                 .AddTo(_disposables);
 
-            _networkClient.Received
-                .Where(packet => packet.MsgCase == Packet.MsgOneofCase.MatchStarted)
+            _messages.On<MatchStartMessage>()
                 .Subscribe(OnMatchStartedReceived)
                 .AddTo(_disposables);
 
@@ -246,9 +251,9 @@ namespace Network
             LogError($"Lobby error.\nReason: {error}");
         }
 
-        private void OnMatchStartedReceived(Packet packet)
+        private void OnMatchStartedReceived(NetworkMessage<MatchStartMessage> message)
         {
-            var match = packet.MatchStarted;
+            var match = message.Payload;
 
             Log(
                 "Match started.\n" +

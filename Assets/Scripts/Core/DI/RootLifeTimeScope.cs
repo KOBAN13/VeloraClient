@@ -7,6 +7,7 @@ using Core.Utils.Services;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
+using Network.Messaging;
 using Network.Services.Identity;
 using Network.Transport;
 using Network.Transport.Client;
@@ -74,6 +75,7 @@ namespace Core.DI
 
         private void RegisterNetworkServices()
         {
+            Register<NetworkMessageBus>(Lifetime.Singleton);
             Register<WebSocketTransport>(Lifetime.Singleton);
             Register<ProtobufPacketCodec>(Lifetime.Singleton);
             Register<WebSocketMessageFramer>(Lifetime.Singleton);
