@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Core.Utils.Factory;
 using Core.Utils.Logger;
@@ -7,6 +8,7 @@ using Core.Utils.Services;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
+using Cysharp.Threading.Tasks;
 using Network.Messaging;
 using Network.Services.Identity;
 using Network.Transport;
@@ -15,6 +17,7 @@ using Network.Transport.Codecs;
 using Network.Transport.Framing;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using VContainer;
 
 namespace Core.DI
@@ -41,16 +44,25 @@ namespace Core.DI
             RegisterComponent(_sceneLoader);
         }
 
-        private void RegisterConfigs()
+        private async void RegisterConfigs()
         {
-            var configs = Addressables
-                .LoadAssetsAsync<ScriptableObject>(_configLabel, null)
-                .WaitForCompletion()
-                .ToList();
-
-            foreach (var config in configs)
+            try
             {
-                RegisterInstance(config);
+                var configsHandle = Addressables.LoadAssetsAsync<ScriptableObject>(_configLabel, null);
+
+                await configsHandle;
+
+                if (configsHandle.Status != AsyncOperationStatus.Succeeded) 
+                    return;
+            
+                foreach (var config in configsHandle.Result)
+                {
+                    RegisterInstance(config);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
             }
         }
 
