@@ -39,8 +39,9 @@ jobs:
         run: |
           rm -rf deploy/WebGLBuild
           mkdir -p deploy/WebGLBuild
+          mkdir -p deploy/WebGLBuild/addressables/WebGL
 
-          echo "Checking build output..."
+          echo "Checking WebGL build output..."
           find build -maxdepth 4 -type f | head -50
 
           if [ -d "build/WebGL/WebGL" ]; then
@@ -52,7 +53,19 @@ jobs:
             exit 1
           fi
 
-          ls -la deploy/WebGLBuild
+          echo "Checking Addressables output..."
+          find ServerData -maxdepth 4 -type f | head -50 || true
+
+          if [ -d "ServerData/WebGL" ]; then
+            cp -r ServerData/WebGL/* deploy/WebGLBuild/addressables/WebGL/
+          else
+            echo "ServerData/WebGL not found"
+            echo "Addressables remote content was not built or Remote.BuildPath is not ServerData/[BuildTarget]"
+            exit 1
+          fi
+
+          echo "Final deploy structure:"
+          find deploy/WebGLBuild -maxdepth 3 -type f | head -100
 
       - name: Upload files to server
         uses: appleboy/scp-action@v0.1.7

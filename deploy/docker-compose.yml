@@ -6,4 +6,6 @@ services:
     container_name: velora-client-build
     restart: always
     ports:
-      - "8090:80"
+      - "8090:443"
+    volumes:
+      - ./certs:/etc/nginx/certs:ro
