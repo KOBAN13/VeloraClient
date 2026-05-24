@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 83f31759486804c91a998f96f2ba5e61
   m_currentHash:
     serializedVersion: 2
-    Hash: 631da6ca3855527c6ea77a7058e6334c
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
       - m_Id: 1e765863f0d0969739e73281e6ea4cf2
         m_Value: 'ServerData/[BuildTarget]'
       - m_Id: 81e73623e2c035301bb318001525c3a0
-        m_Value: 'http://apisfs.ru:8090/addressables/[BuildTarget]'
+        m_Value: 'https://apisfs.ru:8090/addressables/[BuildTarget]'
       - m_Id: 93e464318aaf4313293db16af9dd96f3
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
       - m_Id: ac865c461f74c9da6a76212fa33d9497
