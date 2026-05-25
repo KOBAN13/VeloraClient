@@ -1,10 +1,12 @@
 using Core.Utils.Screens;
 using Core.Utils.StateMachine.Project;
 using Core.Utils.StateMachine.Project.States;
+using Cysharp.Threading.Tasks;
 using R3;
 using UI.Core;
 using UI.Helpers;
 using UI.Views;
+using UnityEngine;
 using VContainer;
 
 namespace UI.ViewModels
@@ -29,17 +31,27 @@ namespace UI.ViewModels
 
         private void SignUp(Unit unit)
         {
-            _screenService.OpenSync<RegisterScreen>();
+            OpenRegisterScreen().Forget(Debug.LogException);
         }
 
         private void SignIn(Unit unit)
         {
-            _screenService.OpenSync<LoginScreen>();
+            OpenLoginScreen().Forget(Debug.LogException);
         }
 
         private void Play(Unit unit)
         {
             _projectStateMachine.Enter<ProjectGameState>();
+        }
+
+        private async UniTask OpenRegisterScreen()
+        {
+            await _screenService.OpenAsync<RegisterScreen>();
+        }
+
+        private async UniTask OpenLoginScreen()
+        {
+            await _screenService.OpenAsync<LoginScreen>();
         }
     }
 }

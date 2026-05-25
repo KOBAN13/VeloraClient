@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DI.RootLifeTimeScope
   parentReference:
     TypeName: 
-  autoRun: 1
+  autoRun: 0
   autoInjectGameObjects: []
   _sceneLoader: {fileID: 2988701618814772345}
   _configLabel:

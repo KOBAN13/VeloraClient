@@ -9,6 +9,11 @@ namespace Core.DI.Bootstraps
     {
         [Inject] private IProjectStateMachine _projectStateMachine;
 
+        protected override async UniTask PrepareLifetimeScope()
+        {
+            await LifetimeScope.LoadConfigsAsync();
+        }
+
         protected override UniTask Initialize()
         {
             InitializeServices();

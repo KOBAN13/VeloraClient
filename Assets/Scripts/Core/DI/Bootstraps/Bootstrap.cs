@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Utils;
@@ -23,20 +24,29 @@ namespace Core.DI.Bootstraps
 
         private async void Awake()
         {
-            LifetimeScope = GetComponent<TLifetimeScope>();
-
-            if (LifetimeScope.Container == null)
+            try
             {
-                LifetimeScope.Build();
+                LifetimeScope = GetComponent<TLifetimeScope>();
+
+                await PrepareLifetimeScope();
+
+                if (LifetimeScope.Container == null)
+                {
+                    LifetimeScope.Build();
+                }
+
+                ObjectResolver = LifetimeScope.Container;
+                
+                ObjectResolver.Inject(this);
+
+                await Initialize();
+
+                _isTicked = true;
             }
-
-            ObjectResolver = LifetimeScope.Container;
-            
-            ObjectResolver.Inject(this);
-
-            await Initialize();
-
-            _isTicked = true;
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
         }
 
         protected void InitializeServices()
@@ -93,6 +103,8 @@ namespace Core.DI.Bootstraps
         {
             LifetimeScope ??= GetComponent<TLifetimeScope>();
         }
+
+        protected virtual UniTask PrepareLifetimeScope() => UniTask.CompletedTask;
 
         protected virtual UniTask Initialize() => UniTask.CompletedTask;
 

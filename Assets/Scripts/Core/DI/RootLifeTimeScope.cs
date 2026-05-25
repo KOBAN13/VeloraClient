@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using Core.Utils.Factory;
 using Core.Utils.Logger;
 using Core.Utils.SceneManagement;
@@ -26,6 +26,25 @@ namespace Core.DI
     {
         [SerializeField] private SceneLoader _sceneLoader;
         [SerializeField] private AssetLabelReference _configLabel;
+
+        private readonly List<ScriptableObject> _configs = new();
+        private AsyncOperationHandle<IList<ScriptableObject>> _configsHandle;
+        
+        public async UniTask LoadConfigsAsync()
+        {
+            _configsHandle = Addressables.LoadAssetsAsync<ScriptableObject>(_configLabel, null);
+
+            await _configsHandle;
+
+            if (_configsHandle.Status != AsyncOperationStatus.Succeeded)
+            {
+                throw new InvalidOperationException(
+                    $"Failed to load configs by label '{_configLabel.labelString}'.");
+            }
+
+            _configs.Clear();
+            _configs.AddRange(_configsHandle.Result);
+        }
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -44,26 +63,22 @@ namespace Core.DI
             RegisterComponent(_sceneLoader);
         }
 
-        private async void RegisterConfigs()
+        private void RegisterConfigs()
         {
-            try
+            foreach (var config in _configs)
             {
-                var configsHandle = Addressables.LoadAssetsAsync<ScriptableObject>(_configLabel, null);
-
-                await configsHandle;
-
-                if (configsHandle.Status != AsyncOperationStatus.Succeeded) 
-                    return;
-            
-                foreach (var config in configsHandle.Result)
-                {
-                    RegisterInstance(config);
-                }
+                RegisterInstance(config);
             }
-            catch (Exception e)
+        }
+
+        protected override void OnDestroy()
+        {
+            if (_configsHandle.IsValid())
             {
-                Debug.LogException(e);
+                Addressables.Release(_configsHandle);
             }
+
+            base.OnDestroy();
         }
 
         private void RegisterFactories()

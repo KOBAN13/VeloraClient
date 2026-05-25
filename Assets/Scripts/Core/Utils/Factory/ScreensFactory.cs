@@ -53,18 +53,6 @@ namespace Core.Utils.Factory
             return screen;
         }
         
-        public TView CreateSync<TView>() where TView : View
-        {
-            var data = FindData(typeof(TView));
-            var handle = data.Asset.LoadAssetAsync<GameObject>();
-            var obj = handle.WaitForCompletion();
-            _sceneResources.AddObjectToRelease(obj);
-            var prefab = obj.GetComponent<TView>();
-            var screen = _viewsFactory.Create(prefab, _uiRootService.Root);
-            screen.gameObject.SetActive(false);
-            return screen;
-        }
-
         private AddressablePrefabByType<View> FindData(Type viewType)
         {
             var data = _screensData.Screens

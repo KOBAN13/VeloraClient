@@ -146,14 +146,8 @@ namespace Core.Utils.Screens
                 return OpenScreen(typedScreen, false);
             }
 
-            var newScreen = _screensFactory.CreateSync<TScreen>();
-
-            if (hasPayload)
-            {
-                newScreen.ApplyPayload(payload);
-            }
-
-            return OpenScreen(newScreen, true);
+            throw new InvalidOperationException(
+                $"{typeof(TScreen).Name} is not preloaded. Use OpenAsync or preload it before OpenSync.");
         }
 
         private TScreen OpenScreen<TScreen>(TScreen screen, bool addToCache) where TScreen : View
