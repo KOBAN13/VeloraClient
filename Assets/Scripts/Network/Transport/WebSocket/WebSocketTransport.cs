@@ -86,7 +86,7 @@ namespace Network.Transport
 
         private string GetWebSocketUrl()
         {
-#if LOCAL_CONNECTION
+#if UNITY_EDITOR && LOCAL_CONNECTION
             return _networkParameters.WebsocketUrlInLocal;
 #elif UNITY_WEBGL && !UNITY_EDITOR
             return _networkParameters.WebsocketUrlInHttps;

@@ -22,6 +22,7 @@ namespace UI.Views
         public override void Initialize()
         {
             Bind();
+            
             _interactableRegisterButtonSubscription = ViewModel.InteractableRegisterButton
                 .Subscribe(isInteractable => _registerBinder.Button.interactable = isInteractable);
         }
