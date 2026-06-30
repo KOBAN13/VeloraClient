@@ -9,11 +9,11 @@ using Network.Transport.Contracts;
 using Network.Transport.Data;
 using R3;
 
-namespace Network.Transport
+namespace Network.Transport.WebSocket
 {
     public class WebSocketTransport : IInitializable, ITickable, IAsyncDisposable, INetworkTransport
     {
-        private WebSocket _webSocket;
+        private NativeWebSocket.WebSocket _webSocket;
         private UniTaskCompletionSource _connectCompletionSource;
         private readonly ILoggerService _logger;
         private readonly INetworkParameters _networkParameters;
@@ -77,7 +77,7 @@ namespace Network.Transport
         
         private void CreateWebSocket()
         {
-            _webSocket = new WebSocket(GetWebSocketUrl());
+            _webSocket = new NativeWebSocket.WebSocket(GetWebSocketUrl());
             _webSocket.OnOpen += OnOpenWebSocketConnection;
             _webSocket.OnMessage += OnMessageWebSocket;
             _webSocket.OnError += OnWebSocketError;
@@ -172,7 +172,7 @@ namespace Network.Transport
             }
         }
         
-        private async UniTaskVoid RunWebSocketAsync(WebSocket webSocket)
+        private async UniTaskVoid RunWebSocketAsync(NativeWebSocket.WebSocket webSocket)
         {
             try
             {

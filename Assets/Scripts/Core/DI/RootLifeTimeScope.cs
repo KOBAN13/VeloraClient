@@ -15,6 +15,7 @@ using Network.Transport;
 using Network.Transport.Client;
 using Network.Transport.Codecs;
 using Network.Transport.Framing;
+using Network.Transport.WebSocket;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
