@@ -7,13 +7,15 @@ namespace Network.Data
     public readonly struct RoomSummaryData : IEquatable<RoomSummaryData>, IComparable<RoomSummaryData>
     {
         public readonly ulong RoomId;
+        public readonly string RoomName;
         public readonly PlayerData[] Players;
         public readonly uint MaxPlayers;
         public readonly RoomStatus Status;
 
-        public RoomSummaryData(ulong roomId, PlayerData[] players, uint maxPlayers, RoomStatus status)
+        public RoomSummaryData(ulong roomId, string roomName, PlayerData[] players, uint maxPlayers, RoomStatus status)
         {
             RoomId = roomId;
+            RoomName = roomName ?? string.Empty;
             Players = players ?? Array.Empty<PlayerData>();
             MaxPlayers = maxPlayers;
             Status = status;
@@ -22,6 +24,7 @@ namespace Network.Data
         public bool Equals(RoomSummaryData other)
         {
             return RoomId == other.RoomId &&
+                   string.Equals(RoomName, other.RoomName, StringComparison.Ordinal) &&
                    GetPlayersOrEmpty(Players).SequenceEqual(GetPlayersOrEmpty(other.Players)) &&
                    MaxPlayers == other.MaxPlayers &&
                    Status == other.Status;
@@ -37,6 +40,7 @@ namespace Network.Data
             unchecked
             {
                 var hashCode = RoomId.GetHashCode();
+                hashCode = (hashCode * 397) ^ (RoomName?.GetHashCode() ?? 0);
                 foreach (var player in GetPlayersOrEmpty(Players))
                 {
                     hashCode = (hashCode * 397) ^ player.GetHashCode();
@@ -54,6 +58,12 @@ namespace Network.Data
             if (roomIdComparison != 0)
             {
                 return roomIdComparison;
+            }
+
+            var roomNameComparison = string.Compare(RoomName, other.RoomName, StringComparison.Ordinal);
+            if (roomNameComparison != 0)
+            {
+                return roomNameComparison;
             }
 
             var players = GetPlayersOrEmpty(Players);

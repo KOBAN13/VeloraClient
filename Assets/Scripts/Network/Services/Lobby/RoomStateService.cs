@@ -147,6 +147,7 @@ namespace Network.Services.Lobby
 
                 var roomSummaryData = new RoomSummaryData(
                     room.RoomId,
+                    room.Name,
                     players,
                     room.MaxPlayer,
                     room.Status);
@@ -209,7 +210,8 @@ namespace Network.Services.Lobby
                 roomStateSnapshotMessage.RoomId,
                 roomStateSnapshotMessage.MaxPlayer,
                 roomStateSnapshotMessage.Status,
-                players);
+                players,
+                FindRoomName(roomStateSnapshotMessage.RoomId));
 
             CurrentRoom = roomStateData;
             IsInRoom = true;
@@ -263,6 +265,19 @@ namespace Network.Services.Lobby
             }
 
             return -1;
+        }
+
+        private string FindRoomName(ulong roomId)
+        {
+            foreach (var room in _roomSummaryData)
+            {
+                if (room.RoomId == roomId)
+                {
+                    return room.RoomName;
+                }
+            }
+
+            return string.Empty;
         }
     }
 }

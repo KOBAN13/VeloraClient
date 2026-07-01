@@ -6,16 +6,18 @@ namespace Network.Data
     public class RoomStateData
     {
         public ulong RoomId { get; }
+        public string RoomName { get; }
         public uint MaxPlayer { get; }
         public RoomStatus Status { get; }
         public IReadOnlyList<PlayerData> Players { get; }
         
-        public RoomStateData(ulong roomId, uint maxPlayer, RoomStatus status, IReadOnlyList<PlayerData> players)
+        public RoomStateData(ulong roomId, uint maxPlayer, RoomStatus status, IReadOnlyList<PlayerData> players, string roomName)
         {
             RoomId = roomId;
             MaxPlayer = maxPlayer;
             Status = status;
             Players = players;
+            RoomName = roomName;
         }
     }
 }

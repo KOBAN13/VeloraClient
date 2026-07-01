@@ -19,6 +19,7 @@ namespace Network.Services.Auth
         
         public Observable<Unit> SuccessLogin => _successLogin;
         public Observable<string> LoginErrorRequest => _loginErrorRequest;
+        public string UserName { get; private set; }
 
         public LoginClientService(INetworkMessageBus messages)
         {
@@ -38,6 +39,8 @@ namespace Network.Services.Auth
 
         public void Login(string username, string password)
         {
+            UserName = username;
+            
             _messages.Send(new LoginRequestMessage
             {
                 Username = username,
