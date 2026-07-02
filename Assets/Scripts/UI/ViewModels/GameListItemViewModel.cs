@@ -5,6 +5,7 @@ using R3;
 using UI.Core;
 using UI.Helpers;
 using UI.Utils;
+using UI.Views;
 using VContainer;
 
 namespace UI.ViewModels
