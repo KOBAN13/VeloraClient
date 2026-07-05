@@ -25,8 +25,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14953fe163cfb1a4eb235a11fcd5416c
+    m_Address: Assets/Assets/Prefabs/UI/PlayerLobbyItem.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2733eabac9f3f4e32944efec7778b619
+    m_Address: Assets/Assets/Prefabs/UI/MessagesVIew.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 33057ba1ee3800e4db4c9be103c92a5d
     m_Address: Assets/Assets/Prefabs/UI/MainMenuScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b626188a12eb35c4db782288fcf014ff
+    m_Address: Assets/Assets/Prefabs/UI/GameRoomHubScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b80a32b7e826d2347a974e2864c04ba9
+    m_Address: Assets/Assets/Prefabs/UI/GameListItem.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -35,8 +55,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6d7728ef5b74934695412baa3579f0c
+    m_Address: Assets/Assets/Prefabs/UI/LobbyScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e7e2fda994d3401bb5468cad29f49314
     m_Address: Assets/Prefabs/UI/ChatView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: feb33397fb6dded478e4530e8277b24e
+    m_Address: Assets/Assets/Prefabs/UI/CreateLobbyScreen.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -13,13 +13,11 @@ namespace UI.ViewModels
         [Inject] private IRoomStateService _roomStateService;
         [Inject] private IScreenService _screenService;
         [Inject] private ILobbyClientService _lobbyService;
-
-        public readonly RefTypeViewModelBinder<ReactiveCommand<bool>> IsPrivateRoomBinder = new();
+        
         public readonly RefTypeViewModelBinder<ReactiveCommand> CreateRoomButtonBinder = new();
         public readonly RefTypeViewModelBinder<ReactiveCommand<string>> RoomNameTextViewBinder = new();
         public readonly RefTypeViewModelBinder<ReactiveCommand<string>> MaxPlayersTextViewBinder = new();
         public readonly RefTypeViewModelBinder<ReactiveCommand> CloseScreenButtonBinder = new();
-        public readonly ViewModelBinder<EUIObjectState> PasswordObjectBinder = new();
 
         private readonly ReactiveProperty<bool> _interactableCreateRoomButton = new(true);
 
@@ -31,7 +29,6 @@ namespace UI.ViewModels
         public override void Initialize()
         {
             CreateRoomButtonBinder.Value.Subscribe(OnCreateRoom).AddTo(Disposable);
-            IsPrivateRoomBinder.Value.Subscribe(OnIsPrivateRoomChanged).AddTo(Disposable);
             RoomNameTextViewBinder.Value.Subscribe(OnRoomNameChanged).AddTo(Disposable);
             MaxPlayersTextViewBinder.Value.Subscribe(OnMaxPlayersChanged).AddTo(Disposable);
             CloseScreenButtonBinder.Value.Subscribe(OnCloseScreen).AddTo(Disposable);
@@ -48,12 +45,7 @@ namespace UI.ViewModels
 
             _interactableCreateRoomButton.Value = false;
         }
-
-        private void OnIsPrivateRoomChanged(bool isPrivateRoom)
-        {
-            PasswordObjectBinder.Value = isPrivateRoom ? EUIObjectState.Show : EUIObjectState.Hide;
-        }
-
+        
         private void OnRoomNameChanged(string roomName)
         {
             _roomName = roomName;

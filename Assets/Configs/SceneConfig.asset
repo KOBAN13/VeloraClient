@@ -58,3 +58,38 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 1
+  - type: UI.View.CreateRoomScreen
+    asset:
+      m_AssetGUID: feb33397fb6dded478e4530e8277b24e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+  - type: UI.Views.GameListItem
+    asset:
+      m_AssetGUID: b80a32b7e826d2347a974e2864c04ba9
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+  - type: UI.Views.GameRoomHubScreen
+    asset:
+      m_AssetGUID: b626188a12eb35c4db782288fcf014ff
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+  - type: UI.Views.LobbyScreen
+    asset:
+      m_AssetGUID: d6d7728ef5b74934695412baa3579f0c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
+  - type: UI.Views.PlayerLobbyItem
+    asset:
+      m_AssetGUID: 14953fe163cfb1a4eb235a11fcd5416c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 1
