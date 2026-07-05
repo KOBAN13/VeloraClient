@@ -10,7 +10,7 @@ namespace UI.Views
 {
     public class CreateRoomScreen : Screen<CreateRoomViewModel>
     {
-        [SerializeField, AutoBind] private InputFieldTextChangedViewBinder _roomNameTextViewBinder;
+        [SerializeField, AutoBind] private InputFieldTextChangedViewBinder _roomNameText;
         [SerializeField, AutoBind] private InputFieldTextChangedViewBinder _roomMaxPlayersTextViewBinder;
         [SerializeField, AutoBind] private ButtonViewBinder _createRoomButtonBinder;
         [SerializeField, AutoBind] private ButtonViewBinder _closeScreenButtonBinder;

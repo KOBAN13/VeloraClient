@@ -8,7 +8,7 @@ namespace UI.Views
 {
     public class LoadingScreen : Screen<LoadingViewModel>
     {
-        [SerializeField, AutoBind] private ProgressBarViewBinder progressBar = new();
+        [SerializeField, AutoBind] private ProgressBarViewBinder _progressBarBinder = new();
         
         public override void Initialize()
         {

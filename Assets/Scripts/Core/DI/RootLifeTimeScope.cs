@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Core.Utils.Factory;
 using Core.Utils.Logger;
+using Core.Utils.Pool;
 using Core.Utils.SceneManagement;
 using Core.Utils.Screens;
 using Core.Utils.Services;
@@ -11,6 +12,7 @@ using Core.Utils.StateMachine.Project.States;
 using Cysharp.Threading.Tasks;
 using Network.Messaging;
 using Network.Services.Identity;
+using Network.Services.Lobby;
 using Network.Services.Match;
 using Network.Transport;
 using Network.Transport.Client;
@@ -57,6 +59,7 @@ namespace Core.DI
             RegisterFactories();
             RegisterRootServices();
             RegisterNetworkServices();
+            RegisterLobbyServices();
             RegisterProjectStates();
         }
 
@@ -111,6 +114,14 @@ namespace Core.DI
             Register<WebSocketMessageFramer>(Lifetime.Singleton);
             Register<NetworkClient>(Lifetime.Singleton);
             Register<ClientIdentityService>(Lifetime.Singleton);
+        }
+
+        private void RegisterLobbyServices()
+        {
+            RegisterEntryPoint<LobbyClientService>();
+            RegisterEntryPoint<RoomStateService>();
+            Register<GameListItemPool>(Lifetime.Singleton);
+            Register<PlayerLobbyItemPool>(Lifetime.Singleton);
         }
 
         private void RegisterProjectStates()

@@ -11,7 +11,7 @@ namespace UI.ViewModels
     {
         [Inject] private ILobbyClientService _lobbyService;
         
-        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> KickPlayerCommand = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> KickPlayerButtonBinder = new();
         [AutoBind] public readonly ViewModelBinder<EUIObjectState> KickPlayerObject = new();
         [AutoBind] public readonly ViewModelBinder<string> UserNameText = new();
 
@@ -19,7 +19,7 @@ namespace UI.ViewModels
         
         public override void Initialize()
         {
-            KickPlayerCommand.Value.Subscribe(OnKickPlayerInLobby).AddTo(Disposable);
+            KickPlayerButtonBinder.Value.Subscribe(OnKickPlayerInLobby).AddTo(Disposable);
         }
         
         public void UpdatePlayer(ulong userId, string userName, string ping)

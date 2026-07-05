@@ -9,6 +9,18 @@ namespace UI.Helpers
         [SerializeField] private Canvas _canvas;
         [SerializeField] private RectTransform _canvasRect;
         private Vector2 _offset;
+
+        private void Awake()
+        {
+            if (_canvas == null)
+                _canvas = GetComponentInParent<Canvas>();
+
+            if (_canvasRect == null)
+                _canvasRect = _canvas.transform as RectTransform;
+
+            Debug.Assert(_canvas != null);
+            Debug.Assert(_canvasRect != null);
+        }
         
         public void OnPointerDown(PointerEventData eventData)
         {

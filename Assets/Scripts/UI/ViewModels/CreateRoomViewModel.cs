@@ -2,6 +2,7 @@
 using Network.Contracts;
 using R3;
 using UI.Core;
+using UI.Helpers;
 using UI.Utils;
 using UI.Views;
 using VContainer;
@@ -14,10 +15,10 @@ namespace UI.ViewModels
         [Inject] private IScreenService _screenService;
         [Inject] private ILobbyClientService _lobbyService;
         
-        public readonly RefTypeViewModelBinder<ReactiveCommand> CreateRoomButtonBinder = new();
-        public readonly RefTypeViewModelBinder<ReactiveCommand<string>> RoomNameTextViewBinder = new();
-        public readonly RefTypeViewModelBinder<ReactiveCommand<string>> MaxPlayersTextViewBinder = new();
-        public readonly RefTypeViewModelBinder<ReactiveCommand> CloseScreenButtonBinder = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> CreateRoomButtonBinder = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand<string>> RoomNameTextViewBinder = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand<string>> RoomMaxPlayersTextViewBinder = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> CloseScreenButtonBinder = new();
 
         private readonly ReactiveProperty<bool> _interactableCreateRoomButton = new(true);
 
@@ -30,7 +31,7 @@ namespace UI.ViewModels
         {
             CreateRoomButtonBinder.Value.Subscribe(OnCreateRoom).AddTo(Disposable);
             RoomNameTextViewBinder.Value.Subscribe(OnRoomNameChanged).AddTo(Disposable);
-            MaxPlayersTextViewBinder.Value.Subscribe(OnMaxPlayersChanged).AddTo(Disposable);
+            RoomMaxPlayersTextViewBinder.Value.Subscribe(OnMaxPlayersChanged).AddTo(Disposable);
             CloseScreenButtonBinder.Value.Subscribe(OnCloseScreen).AddTo(Disposable);
             
             _roomStateService.CurrentRoomChanged

@@ -12,12 +12,12 @@ namespace UI.ViewModels
         private SceneLoader _sceneLoader;
         
         [AutoBind]
-        private readonly ViewModelBinder<float> _progressBinder = new();
+        public readonly ViewModelBinder<float> ProgressBarBinder = new();
         
         public override void Initialize()
         {
             _sceneLoader.Progress
-                .Subscribe(value => _progressBinder.Value = value)
+                .Subscribe(value => ProgressBarBinder.Value = value)
                 .AddTo(Disposable);
         }
     }

@@ -7,6 +7,7 @@ using Network.Data;
 using ObservableCollections;
 using R3;
 using UI.Core;
+using UI.Helpers;
 using UI.Utils;
 using UI.Views;
 using UnityEngine;
@@ -21,10 +22,10 @@ namespace UI.ViewModels
         [Inject] private IScreenService _screenService;
         [Inject] private IPlayerLobbyItemPool _playerLobbyItemPool;
 
-        public readonly RefTypeViewModelBinder<ReactiveCommand> InvitePlayerCommand = new();
-        public readonly RefTypeViewModelBinder<ReactiveCommand> StartGameCommand = new();
-        public readonly RefTypeViewModelBinder<ReactiveCommand> LeaveGameCommand = new();
-        public readonly ViewModelBinder<EUIObjectState> ObjectStartGameCommand = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> InvitePlayerButtonBinder = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> StartGameButtonBinder = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> LeaveGameButtonBinder = new();
+        [AutoBind] public readonly ViewModelBinder<EUIObjectState> ObjectStartGameButtonBinder = new();
 
         public readonly ReactiveCommand<GameObject> SetParentObject = new();
 
@@ -34,9 +35,9 @@ namespace UI.ViewModels
         {
             SetParentObject.Subscribe(InitializeLobbyAsync).AddTo(Disposable);
 
-            InvitePlayerCommand.Value.Subscribe(OnInvitePlayer).AddTo(Disposable);
-            StartGameCommand.Value.Subscribe(OnStartGame).AddTo(Disposable);
-            LeaveGameCommand.Value.Subscribe(OnLeaveGame).AddTo(Disposable);
+            InvitePlayerButtonBinder.Value.Subscribe(OnInvitePlayer).AddTo(Disposable);
+            StartGameButtonBinder.Value.Subscribe(OnStartGame).AddTo(Disposable);
+            LeaveGameButtonBinder.Value.Subscribe(OnLeaveGame).AddTo(Disposable);
 
             _lobbyService.KickedUser.Subscribe(_ => OnKickedFromLobby()).AddTo(Disposable);
             _roomStateService.CurrentRoomChanged.Subscribe(_ => UpdateStartGameButtonVisibility()).AddTo(Disposable);
@@ -56,7 +57,7 @@ namespace UI.ViewModels
 
         private void UpdateStartGameButtonVisibility()
         {
-            ObjectStartGameCommand.Value = _roomStateService.IsOwner
+            ObjectStartGameButtonBinder.Value = _roomStateService.IsOwner
                 ? EUIObjectState.Show
                 : EUIObjectState.Hide;
         }

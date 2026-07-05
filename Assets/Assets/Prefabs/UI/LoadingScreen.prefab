@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07cbbe15f2bc4920adace2e70de48ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.Views.LoadingScreen
-  progressBar:
+  _progressBarBinder:
     _image: {fileID: 4295724588217824536}
 --- !u!1 &26915042475765972
 GameObject:

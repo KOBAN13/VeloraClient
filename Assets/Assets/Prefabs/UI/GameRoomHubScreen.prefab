@@ -2097,8 +2097,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6854973773360543791}
-  - component: {fileID: 2492113941496354923}
-  - component: {fileID: 234036549941986316}
   - component: {fileID: 4708885942551267886}
   - component: {fileID: 2154592998154379582}
   - component: {fileID: 8759488059325581641}
@@ -2118,7 +2116,7 @@ RectTransform:
   m_GameObject: {fileID: 7355680608951183701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2185370178446474428}
@@ -2127,51 +2125,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!223 &2492113941496354923
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355680608951183701}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 1
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_UseReflectionProbes: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &234036549941986316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7355680608951183701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 55
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4708885942551267886
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2223,14 +2180,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.Views.GameRoomHubScreen
   _userNameBinder:
-    _testText: {fileID: 0}
+    _testText: {fileID: 7412379254739138151}
   _createRoomButtonBinder:
-    _button: {fileID: 0}
+    _button: {fileID: 8497239822946440000}
   _logoutButtonBinder:
-    _button: {fileID: 0}
+    _button: {fileID: 2043096815169105723}
   _autoLobbyButtonBinder:
-    _button: {fileID: 0}
-  _lobbyList: {fileID: 0}
+    _button: {fileID: 4955191698957109956}
+  _lobbyList: {fileID: 6916692633346587163}
 --- !u!1 &7498348278063647295
 GameObject:
   m_ObjectHideFlags: 0

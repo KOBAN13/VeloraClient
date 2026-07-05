@@ -22,7 +22,7 @@ namespace UI.ViewModels
         [AutoBind] public readonly ViewModelBinder<string> UserNameBinder = new();
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> CreateRoomButtonBinder = new();
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> LogoutButtonBinder = new();
-        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> AutoLobbyBinder = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> AutoLobbyButtonBinder = new();
         [AutoBind] public readonly ReactiveCommand<GameObject> SetParentObject = new();
 
         public override void Initialize()

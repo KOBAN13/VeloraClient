@@ -9,7 +9,7 @@ namespace UI.Views
     public class LobbyScreen : Screen<LobbyViewModel>
     {
         [SerializeField, AutoBind] private ButtonViewBinder _startGameButtonBinder;
-        [SerializeField, AutoBind] private ButtonViewBinder _inviteGameButtonBinder;
+        [SerializeField, AutoBind] private ButtonViewBinder _invitePlayerButtonBinder;
         [SerializeField, AutoBind] private ButtonViewBinder _leaveGameButtonBinder;
         [SerializeField, AutoBind] private GameObjectViewBinder _objectStartGameButtonBinder;
 

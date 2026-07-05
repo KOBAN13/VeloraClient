@@ -58,7 +58,7 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 1
-  - type: UI.View.CreateRoomScreen
+  - type: UI.Views.CreateRoomScreen
     asset:
       m_AssetGUID: feb33397fb6dded478e4530e8277b24e
       m_SubObjectName: 

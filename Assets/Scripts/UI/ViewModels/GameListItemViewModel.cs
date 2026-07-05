@@ -17,7 +17,7 @@ namespace UI.ViewModels
 
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> PlayButtonBinder = new();
 
-        [AutoBind] public readonly ViewModelBinder<string> PlayerInLobbyBinder = new();
+        [AutoBind] public readonly ViewModelBinder<string> CountPlayerInLobbyBinder = new();
 
         [AutoBind] public readonly ViewModelBinder<string> RoomNameBinder = new();
 
@@ -39,7 +39,7 @@ namespace UI.ViewModels
             _interactablePlayButton.Value = playerSlots > 0;
 
             RoomNameBinder.Value =  room.RoomName;
-            PlayerInLobbyBinder.Value = $"Player slots: {playerSlots}";
+            CountPlayerInLobbyBinder.Value = $"Player slots: {playerSlots}";
 
             RoomData = room;
         }

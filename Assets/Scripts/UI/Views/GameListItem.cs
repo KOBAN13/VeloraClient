@@ -16,12 +16,14 @@ namespace UI.Views
 
         [SerializeField, AutoBind] private TextViewBinder _roomName = new();
 
-        [SerializeField, AutoBind] private GameObjectViewBinder _lockIcon = new();
+        [SerializeField] private GameObjectViewBinder _lockIcon = new();
 
         private IDisposable _interactablePlayButton;
 
         public override void Initialize()
         {
+            Bind();
+
             _interactablePlayButton = ViewModel.InteractablePlayButton.Subscribe(OnInteractablePlayButton);
         }
 
