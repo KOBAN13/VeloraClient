@@ -129,7 +129,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8078a1b0f043a463094d523438ed9027, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db2670522f4de4525bc3d2b594ad161b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -923,9 +923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cafb5a33a29458191d98fb6f9bc520c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <OnClickAlpha>k__BackingField: 0
-  <FadeTime>k__BackingField: 0
-  <OnHoverAlpha>k__BackingField: 0
+  <OnClickAlpha>k__BackingField: 0.6
+  <FadeTime>k__BackingField: 0.2
+  <OnHoverAlpha>k__BackingField: 0.4
 --- !u!82 &3691081141887969722
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1301,9 +1301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cafb5a33a29458191d98fb6f9bc520c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <OnClickAlpha>k__BackingField: 0
-  <FadeTime>k__BackingField: 0
-  <OnHoverAlpha>k__BackingField: 0
+  <OnClickAlpha>k__BackingField: 0.6
+  <FadeTime>k__BackingField: 0.2
+  <OnHoverAlpha>k__BackingField: 0.4
 --- !u!1 &7847607303771034155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,9 +1540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cafb5a33a29458191d98fb6f9bc520c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <OnClickAlpha>k__BackingField: 0
-  <FadeTime>k__BackingField: 0
-  <OnHoverAlpha>k__BackingField: 0
+  <OnClickAlpha>k__BackingField: 0.6
+  <FadeTime>k__BackingField: 0.2
+  <OnHoverAlpha>k__BackingField: 0.4
 --- !u!82 &1478185124553183712
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using Network.Contracts;
 using R3;
 using UI.Core;
+using UI.Helpers;
 using UI.Utils;
 using VContainer;
 
@@ -10,10 +11,9 @@ namespace UI.ViewModels
     {
         [Inject] private ILobbyClientService _lobbyService;
         
-        public readonly RefTypeViewModelBinder<ReactiveCommand> KickPlayerCommand = new();
-        public readonly ViewModelBinder<EUIObjectState> KickPlayerObject = new();
-        public readonly ViewModelBinder<string> PingPlayerText = new();
-        public readonly ViewModelBinder<string> UserNameText = new();
+        [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> KickPlayerCommand = new();
+        [AutoBind] public readonly ViewModelBinder<EUIObjectState> KickPlayerObject = new();
+        [AutoBind] public readonly ViewModelBinder<string> UserNameText = new();
 
         private ulong _userId;
         
@@ -26,7 +26,6 @@ namespace UI.ViewModels
         {
             _userId = userId;
             UserNameText.Value = userName;
-            PingPlayerText.Value = ping;
         }
         
         public void ActivityKickPlayerButton(EUIObjectState state)

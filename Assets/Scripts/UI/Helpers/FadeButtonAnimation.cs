@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,9 +7,9 @@ namespace UI.Helpers
 {
     public class FadeButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
-        [field: SerializeField] public float OnClickAlpha { get; private set; }
-        [field: SerializeField] public float FadeTime { get; private set; }
-        [field: SerializeField] public float OnHoverAlpha { get; private set; }
+        [field: SerializeField] public float OnClickAlpha { get; private set; } = 0.6f;
+        [field: SerializeField] public float FadeTime { get; private set; } = 0.2f;
+        [field: SerializeField] public float OnHoverAlpha { get; private set; } = 0.4f;
         
         private Tween _tween;
         private CanvasGroup _group;
@@ -41,6 +42,13 @@ namespace UI.Helpers
         public void OnPointerUp(PointerEventData eventData)
         {
             _group.alpha = 1.0f;
+        }
+
+        private void OnValidate()
+        {
+            OnClickAlpha = 0.6f;
+            FadeTime = 0.2f;
+            OnHoverAlpha = 0.4f;
         }
     }
 }
