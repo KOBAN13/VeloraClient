@@ -41,7 +41,7 @@ namespace UI.ViewModels
 
         private void Play(Unit unit)
         {
-            _projectStateMachine.Enter<ProjectGameState>();
+            _projectStateMachine.Enter<ProjectLobbyState>();
         }
 
         private async UniTask OpenRegisterScreen()

@@ -65,9 +65,7 @@ namespace Network.Services.Lobby
         
         public void RefreshRooms()
         {
-            _messages.Send(new RoomListRequestMessage()
-            {
-            });
+            _messages.Send(new RoomListRequestMessage());
         }
 
         public void CreateRoom(string nameRoom, uint maxPlayers)
@@ -83,9 +81,7 @@ namespace Network.Services.Lobby
         public void LeaveRoom()
         {
             _players.Clear();
-            _messages.Send(new LeaveRoomRequestMessage()
-            {
-            });
+            _messages.Send(new LeaveRoomRequestMessage());
         }
         
         public void JoinRoom(ulong roomId)

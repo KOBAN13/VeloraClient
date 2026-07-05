@@ -3,8 +3,7 @@ using Core.Utils.StateMachine.Game;
 using Core.Utils.StateMachine.Game.Factory;
 using Core.Utils.StateMachine.Game.States;
 using Network.Services.Chat;
-using Network.Services.Identity;
-using Network.Services.Lobby;
+using Network.Services.Match;
 using UI.Services;
 using VContainer;
 
@@ -17,7 +16,6 @@ namespace Core.DI
             Builder = builder;
 
             RegisterGameServices();
-            RegisterLobbyServices();
         }
 
         private void RegisterGameServices()
@@ -29,13 +27,7 @@ namespace Core.DI
             Register<GameAStateMachine>(Lifetime.Singleton);
             Register<GameBootstrapState>(Lifetime.Singleton);
             Register<GameMainState>(Lifetime.Singleton);
-        }
-
-        private void RegisterLobbyServices()
-        {
-            Register<LobbyClientService>(Lifetime.Singleton);
-            Register<ClientIdentityService>(Lifetime.Singleton);
-            Register<RoomStateService>(Lifetime.Singleton);
+            RegisterEntryPoint<MatchService>();
         }
     }
 }

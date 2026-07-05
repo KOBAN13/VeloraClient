@@ -21,17 +21,9 @@ namespace Core.Utils.Pool
         private PlayerLobbyItem _prefab;
         private GameObject _parent;
 
-        public async UniTask Initialize(GameObject parent)
+        public void Initialize(GameObject parent)
         {
             _parent = parent;
-
-            if (_prefab == null)
-            {
-                var data = _screensData.Screens
-                    .FirstOrDefault(d => d.Type == typeof(PlayerLobbyItem));
-                var handle = await data.Asset.LoadAssetAsync<GameObject>();
-                _prefab = handle.GetComponent<PlayerLobbyItem>();
-            }
 
             Clear();
             _pool?.Clear();

@@ -15,7 +15,6 @@ namespace Network.Services.Lobby
     {
         private readonly ILobbyClientService _lobbyClientService;
         private readonly IClientIdentityService _clientIdentityService;
-        private readonly ILoggerService _loggerService;
         private readonly CompositeDisposable _disposables = new();
 
         private readonly ObservableList<RoomSummaryData> _roomSummaryData = new();
@@ -35,15 +34,12 @@ namespace Network.Services.Lobby
 
         public bool IsInitialized { get; set; }
 
-
         public RoomStateService(ILobbyClientService lobbyClientService, IClientIdentityService clientIdentityService, ILoggerService loggerService)
         {
             _lobbyClientService = lobbyClientService;
             _clientIdentityService = clientIdentityService;
-            _loggerService = loggerService;
         }
-
-
+        
         public void Initialize()
         {
             _lobbyClientService.RoomListSnapshotReceived

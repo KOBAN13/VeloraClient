@@ -32,7 +32,7 @@ namespace UI.ViewModels
 
         public override void Initialize()
         {
-            SetParentObject.Subscribe(parent => InitializeLobbyAsync(parent).Forget()).AddTo(Disposable);
+            SetParentObject.Subscribe(InitializeLobbyAsync).AddTo(Disposable);
 
             InvitePlayerCommand.Value.Subscribe(OnInvitePlayer).AddTo(Disposable);
             StartGameCommand.Value.Subscribe(OnStartGame).AddTo(Disposable);
@@ -68,7 +68,7 @@ namespace UI.ViewModels
             CloseLobbyScreen();
         }
 
-        private async UniTask InitializeLobbyAsync(GameObject parent)
+        private void InitializeLobbyAsync(GameObject parent)
         {
             if (_isLobbyInitialized)
             {
@@ -77,7 +77,7 @@ namespace UI.ViewModels
 
             _isLobbyInitialized = true;
 
-            await _playerLobbyItemPool.Initialize(parent);
+            _playerLobbyItemPool.Initialize(parent);
 
             var currentPlayers = new List<PlayerData>();
 

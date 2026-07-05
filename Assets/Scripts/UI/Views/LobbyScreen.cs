@@ -18,6 +18,7 @@ namespace UI.Views
         public override void Initialize()
         {
             Bind();
+            
             ViewModel.SetParentObject.Execute(_lobbyListContent);
         }
     }

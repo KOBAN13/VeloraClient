@@ -11,6 +11,7 @@ using Core.Utils.StateMachine.Project.States;
 using Cysharp.Threading.Tasks;
 using Network.Messaging;
 using Network.Services.Identity;
+using Network.Services.Match;
 using Network.Transport;
 using Network.Transport.Client;
 using Network.Transport.Codecs;
@@ -99,6 +100,7 @@ namespace Core.DI
             Register<ScreenService>(Lifetime.Singleton);
             Register<TickService>(Lifetime.Singleton);
             Register<LoggerService>(Lifetime.Singleton);
+            RegisterEntryPoint<MatchStartCoordinator>();
         }
 
         private void RegisterNetworkServices()
@@ -117,6 +119,7 @@ namespace Core.DI
 
             Register<ProjectBootstrapState>(Lifetime.Singleton);
             Register<ProjectMainMenu>(Lifetime.Singleton);
+            Register<ProjectLobbyState>(Lifetime.Singleton);
             Register<ProjectGameState>(Lifetime.Singleton);
         }
     }
