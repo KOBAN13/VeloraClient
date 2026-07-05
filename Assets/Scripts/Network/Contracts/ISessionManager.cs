@@ -6,10 +6,10 @@ namespace Network.Contracts
     public interface ISessionManager
     {
         Observable<ERoomRole> MyRole { get; }
-        T RoomVariables<T>(string keyVariable);
-        T UserVariables<T>(string keyVariable);
+        T RoomVariables<T>(string keyVariable) where T : new();
+        T UserVariables<T>(string keyVariable) where T : new();
         void SetRole(ERoomRole role);
         ERoomRole GetRole();
-        int FindUserIdByName(string name);
+        ulong FindUserIdByName(string name);
     }
 }

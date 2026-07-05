@@ -27,7 +27,10 @@ namespace Network.Messaging
                 TryExtract(packet.StartGame, out type, out payload) ||
                 TryExtract(packet.RoomList, out type, out payload) ||
                 TryExtract(packet.RoomSummaryMessage, out type, out payload) ||
-                TryExtract(packet.RoomListSnapshot, out type, out payload))
+                TryExtract(packet.RoomListSnapshot, out type, out payload) ||
+                TryExtract(packet.PlayerJoinRoom, out type, out payload) ||
+                TryExtract(packet.PlayerKickRoom, out type, out payload) ||
+                TryExtract(packet.PlayerRemoveRoom, out type, out payload))
             {
                 return true;
             }
@@ -55,6 +58,7 @@ namespace Network.Messaging
                 LeaveRoomRequestMessage leaveRoomRequest => new Packet { LeaveRoomRequest = leaveRoomRequest },
                 ReadyRequestMessage readyRequest => new Packet { ReadyRequest = readyRequest },
                 StartGameRequestMessage startGameRequest => new Packet { StartGame = startGameRequest },
+                PlayerKickRoom playerKickRoom => new Packet { PlayerKickRoom = playerKickRoom },
                 _ => throw new NotSupportedException($"Message type {typeof(T).Name} is not supported for sending.")
             };
         }

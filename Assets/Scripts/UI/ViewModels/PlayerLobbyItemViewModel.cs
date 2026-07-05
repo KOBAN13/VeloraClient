@@ -9,20 +9,22 @@ namespace UI.ViewModels
     public class PlayerLobbyItemViewModel : ViewModel
     {
         [Inject] private ILobbyClientService _lobbyService;
-        [Inject] private ISessionManager _sessionManager;
         
         public readonly RefTypeViewModelBinder<ReactiveCommand> KickPlayerCommand = new();
         public readonly ViewModelBinder<EUIObjectState> KickPlayerObject = new();
         public readonly ViewModelBinder<string> PingPlayerText = new();
         public readonly ViewModelBinder<string> UserNameText = new();
+
+        private ulong _userId;
         
         public override void Initialize()
         {
             KickPlayerCommand.Value.Subscribe(OnKickPlayerInLobby).AddTo(Disposable);
         }
         
-        public void UpdateGameListItem(string userName, string ping)
+        public void UpdatePlayer(ulong userId, string userName, string ping)
         {
+            _userId = userId;
             UserNameText.Value = userName;
             PingPlayerText.Value = ping;
         }
@@ -34,9 +36,12 @@ namespace UI.ViewModels
         
         private void OnKickPlayerInLobby(Unit unit)
         {
-            var userId = _sessionManager.FindUserIdByName(UserNameText.Value);
-            
-            _lobbyService.KickUser(userId);
+            if (_userId == 0)
+            {
+                return;
+            }
+
+            _lobbyService.KickUser(_userId);
         }
     }
 }

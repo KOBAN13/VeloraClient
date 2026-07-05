@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Text;
+using Cysharp.Threading.Tasks;
 using Core.Utils.Pool;
 using Core.Utils.Screens;
 using Network.Contracts;
-using Network.Transport.Data;
+using Network.Data;
+using ObservableCollections;
 using R3;
 using UI.Core;
 using UI.Utils;
@@ -16,9 +17,9 @@ namespace UI.ViewModels
     public class LobbyViewModel : ViewModel
     {
         [Inject] private ILobbyClientService _lobbyService;
+        [Inject] private IRoomStateService _roomStateService;
         [Inject] private IScreenService _screenService;
         [Inject] private IPlayerLobbyItemPool _playerLobbyItemPool;
-        [Inject] private ISessionManager _sessionManager;
 
         public readonly RefTypeViewModelBinder<ReactiveCommand> InvitePlayerCommand = new();
         public readonly RefTypeViewModelBinder<ReactiveCommand> StartGameCommand = new();
@@ -27,23 +28,20 @@ namespace UI.ViewModels
 
         public readonly ReactiveCommand<GameObject> SetParentObject = new();
 
-        private readonly StringBuilder _pingBuilder = new();
+        private bool _isLobbyInitialized;
 
         public override void Initialize()
         {
-            SetParentObject.Subscribe(InitializeLobby).AddTo(Disposable);
+            SetParentObject.Subscribe(parent => InitializeLobbyAsync(parent).Forget()).AddTo(Disposable);
 
             InvitePlayerCommand.Value.Subscribe(OnInvitePlayer).AddTo(Disposable);
             StartGameCommand.Value.Subscribe(OnStartGame).AddTo(Disposable);
             LeaveGameCommand.Value.Subscribe(OnLeaveGame).AddTo(Disposable);
 
-            _lobbyService.KickedUser.Subscribe(OnLeaveGame).AddTo(Disposable);
+            _lobbyService.KickedUser.Subscribe(_ => OnKickedFromLobby()).AddTo(Disposable);
+            _roomStateService.CurrentRoomChanged.Subscribe(_ => UpdateStartGameButtonVisibility()).AddTo(Disposable);
 
-            _lobbyService.RoleChanged.Subscribe(OnDisableStartGameButton).AddTo(Disposable);
-
-            _lobbyService.Users.ObserveAdd().Subscribe(kvp => OnUserAdded(kvp.Value)).AddTo(Disposable);
-            _lobbyService.Users.ObserveRemove().Subscribe(kvp => OnUserRemoved(kvp.Value)).AddTo(Disposable);
-            _lobbyService.Users.ObserveReplace().Subscribe(kvp => OnUserUpdated(kvp.NewValue)).AddTo(Disposable);
+            UpdateStartGameButtonVisibility();
         }
 
         private void OnInvitePlayer(Unit unit)
@@ -56,68 +54,95 @@ namespace UI.ViewModels
             _lobbyService.StartGame();
         }
 
-        private void OnDisableStartGameButton(Unit unit)
+        private void UpdateStartGameButtonVisibility()
         {
-            var role = _sessionManager.GetRole();
-
-            ObjectStartGameCommand.Value = role switch
-            {
-                ERoomRole.Owner => EUIObjectState.Show,
-                ERoomRole.Player => EUIObjectState.Hide,
-                _ => ObjectStartGameCommand.Value
-            };
+            ObjectStartGameCommand.Value = _roomStateService.IsOwner
+                ? EUIObjectState.Show
+                : EUIObjectState.Hide;
         }
 
         private void OnLeaveGame(Unit unit)
         {
+            _playerLobbyItemPool.Clear();
             _lobbyService.LeaveRoom();
+            CloseLobbyScreen();
+        }
+
+        private async UniTask InitializeLobbyAsync(GameObject parent)
+        {
+            if (_isLobbyInitialized)
+            {
+                return;
+            }
+
+            _isLobbyInitialized = true;
+
+            await _playerLobbyItemPool.Initialize(parent);
+
+            var currentPlayers = new List<PlayerData>();
+
+            foreach (var player in _lobbyService.Players)
+            {
+                currentPlayers.Add(player);
+            }
+
+            _lobbyService.Players
+                .ObserveAdd()
+                .Subscribe(kvp => OnUserAdded(kvp.Value))
+                .AddTo(Disposable);
+            
+            _lobbyService.Players
+                .ObserveRemove()
+                .Subscribe(kvp => OnUserRemoved(kvp.Value))
+                .AddTo(Disposable);
+            
+            _lobbyService.Players
+                .ObserveReplace()
+                .Subscribe(kvp => OnUserUpdated(kvp.NewValue))
+                .AddTo(Disposable);
+
+            foreach (var player in currentPlayers)
+            {
+                OnUserAdded(player);
+            }
+        }
+
+        private void OnUserAdded(PlayerData playerData)
+        {
+            UpdatePlayerItem(playerData);
+        }
+
+        private void OnUserRemoved(PlayerData playerData)
+        {
+            _playerLobbyItemPool.ReleaseListItem(playerData.UserId);
+        }
+
+        private void OnUserUpdated(PlayerData playerData)
+        {
+            UpdatePlayerItem(playerData);
+        }
+
+        private void UpdatePlayerItem(PlayerData playerData)
+        {
+            var item = _playerLobbyItemPool.GetById(playerData.UserId) ?? _playerLobbyItemPool.GetListItem(playerData.UserId);
+            var kickButtonState = _roomStateService.IsOwner && !playerData.IsOwner
+                ? EUIObjectState.Show
+                : EUIObjectState.Hide;
+
+            item.ViewModel.UpdatePlayer(playerData.UserId, playerData.Username, string.Empty);
+            item.ViewModel.ActivityKickPlayerButton(kickButtonState);
+        }
+
+        private void OnKickedFromLobby()
+        {
+            _playerLobbyItemPool.Clear();
+            CloseLobbyScreen();
+        }
+
+        private void CloseLobbyScreen()
+        {
             _screenService.CloseScreen<LobbyScreen>();
             _screenService.OpenSync<GameRoomHubScreen>();
-        }
-
-        private void InitializeLobby(GameObject obj)
-        {
-            _playerLobbyItemPool.Initialize(obj);
-        }
-
-        private void OnUserAdded(KeyValuePair<int, User> kvp)
-        {
-            var item = _playerLobbyItemPool.GetListItem(kvp.Key);
-            var user = kvp.Value;
-
-            _pingBuilder.Clear();
-
-            item.ViewModel.UpdateGameListItem(user.Name, _pingBuilder.ToString());
-
-            var role = _sessionManager.GetRole();
-
-            var state = role == ERoomRole.Owner
-                ? EUIObjectState.Show
-                : EUIObjectState.Hide;
-
-            item.ViewModel.ActivityKickPlayerButton(state);
-        }
-
-        private void OnUserRemoved(KeyValuePair<int, User> kvp)
-        {
-            _playerLobbyItemPool.ReleaseListItem(kvp.Key);
-        }
-
-        private void OnUserUpdated(KeyValuePair<int, User> kvp)
-        {
-            var item = _playerLobbyItemPool.GetById(kvp.Key);
-
-            _pingBuilder.Clear();
-
-            item.ViewModel.UpdateGameListItem(kvp.Value.Name, _pingBuilder.ToString());
-
-            var role = _sessionManager.GetRole();
-
-            var state = role == ERoomRole.Owner
-                ? EUIObjectState.Show
-                : EUIObjectState.Hide;
-
-            item.ViewModel.ActivityKickPlayerButton(state);
         }
     }
 }

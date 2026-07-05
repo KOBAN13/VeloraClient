@@ -16,19 +16,25 @@ namespace Core.Utils.Pool
         [Inject] private ScreensData _screensData;
         [Inject] private ViewsFactory _viewsFactory;
 
-        private readonly Dictionary<int, PlayerLobbyItem> _activePlayers = new();
+        private readonly Dictionary<ulong, PlayerLobbyItem> _activePlayers = new();
         private ObjectPool<PlayerLobbyItem> _pool;
         private PlayerLobbyItem _prefab;
         private GameObject _parent;
 
-        public async void Initialize(GameObject parent)
+        public async UniTask Initialize(GameObject parent)
         {
-            var data = _screensData.Screens
-                .FirstOrDefault(d => d.Type == typeof(PlayerLobbyItem));
-            var handle = await data.Asset.LoadAssetAsync<GameObject>();
-
             _parent = parent;
-            _prefab = handle.GetComponent<PlayerLobbyItem>();
+
+            if (_prefab == null)
+            {
+                var data = _screensData.Screens
+                    .FirstOrDefault(d => d.Type == typeof(PlayerLobbyItem));
+                var handle = await data.Asset.LoadAssetAsync<GameObject>();
+                _prefab = handle.GetComponent<PlayerLobbyItem>();
+            }
+
+            Clear();
+            _pool?.Clear();
 
             _pool = new ObjectPool<PlayerLobbyItem>
             (
@@ -64,14 +70,14 @@ namespace Core.Utils.Pool
             return gameListItem;
         }
 
-        public PlayerLobbyItem GetListItem(int userId)
+        public PlayerLobbyItem GetListItem(ulong userId)
         {
             var item = _pool.Get();
             _activePlayers[userId] = item;
             return item;
         }
 
-        public void ReleaseListItem(int userId)
+        public void ReleaseListItem(ulong userId)
         {
             if (!_activePlayers.Remove(userId, out var item))
                 return;
@@ -79,7 +85,7 @@ namespace Core.Utils.Pool
             _pool.Release(item);
         }
 
-        public PlayerLobbyItem GetById(int userId)
+        public PlayerLobbyItem GetById(ulong userId)
         {
             _activePlayers.TryGetValue(userId, out var item);
             return item;
@@ -87,6 +93,12 @@ namespace Core.Utils.Pool
 
         public void Clear()
         {
+            if (_pool == null)
+            {
+                _activePlayers.Clear();
+                return;
+            }
+
             foreach (var kv in _activePlayers.Values)
                 _pool.Release(kv);
 
