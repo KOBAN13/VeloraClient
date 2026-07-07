@@ -1,6 +1,8 @@
-﻿using Core.Utils.Screens;
+﻿using Core.Utils.SceneManagement;
+using Core.Utils.Screens;
 using Core.Utils.StateMachine.Abstract.States;
 using Cysharp.Threading.Tasks;
+using Services.SceneManagement.Enums;
 using UI.Views;
 
 namespace Core.Utils.StateMachine.Project.States
@@ -8,10 +10,12 @@ namespace Core.Utils.StateMachine.Project.States
     public class ProjectLobbyState : IState
     {
         private readonly ScreenService _screenService;
+        private readonly SceneLoader _sceneLoader;
 
-        public ProjectLobbyState(ScreenService screenService)
+        public ProjectLobbyState(ScreenService screenService, SceneLoader sceneLoader)
         {
             _screenService = screenService;
+            _sceneLoader = sceneLoader;
         }
 
         public void Exit()
@@ -28,13 +32,9 @@ namespace Core.Utils.StateMachine.Project.States
 
         private async UniTaskVoid OpenLobby()
         {
+            await _sceneLoader.LoadScene(TypeScene.Lobby, typeof(LobbyScreen), typeof(CreateRoomScreen));
+
             await _screenService.OpenAsync<GameRoomHubScreen>();
-            
-            var lobbyScreen = await _screenService.OpenAsync<LobbyScreen>();
-            lobbyScreen.gameObject.SetActive(false);
-            
-            var createRoomScreen = await _screenService.OpenAsync<CreateRoomScreen>();
-            createRoomScreen.gameObject.SetActive(false);
         }
     }
 }

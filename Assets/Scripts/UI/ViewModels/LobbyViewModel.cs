@@ -30,19 +30,46 @@ namespace UI.ViewModels
         public readonly ReactiveCommand<GameObject> SetParentObject = new();
 
         private bool _isLobbyInitialized;
+        private bool _hasRequestedPlayers;
+        private ulong _requestedPlayersRoomId;
 
         public override void Initialize()
         {
-            SetParentObject.Subscribe(InitializeLobbyAsync).AddTo(Disposable);
+            SetParentObject.Subscribe(parent => InitializeLobbyAsync(parent).Forget()).AddTo(Disposable);
 
             InvitePlayerButtonBinder.Value.Subscribe(OnInvitePlayer).AddTo(Disposable);
             StartGameButtonBinder.Value.Subscribe(OnStartGame).AddTo(Disposable);
             LeaveGameButtonBinder.Value.Subscribe(OnLeaveGame).AddTo(Disposable);
 
             _lobbyService.KickedUser.Subscribe(_ => OnKickedFromLobby()).AddTo(Disposable);
-            _roomStateService.CurrentRoomChanged.Subscribe(_ => UpdateStartGameButtonVisibility()).AddTo(Disposable);
+            
+            _roomStateService.CurrentRoomChanged.Subscribe(OnCurrentRoomChanged).AddTo(Disposable);
 
             UpdateStartGameButtonVisibility();
+        }
+
+        private void OnCurrentRoomChanged(RoomStateData room)
+        {
+            RequestPlayersInCurrentRoom(room);
+            UpdateStartGameButtonVisibility();
+        }
+
+        private void RequestPlayersInCurrentRoom(RoomStateData room)
+        {
+            if (room == null)
+            {
+                return;
+            }
+
+            if (_hasRequestedPlayers && _requestedPlayersRoomId == room.RoomId)
+            {
+                return;
+            }
+
+            _hasRequestedPlayers = true;
+            _requestedPlayersRoomId = room.RoomId;
+
+            _lobbyService.GetPlayersInLobby(room.RoomId);
         }
 
         private void OnInvitePlayer(Unit unit)
@@ -64,12 +91,13 @@ namespace UI.ViewModels
 
         private void OnLeaveGame(Unit unit)
         {
+            ResetRequestedPlayersRoom();
             _playerLobbyItemPool.Clear();
             _lobbyService.LeaveRoom();
             CloseLobbyScreen();
         }
 
-        private void InitializeLobbyAsync(GameObject parent)
+        private async UniTaskVoid InitializeLobbyAsync(GameObject parent)
         {
             if (_isLobbyInitialized)
             {
@@ -78,7 +106,7 @@ namespace UI.ViewModels
 
             _isLobbyInitialized = true;
 
-            _playerLobbyItemPool.Initialize(parent);
+            await _playerLobbyItemPool.Initialize(parent);
 
             var currentPlayers = new List<PlayerData>();
 
@@ -136,8 +164,15 @@ namespace UI.ViewModels
 
         private void OnKickedFromLobby()
         {
+            ResetRequestedPlayersRoom();
             _playerLobbyItemPool.Clear();
             CloseLobbyScreen();
+        }
+
+        private void ResetRequestedPlayersRoom()
+        {
+            _hasRequestedPlayers = false;
+            _requestedPlayersRoomId = 0;
         }
 
         private void CloseLobbyScreen()

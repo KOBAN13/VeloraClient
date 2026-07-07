@@ -7,6 +7,7 @@ using Network.Messaging;
 using ObservableCollections;
 using Packets;
 using R3;
+using UnityEngine.Pool;
 
 namespace Network.Services.Lobby
 {
@@ -17,6 +18,7 @@ namespace Network.Services.Lobby
         
         private readonly Subject<RoomStateSnapshotMessage> _roomStateSnapshotReceived = new();
         private readonly Subject<RoomListSnapshotMessage> _roomListSnapshotReceived = new();
+        private readonly Subject<PlayersInRoomResponse> _playersInRoomReceived = new();
         private readonly ObservableList<PlayerData> _players = new();
         private readonly Subject<string> _lobbyErrorRequest = new();
         private readonly CompositeDisposable _disposables = new();
@@ -26,6 +28,7 @@ namespace Network.Services.Lobby
 
         public Observable<RoomListSnapshotMessage> RoomListSnapshotReceived => _roomListSnapshotReceived;
         public Observable<RoomStateSnapshotMessage> RoomStateSnapshotReceived => _roomStateSnapshotReceived;
+        public Observable<PlayersInRoomResponse> PlayersInRoomReceived => _playersInRoomReceived;
         public Observable<string> LobbyErrorReceived => _lobbyErrorRequest;
         public IReadOnlyObservableList<PlayerData> Players => _players;
         public Observable<Unit> KickedUser => _kickedUser;
@@ -50,7 +53,11 @@ namespace Network.Services.Lobby
                 .Subscribe(message => _roomListSnapshotReceived.OnNext(message.Payload))
                 .AddTo(_disposables);
             
-            _messages.On<PlayerJoinRoom>()
+            _messages.On<PlayersInRoomResponse>()
+                .Subscribe(message => OnPlayersInRoom(message.Payload))
+                .AddTo(_disposables);
+            
+            _messages.On<JoinRoomResponseMessage>()
                 .Subscribe(message => OnPlayerJoined(message.Payload.Player))
                 .AddTo(_disposables);
             
@@ -62,7 +69,7 @@ namespace Network.Services.Lobby
                 .Subscribe(message => OnPlayerKicked(message.Payload))
                 .AddTo(_disposables);
         }
-        
+
         public void RefreshRooms()
         {
             _messages.Send(new RoomListRequestMessage());
@@ -82,6 +89,11 @@ namespace Network.Services.Lobby
         {
             _players.Clear();
             _messages.Send(new LeaveRoomRequestMessage());
+        }
+
+        public void GetPlayersInLobby(ulong roomId)
+        {
+            _messages.Send(new PlayersInRoomRequest { RoomId = roomId });
         }
         
         public void JoinRoom(ulong roomId)
@@ -120,6 +132,13 @@ namespace Network.Services.Lobby
         {
             _disposables.Dispose();
         }
+        
+        private void OnPlayersInRoom(PlayersInRoomResponse messagePayload)
+        {
+            ReconcilePlayers(messagePayload.Player);
+            
+            _playersInRoomReceived.OnNext(messagePayload);
+        }
 
         private void OnRoomStateSnapshotReceived(RoomStateSnapshotMessage roomStateSnapshotMessage)
         {
@@ -151,7 +170,7 @@ namespace Network.Services.Lobby
 
         private void ReconcilePlayers(IEnumerable<RoomPlayerMessage> roomPlayers)
         {
-            var roomPlayerUserIds = new HashSet<ulong>();
+            using var _ = HashSetPool<ulong>.Get(out var roomPlayerUserIds);
 
             foreach (var roomPlayerMessage in roomPlayers)
             {
@@ -170,7 +189,7 @@ namespace Network.Services.Lobby
                 return;
             }
 
-            List<PlayerData> stalePlayers = null;
+            using var __ = ListPool<PlayerData>.Get(out var stalePlayers);
 
             foreach (var player in _players)
             {
@@ -178,8 +197,7 @@ namespace Network.Services.Lobby
                 {
                     continue;
                 }
-
-                stalePlayers ??= new List<PlayerData>();
+                
                 stalePlayers.Add(player);
             }
 

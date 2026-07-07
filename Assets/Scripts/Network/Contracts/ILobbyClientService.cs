@@ -9,10 +9,12 @@ namespace Network.Contracts
     {
         Observable<RoomListSnapshotMessage> RoomListSnapshotReceived { get; }
         Observable<RoomStateSnapshotMessage> RoomStateSnapshotReceived { get; }
+        Observable<PlayersInRoomResponse> PlayersInRoomReceived { get; }
         Observable<string> LobbyErrorReceived { get; }
         IReadOnlyObservableList<PlayerData> Players { get; }
         Observable<Unit> KickedUser { get; }
 
+        void GetPlayersInLobby(ulong roomId);
         void RefreshRooms();
         void CreateRoom(string nameRoom, uint maxPlayers);
         void LeaveRoom();

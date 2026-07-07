@@ -14,7 +14,6 @@ namespace Core.DI
 
         private void RegisterMainMenuServices()
         {
-            RegisterEntryPoint<LoginClientService>();
             RegisterEntryPoint<RegisterClientService>();
         }
     }

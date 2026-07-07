@@ -38,6 +38,8 @@ namespace UI.ViewModels
                 .Where(_ => _roomStateService.IsOwner)
                 .Subscribe(_ => OnOpenLobbyScreen())
                 .AddTo(Disposable);
+            
+            _roomStateService.RefreshRooms();
         }
 
         private void OnCreateRoom(Unit unit)

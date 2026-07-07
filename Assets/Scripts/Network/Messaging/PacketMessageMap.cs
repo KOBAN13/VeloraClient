@@ -25,10 +25,12 @@ namespace Network.Messaging
                 TryExtract(packet.RoomStateSnapshot, out type, out payload) ||
                 TryExtract(packet.MatchStarted, out type, out payload) ||
                 TryExtract(packet.StartGame, out type, out payload) ||
-                TryExtract(packet.RoomList, out type, out payload) ||
+                TryExtract(packet.RoomListRequestMessage, out type, out payload) ||
                 TryExtract(packet.RoomSummaryMessage, out type, out payload) ||
                 TryExtract(packet.RoomListSnapshot, out type, out payload) ||
-                TryExtract(packet.PlayerJoinRoom, out type, out payload) ||
+                TryExtract(packet.JoinRoomResponseMessage, out type, out payload) ||
+                TryExtract(packet.PlayersInRoomRequest, out type, out payload) ||
+                TryExtract(packet.PlayersInRoomResponse, out type, out payload) ||
                 TryExtract(packet.PlayerKickRoom, out type, out payload) ||
                 TryExtract(packet.PlayerRemoveRoom, out type, out payload))
             {
@@ -52,13 +54,14 @@ namespace Network.Messaging
                 ChatMessage chat => new Packet { Chat = chat },
                 LoginRequestMessage loginRequest => new Packet { LoginRequest = loginRequest },
                 RegisterRequestMessage registerRequest => new Packet { RegisterRequest = registerRequest },
-                RoomListRequestMessage roomListRequest => new Packet { RoomList = roomListRequest },
+                RoomListRequestMessage roomListRequest => new Packet { RoomListRequestMessage = roomListRequest },
                 CreateRoomRequestMessage createRoomRequest => new Packet { CreateRoomRequest = createRoomRequest },
                 JoinRoomRequestMessage joinRoomRequest => new Packet { JoinRoomRequest = joinRoomRequest },
                 LeaveRoomRequestMessage leaveRoomRequest => new Packet { LeaveRoomRequest = leaveRoomRequest },
                 ReadyRequestMessage readyRequest => new Packet { ReadyRequest = readyRequest },
                 StartGameRequestMessage startGameRequest => new Packet { StartGame = startGameRequest },
                 PlayerKickRoom playerKickRoom => new Packet { PlayerKickRoom = playerKickRoom },
+                PlayersInRoomRequest playersInRoomRequest => new Packet { PlayersInRoomRequest = playersInRoomRequest },
                 _ => throw new NotSupportedException($"Message type {typeof(T).Name} is not supported for sending.")
             };
         }

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.Utils.Data;
 using Core.Utils.Factory;
 using Cysharp.Threading.Tasks;
 using UI.Views;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.Pool;
 using VContainer;
 
@@ -21,12 +21,27 @@ namespace Core.Utils.Pool
         private PlayerLobbyItem _prefab;
         private GameObject _parent;
 
-        public void Initialize(GameObject parent)
+        public async UniTask Initialize(GameObject parent)
         {
             _parent = parent;
 
             Clear();
             _pool?.Clear();
+            
+            var data = _screensData.Screens.FirstOrDefault(d => d.Type == typeof(PlayerLobbyItem));
+            
+            if (data == null)
+            {
+                throw new InvalidOperationException($"{nameof(PlayerLobbyItem)} prefab is not registered in {nameof(ScreensData)}.");
+            }
+            
+            var prefabHandle = await data.Asset.LoadAssetAsync<GameObject>();
+            _prefab = prefabHandle.GetComponent<PlayerLobbyItem>();
+            
+            if (_prefab == null)
+            {
+                throw new InvalidOperationException($"{nameof(PlayerLobbyItem)} component is missing on loaded prefab.");
+            }
 
             _pool = new ObjectPool<PlayerLobbyItem>
             (
@@ -42,7 +57,11 @@ namespace Core.Utils.Pool
 
         private static void OnDestroyGameListItem(PlayerLobbyItem obj)
         {
-            Addressables.Release(obj.gameObject);
+            if (obj == null)
+                return;
+
+            if (obj.gameObject != null)
+                UnityEngine.Object.Destroy(obj.gameObject);
         }
 
         private static void OnReleaseGameListItem(PlayerLobbyItem obj)

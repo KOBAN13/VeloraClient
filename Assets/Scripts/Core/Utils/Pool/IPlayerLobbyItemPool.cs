@@ -6,7 +6,7 @@ namespace Core.Utils.Pool
 {
     public interface IPlayerLobbyItemPool
     {
-        void Initialize(GameObject parent);
+        UniTask Initialize(GameObject parent);
         
         PlayerLobbyItem GetListItem(ulong userId);
 

@@ -4,6 +4,7 @@ using Core.Utils.Logger;
 using Core.Utils.Services;
 using Network.Contracts;
 using Network.Data;
+using Network.Messaging;
 using ObservableCollections;
 using Packets;
 using R3;
@@ -15,6 +16,7 @@ namespace Network.Services.Lobby
     {
         private readonly ILobbyClientService _lobbyClientService;
         private readonly IClientIdentityService _clientIdentityService;
+        private readonly INetworkMessageBus _messages;
         private readonly CompositeDisposable _disposables = new();
 
         private readonly ObservableList<RoomSummaryData> _roomSummaryData = new();
@@ -34,10 +36,11 @@ namespace Network.Services.Lobby
 
         public bool IsInitialized { get; set; }
 
-        public RoomStateService(ILobbyClientService lobbyClientService, IClientIdentityService clientIdentityService, ILoggerService loggerService)
+        public RoomStateService(ILobbyClientService lobbyClientService, IClientIdentityService clientIdentityService, INetworkMessageBus messages)
         {
             _lobbyClientService = lobbyClientService;
             _clientIdentityService = clientIdentityService;
+            _messages = messages;
         }
         
         public void Initialize()

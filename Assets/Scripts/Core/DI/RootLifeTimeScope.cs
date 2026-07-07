@@ -11,6 +11,7 @@ using Core.Utils.StateMachine.Project.Factory;
 using Core.Utils.StateMachine.Project.States;
 using Cysharp.Threading.Tasks;
 using Network.Messaging;
+using Network.Services.Auth;
 using Network.Services.Identity;
 using Network.Services.Lobby;
 using Network.Services.Match;
@@ -103,6 +104,7 @@ namespace Core.DI
             Register<ScreenService>(Lifetime.Singleton);
             Register<TickService>(Lifetime.Singleton);
             Register<LoggerService>(Lifetime.Singleton);
+            Register<LoginClientService>(Lifetime.Singleton);
             RegisterEntryPoint<MatchStartCoordinator>();
         }
 
