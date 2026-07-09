@@ -13,7 +13,6 @@ namespace UI.ViewModels
     {
         [Inject] private IRoomStateService _roomStateService;
         [Inject] private IScreenService _screenService;
-        [Inject] private ILobbyClientService _lobbyService;
         
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand> CreateRoomButtonBinder = new();
         [AutoBind] public readonly RefTypeViewModelBinder<ReactiveCommand<string>> RoomNameTextViewBinder = new();
@@ -38,8 +37,6 @@ namespace UI.ViewModels
                 .Where(_ => _roomStateService.IsOwner)
                 .Subscribe(_ => OnOpenLobbyScreen())
                 .AddTo(Disposable);
-            
-            _roomStateService.RefreshRooms();
         }
 
         private void OnCreateRoom(Unit unit)

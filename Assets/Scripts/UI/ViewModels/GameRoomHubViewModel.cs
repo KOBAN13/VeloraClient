@@ -1,4 +1,5 @@
-﻿using Core.Utils.Pool;
+﻿using Cysharp.Threading.Tasks;
+using Core.Utils.Pool;
 using Core.Utils.Screens;
 using Network.Contracts;
 using Network.Data;
@@ -27,7 +28,7 @@ namespace UI.ViewModels
 
         public override void Initialize()
         {
-            SetParentObject.Subscribe(InitUI).AddTo(Disposable);
+            SetParentObject.Subscribe(parent => InitUIAsync(parent).Forget()).AddTo(Disposable);
             
             UserNameBinder.Value = _loginClientService.UserName;
 
@@ -37,11 +38,19 @@ namespace UI.ViewModels
             _roomStateService.RoomSummaryData.ObserveAdd().Subscribe(kvp => OnRoomAdded(kvp.Value)).AddTo(Disposable);
             _roomStateService.RoomSummaryData.ObserveRemove().Subscribe(kvp => OnRoomRemoved(kvp.Value)).AddTo(Disposable);
             _roomStateService.RoomSummaryData.ObserveReplace().Subscribe(kvp => OnRoomUpdated(kvp.NewValue)).AddTo(Disposable);
+
         }
 
-        private void InitUI(GameObject parent)
+        private async UniTaskVoid InitUIAsync(GameObject parent)
         {
-            _gameListItemPool.Initialize(parent);
+            await _gameListItemPool.Initialize(parent);
+            
+            foreach (var t in _roomStateService.RoomSummaryData)
+            {
+                UpsertRoomItem(t);
+            }
+
+            _roomStateService.RefreshRooms();
         }
 
         private void OnCreateRoom() => _screenService.OpenSync<CreateRoomScreen>();
@@ -53,9 +62,7 @@ namespace UI.ViewModels
 
         private void OnRoomAdded(RoomSummaryData roomSummaryData)
         {
-            var item = _gameListItemPool.GetListItem(roomSummaryData.RoomId);
-
-            item.ViewModel.UpdateGameListItem(roomSummaryData);
+            UpsertRoomItem(roomSummaryData);
         }
 
         private void OnRoomRemoved(RoomSummaryData roomSummaryData)
@@ -65,7 +72,13 @@ namespace UI.ViewModels
 
         private void OnRoomUpdated(RoomSummaryData roomSummaryData)
         {
-            var item = _gameListItemPool.GetById(roomSummaryData.RoomId);
+            UpsertRoomItem(roomSummaryData);
+        }
+
+        private void UpsertRoomItem(RoomSummaryData roomSummaryData)
+        {
+            var item = _gameListItemPool.GetById(roomSummaryData.RoomId) ?? _gameListItemPool.GetListItem(roomSummaryData.RoomId);
+
             item.ViewModel.UpdateGameListItem(roomSummaryData);
         }
     }
