@@ -13,6 +13,8 @@ namespace UI.Binders
         
         private ReactiveCommand<bool> _reactiveCommand;
         
+        public Toggle Toggle => _toggle;
+        
         public override void Parse(ReactiveCommand<bool> value)
         {
             _reactiveCommand = value;

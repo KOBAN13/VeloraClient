@@ -122,6 +122,7 @@ namespace Core.DI
         {
             RegisterEntryPoint<LobbyClientService>();
             RegisterEntryPoint<RoomStateService>();
+            Register<ReadyToggleCooldownService>(Lifetime.Singleton);
             Register<GameListItemPool>(Lifetime.Singleton);
             Register<PlayerLobbyItemPool>(Lifetime.Singleton);
         }
