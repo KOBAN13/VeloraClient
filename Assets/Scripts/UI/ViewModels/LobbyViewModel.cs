@@ -19,6 +19,7 @@ namespace UI.ViewModels
     {
         [Inject] private ILobbyClientService _lobbyService;
         [Inject] private IRoomStateService _roomStateService;
+        [Inject] private IClientIdentityService _clientIdentityService;
         [Inject] private IScreenService _screenService;
         [Inject] private IPlayerLobbyItemPool _playerLobbyItemPool;
 
@@ -30,6 +31,7 @@ namespace UI.ViewModels
         public readonly ReactiveCommand<GameObject> SetParentObject = new();
 
         private bool _isLobbyInitialized;
+        private bool _isPlayerItemPoolInitialized;
         private bool _hasRequestedPlayers;
         private ulong _requestedPlayersRoomId;
 
@@ -42,7 +44,7 @@ namespace UI.ViewModels
             LeaveGameButtonBinder.Value.Subscribe(OnLeaveGame).AddTo(Disposable);
 
             _lobbyService.KickedUser.Subscribe(_ => OnKickedFromLobby()).AddTo(Disposable);
-            
+
             _roomStateService.CurrentRoomChanged.Subscribe(OnCurrentRoomChanged).AddTo(Disposable);
 
             UpdateStartGameButtonVisibility();
@@ -52,6 +54,7 @@ namespace UI.ViewModels
         {
             RequestPlayersInCurrentRoom(room);
             UpdateStartGameButtonVisibility();
+            UpdatePlayerItems();
         }
 
         private void RequestPlayersInCurrentRoom(RoomStateData room)
@@ -107,6 +110,7 @@ namespace UI.ViewModels
             _isLobbyInitialized = true;
 
             await _playerLobbyItemPool.Initialize(parent);
+            _isPlayerItemPoolInitialized = true;
 
             var currentPlayers = new List<PlayerData>();
 
@@ -119,12 +123,12 @@ namespace UI.ViewModels
                 .ObserveAdd()
                 .Subscribe(kvp => OnUserAdded(kvp.Value))
                 .AddTo(Disposable);
-            
+
             _lobbyService.Players
                 .ObserveRemove()
                 .Subscribe(kvp => OnUserRemoved(kvp.Value))
                 .AddTo(Disposable);
-            
+
             _lobbyService.Players
                 .ObserveReplace()
                 .Subscribe(kvp => OnUserUpdated(kvp.NewValue))
@@ -153,13 +157,35 @@ namespace UI.ViewModels
 
         private void UpdatePlayerItem(PlayerData playerData)
         {
+            var canToggleReady = IsLocalPlayer(playerData) && _roomStateService.CanToggleReady;
+
             var item = _playerLobbyItemPool.GetById(playerData.UserId) ?? _playerLobbyItemPool.GetListItem(playerData.UserId);
+
             var kickButtonState = _roomStateService.IsOwner && !playerData.IsOwner
                 ? EUIObjectState.Show
                 : EUIObjectState.Hide;
 
-            item.ViewModel.UpdatePlayer(playerData.UserId, playerData.Username, string.Empty);
+            item.ViewModel.UpdatePlayer(playerData.UserId, playerData.Username, string.Empty, playerData.IsReady, canToggleReady);
             item.ViewModel.ActivityKickPlayerButton(kickButtonState);
+        }
+
+        private void UpdatePlayerItems()
+        {
+            if (!_isPlayerItemPoolInitialized)
+            {
+                return;
+            }
+
+            foreach (var player in _lobbyService.Players)
+            {
+                UpdatePlayerItem(player);
+            }
+        }
+
+        private bool IsLocalPlayer(PlayerData playerData)
+        {
+            var clientId = _clientIdentityService.ClientId;
+            return clientId != 0 && (playerData.ClientId == clientId || playerData.UserId == clientId);
         }
 
         private void OnKickedFromLobby()

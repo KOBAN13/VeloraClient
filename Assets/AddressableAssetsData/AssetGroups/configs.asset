@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 205c2898d88c716428f1166b90d46f85
+    m_Address: Assets/Configs/PlayerItemLobbyParameters.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a6f4072fd6d8e72da9f63d05d2adf206
     m_Address: Assets/Configs/PoolParameters.asset
     m_ReadOnly: 0

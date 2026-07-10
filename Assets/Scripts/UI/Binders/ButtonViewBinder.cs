@@ -23,6 +23,12 @@ namespace UI.Binders
         public override void Dispose()
         {
             base.Dispose();
+
+            if (_button == null)
+            {
+                _reactiveCommand = null;
+                return;
+            }
             
             _button.onClick.RemoveListener(OnClicked);
             _reactiveCommand = null;

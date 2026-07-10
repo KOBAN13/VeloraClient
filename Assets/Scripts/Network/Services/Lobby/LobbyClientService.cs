@@ -15,7 +15,7 @@ namespace Network.Services.Lobby
     {
         private readonly INetworkMessageBus _messages;
         private readonly IClientIdentityService _clientIdentityService;
-        
+
         private readonly Subject<RoomStateSnapshotMessage> _roomStateSnapshotReceived = new();
         private readonly Subject<RoomListSnapshotMessage> _roomListSnapshotReceived = new();
         private readonly Subject<PlayersInRoomResponse> _playersInRoomReceived = new();
@@ -38,13 +38,13 @@ namespace Network.Services.Lobby
             _messages = messages;
             _clientIdentityService = clientIdentityService;
         }
-        
+
         public void Initialize()
         {
             _messages.On<DenyResponseMessage>()
                 .Subscribe(message => _lobbyErrorRequest.OnNext(message.Payload.Reason))
                 .AddTo(_disposables);
-            
+
             _messages.On<RoomStateSnapshotMessage>()
                 .Subscribe(message => OnRoomStateSnapshotReceived(message.Payload))
                 .AddTo(_disposables);
@@ -52,22 +52,45 @@ namespace Network.Services.Lobby
             _messages.On<RoomListSnapshotMessage>()
                 .Subscribe(message => _roomListSnapshotReceived.OnNext(message.Payload))
                 .AddTo(_disposables);
-            
+
             _messages.On<PlayersInRoomResponse>()
                 .Subscribe(message => OnPlayersInRoom(message.Payload))
                 .AddTo(_disposables);
-            
+
             _messages.On<JoinRoomResponseMessage>()
                 .Subscribe(message => OnPlayerJoined(message.Payload.Player))
                 .AddTo(_disposables);
-            
+
             _messages.On<PlayerRemoveRoom>()
                 .Subscribe(message => OnPlayerRemoved(message.Payload.Player))
                 .AddTo(_disposables);
-            
+
+            _messages.On<ReadyResponseMessage>()
+                .Subscribe(message => OnReadyChanged(message.Payload))
+                .AddTo(_disposables);
+
             _messages.On<PlayerKickRoom>()
                 .Subscribe(message => OnPlayerKicked(message.Payload))
                 .AddTo(_disposables);
+        }
+
+        private void OnReadyChanged(ReadyResponseMessage message)
+        {
+            var playerIndex = FindPlayerIndex(message.UserId);
+
+            if (playerIndex < 0)
+            {
+                return;
+            }
+
+            var current = _players[playerIndex];
+
+            _players[playerIndex] = new PlayerData(
+                current.UserId,
+                current.ClientId,
+                current.Username,
+                message.IsReady,
+                current.IsOwner);
         }
 
         public void RefreshRooms()
@@ -95,7 +118,7 @@ namespace Network.Services.Lobby
         {
             _messages.Send(new PlayersInRoomRequest { RoomId = roomId });
         }
-        
+
         public void JoinRoom(ulong roomId)
         {
             _players.Clear();
@@ -104,7 +127,7 @@ namespace Network.Services.Lobby
                 RoomId = roomId
             });
         }
-        
+
         public void SetReady(bool isReady)
         {
             _messages.Send(new ReadyRequestMessage()
@@ -132,11 +155,11 @@ namespace Network.Services.Lobby
         {
             _disposables.Dispose();
         }
-        
+
         private void OnPlayersInRoom(PlayersInRoomResponse messagePayload)
         {
             ReconcilePlayers(messagePayload.Player);
-            
+
             _playersInRoomReceived.OnNext(messagePayload);
         }
 
@@ -197,7 +220,7 @@ namespace Network.Services.Lobby
                 {
                     continue;
                 }
-                
+
                 stalePlayers.Add(player);
             }
 

@@ -38,76 +38,79 @@ namespace Packets {
             "YWNrZXRzLlJvb21TdGF0dXMiRQoXUm9vbUxpc3RTbmFwc2hvdE1lc3NhZ2US",
             "KgoFcm9vbXMYASADKAsyGy5wYWNrZXRzLlJvb21TdW1tYXJ5TWVzc2FnZSIZ",
             "ChdMZWF2ZVJvb21SZXF1ZXN0TWVzc2FnZSImChNSZWFkeVJlcXVlc3RNZXNz",
-            "YWdlEg8KB2lzUmVhZHkYASABKAgiZwoRUm9vbVBsYXllck1lc3NhZ2USDgoG",
-            "dXNlcklkGAEgASgEEhAKCGNsaWVudElkGAIgASgEEhAKCHVzZXJuYW1lGAMg",
-            "ASgJEg8KB2lzUmVhZHkYBCABKAgSDQoFb3duZXIYBSABKAgiRQoXSm9pblJv",
-            "b21SZXNwb25zZU1lc3NhZ2USKgoGcGxheWVyGAEgASgLMhoucGFja2V0cy5S",
-            "b29tUGxheWVyTWVzc2FnZSIgCg5QbGF5ZXJLaWNrUm9vbRIOCgZ1c2VySWQY",
-            "ASABKAQiPgoQUGxheWVyUmVtb3ZlUm9vbRIqCgZwbGF5ZXIYASABKAsyGi5w",
-            "YWNrZXRzLlJvb21QbGF5ZXJNZXNzYWdlIiYKFFBsYXllcnNJblJvb21SZXF1",
-            "ZXN0Eg4KBnJvb21JZBgBIAEoBCJDChVQbGF5ZXJzSW5Sb29tUmVzcG9uc2US",
-            "KgoGUGxheWVyGAEgAygLMhoucGFja2V0cy5Sb29tUGxheWVyTWVzc2FnZSKO",
-            "AQoYUm9vbVN0YXRlU25hcHNob3RNZXNzYWdlEg4KBnJvb21JZBgBIAEoBBIR",
-            "CgltYXhQbGF5ZXIYAiABKA0SIwoGc3RhdHVzGAMgASgOMhMucGFja2V0cy5S",
-            "b29tU3RhdHVzEioKBlBsYXllchgEIAMoCzIaLnBhY2tldHMuUm9vbVBsYXll",
-            "ck1lc3NhZ2UifgoRTWF0Y2hTdGFydE1lc3NhZ2USDgoGcm9vbUlkGAEgASgE",
-            "Eg8KB21hdGNoSWQYAiABKAQSEQoJcGxheWVyX2lkGAMgASgEEgwKBHNsb3QY",
-            "BCABKA0SDwoHbWFwU2VlZBgFIAEoBBIWCg5zdGFydHNBdFVuaXhNcxgGIAEo",
-            "AyImCg5WZWN0b3IyTWVzc2FnZRIJCgF4GAEgASgCEgkKAXkYAiABKAIiVAoS",
-            "UGxheWVySW5wdXRNZXNzYWdlEg8KB21hdGNoSWQYASABKAQSLQoMbW92ZVBv",
-            "c2l0aW9uGAIgASgLMhcucGFja2V0cy5WZWN0b3IyTWVzc2FnZSKcAQoXUGxh",
-            "eWVyQ2VsbEVudGl0eU1lc3NhZ2USCgoCaWQYASABKAQSDwoHb3duZXJJZBgC",
-            "IAEoBBIpCghwb3NpdGlvbhgDIAEoCzIXLnBhY2tldHMuVmVjdG9yMk1lc3Nh",
-            "Z2USCgoCaHAYBCABKA0SDwoHYmlvbWFzcxgFIAEoDRINCgVsZXZlbBgGIAEo",
-            "DRINCgVhbGl2ZRgHIAEoCCJnChFDb3JlRW50aXR5TWVzc2FnZRIKCgJpZBgB",
-            "IAEoBBIPCgdvd25lcklkGAIgASgEEikKCHBvc2l0aW9uGAMgASgLMhcucGFj",
-            "a2V0cy5WZWN0b3IyTWVzc2FnZRIKCgJocBgEIAEoDSJtChVOdXRyaWVudEVu",
-            "dGl0eU1lc3NhZ2USCgoCaWQYASABKAQSKQoIcG9zaXRpb24YAiABKAsyFy5w",
-            "YWNrZXRzLlZlY3RvcjJNZXNzYWdlEg0KBXZhbHVlGAMgASgNEg4KBmFjdGl2",
-            "ZRgEIAEoCCItChFXYWxsRW50aXR5TWVzc2FnZRIKCgJpZBgBIAEoBBIMCgRv",
-            "cGVuGAIgASgIIrgCChRNYXRjaFNuYXBzaG90TWVzc2FnZRIPCgdtYXRjaElk",
-            "GAEgASgEEhIKCnNlcnZlclRpY2sYAiABKAQSIgoFcGhhc2UYAyABKA4yEy5w",
-            "YWNrZXRzLk1hdGNoUGhhc2USFwoPcGhhc2VUaW1lTGVmdE1zGAQgASgDEjUK",
-            "C3BsYXllckNlbGxzGAUgAygLMiAucGFja2V0cy5QbGF5ZXJDZWxsRW50aXR5",
-            "TWVzc2FnZRIpCgVjb3JlcxgGIAMoCzIaLnBhY2tldHMuQ29yZUVudGl0eU1l",
-            "c3NhZ2USMQoJbnV0cmllbnRzGAcgAygLMh4ucGFja2V0cy5OdXRyaWVudEVu",
-            "dGl0eU1lc3NhZ2USKQoFd2FsbHMYCCADKAsyGi5wYWNrZXRzLldhbGxFbnRp",
-            "dHlNZXNzYWdlIhMKEU9rUmVzcG9uc2VNZXNzYWdlIiUKE0RlbnlSZXNwb25z",
-            "ZU1lc3NhZ2USDgoGcmVhc29uGAEgASgJItsKCgZQYWNrZXQSEQoJc2VuZGVy",
-            "X2lkGAEgASgEEiQKBGNoYXQYAiABKAsyFC5wYWNrZXRzLkNoYXRNZXNzYWdl",
-            "SAASIAoCaWQYAyABKAsyEi5wYWNrZXRzLklkTWVzc2FnZUgAEjUKDWxvZ2lu",
-            "X3JlcXVlc3QYBCABKAsyHC5wYWNrZXRzLkxvZ2luUmVxdWVzdE1lc3NhZ2VI",
-            "ABI7ChByZWdpc3Rlcl9yZXF1ZXN0GAUgASgLMh8ucGFja2V0cy5SZWdpc3Rl",
-            "clJlcXVlc3RNZXNzYWdlSAASMQoLb2tfcmVzcG9uc2UYBiABKAsyGi5wYWNr",
-            "ZXRzLk9rUmVzcG9uc2VNZXNzYWdlSAASNQoNZGVueV9yZXNwb25zZRgHIAEo",
-            "CzIcLnBhY2tldHMuRGVueVJlc3BvbnNlTWVzc2FnZUgAEkAKE2NyZWF0ZV9y",
-            "b29tX3JlcXVlc3QYCCABKAsyIS5wYWNrZXRzLkNyZWF0ZVJvb21SZXF1ZXN0",
-            "TWVzc2FnZUgAEjwKEWpvaW5fcm9vbV9yZXF1ZXN0GAkgASgLMh8ucGFja2V0",
-            "cy5Kb2luUm9vbVJlcXVlc3RNZXNzYWdlSAASPgoSbGVhdmVfcm9vbV9yZXF1",
-            "ZXN0GAogASgLMiAucGFja2V0cy5MZWF2ZVJvb21SZXF1ZXN0TWVzc2FnZUgA",
-            "EjUKDXJlYWR5X3JlcXVlc3QYCyABKAsyHC5wYWNrZXRzLlJlYWR5UmVxdWVz",
-            "dE1lc3NhZ2VIABJAChNyb29tX3N0YXRlX3NuYXBzaG90GAwgASgLMiEucGFj",
-            "a2V0cy5Sb29tU3RhdGVTbmFwc2hvdE1lc3NhZ2VIABIzCg1tYXRjaF9zdGFy",
-            "dGVkGA0gASgLMhoucGFja2V0cy5NYXRjaFN0YXJ0TWVzc2FnZUgAEjYKCnN0",
-            "YXJ0X2dhbWUYDiABKAsyIC5wYWNrZXRzLlN0YXJ0R2FtZVJlcXVlc3RNZXNz",
-            "YWdlSAASOwoUcm9vbV9zdW1tYXJ5X21lc3NhZ2UYDyABKAsyGy5wYWNrZXRz",
-            "LlJvb21TdW1tYXJ5TWVzc2FnZUgAEj4KEnJvb21fbGlzdF9zbmFwc2hvdBgQ",
-            "IAEoCzIgLnBhY2tldHMuUm9vbUxpc3RTbmFwc2hvdE1lc3NhZ2VIABIzCgxw",
-            "bGF5ZXJfaW5wdXQYESABKAsyGy5wYWNrZXRzLlBsYXllcklucHV0TWVzc2Fn",
-            "ZUgAEjcKDm1hdGNoX3NuYXBzaG90GBIgASgLMh0ucGFja2V0cy5NYXRjaFNu",
-            "YXBzaG90TWVzc2FnZUgAEjMKEHBsYXllcl9raWNrX3Jvb20YEyABKAsyFy5w",
-            "YWNrZXRzLlBsYXllcktpY2tSb29tSAASNwoScGxheWVyX3JlbW92ZV9yb29t",
-            "GBQgASgLMhkucGFja2V0cy5QbGF5ZXJSZW1vdmVSb29tSAASRgoaam9pbl9y",
-            "b29tX3Jlc3BvbnNlX21lc3NhZ2UYFSABKAsyIC5wYWNrZXRzLkpvaW5Sb29t",
-            "UmVzcG9uc2VNZXNzYWdlSAASQAoXcGxheWVyc19pbl9yb29tX3JlcXVlc3QY",
-            "FiABKAsyHS5wYWNrZXRzLlBsYXllcnNJblJvb21SZXF1ZXN0SAASQgoYcGxh",
-            "eWVyc19pbl9yb29tX3Jlc3BvbnNlGBcgASgLMh4ucGFja2V0cy5QbGF5ZXJz",
-            "SW5Sb29tUmVzcG9uc2VIABJEChlyb29tX2xpc3RfcmVxdWVzdF9tZXNzYWdl",
-            "GBggASgLMh8ucGFja2V0cy5Sb29tTGlzdFJlcXVlc3RNZXNzYWdlSABCBQoD",
-            "bXNnKj4KClJvb21TdGF0dXMSFwoTUk9PTV9TVEFUVVNfV0FJVElORxAAEhcK",
-            "E1JPT01fU1RBVFVTX1NUQVJURUQQASpUCgpNYXRjaFBoYXNlEhcKE01BVENI",
-            "X1BIQVNFX1BSRVBBUkUQABIWChJNQVRDSF9QSEFTRV9BQ1RJVkUQARIVChFN",
-            "QVRDSF9QSEFTRV9FTkRFRBACQglaBy4vcHJvdG9iBnByb3RvMw=="));
+            "YWdlEg8KB2lzUmVhZHkYASABKAgiNwoUUmVhZHlSZXNwb25zZU1lc3NhZ2US",
+            "DgoGdXNlcklkGAEgASgEEg8KB2lzUmVhZHkYAiABKAgiZwoRUm9vbVBsYXll",
+            "ck1lc3NhZ2USDgoGdXNlcklkGAEgASgEEhAKCGNsaWVudElkGAIgASgEEhAK",
+            "CHVzZXJuYW1lGAMgASgJEg8KB2lzUmVhZHkYBCABKAgSDQoFb3duZXIYBSAB",
+            "KAgiRQoXSm9pblJvb21SZXNwb25zZU1lc3NhZ2USKgoGcGxheWVyGAEgASgL",
+            "MhoucGFja2V0cy5Sb29tUGxheWVyTWVzc2FnZSIgCg5QbGF5ZXJLaWNrUm9v",
+            "bRIOCgZ1c2VySWQYASABKAQiPgoQUGxheWVyUmVtb3ZlUm9vbRIqCgZwbGF5",
+            "ZXIYASABKAsyGi5wYWNrZXRzLlJvb21QbGF5ZXJNZXNzYWdlIiYKFFBsYXll",
+            "cnNJblJvb21SZXF1ZXN0Eg4KBnJvb21JZBgBIAEoBCJDChVQbGF5ZXJzSW5S",
+            "b29tUmVzcG9uc2USKgoGUGxheWVyGAEgAygLMhoucGFja2V0cy5Sb29tUGxh",
+            "eWVyTWVzc2FnZSKOAQoYUm9vbVN0YXRlU25hcHNob3RNZXNzYWdlEg4KBnJv",
+            "b21JZBgBIAEoBBIRCgltYXhQbGF5ZXIYAiABKA0SIwoGc3RhdHVzGAMgASgO",
+            "MhMucGFja2V0cy5Sb29tU3RhdHVzEioKBlBsYXllchgEIAMoCzIaLnBhY2tl",
+            "dHMuUm9vbVBsYXllck1lc3NhZ2UifgoRTWF0Y2hTdGFydE1lc3NhZ2USDgoG",
+            "cm9vbUlkGAEgASgEEg8KB21hdGNoSWQYAiABKAQSEQoJcGxheWVyX2lkGAMg",
+            "ASgEEgwKBHNsb3QYBCABKA0SDwoHbWFwU2VlZBgFIAEoBBIWCg5zdGFydHNB",
+            "dFVuaXhNcxgGIAEoAyImCg5WZWN0b3IyTWVzc2FnZRIJCgF4GAEgASgCEgkK",
+            "AXkYAiABKAIiVAoSUGxheWVySW5wdXRNZXNzYWdlEg8KB21hdGNoSWQYASAB",
+            "KAQSLQoMbW92ZVBvc2l0aW9uGAIgASgLMhcucGFja2V0cy5WZWN0b3IyTWVz",
+            "c2FnZSKcAQoXUGxheWVyQ2VsbEVudGl0eU1lc3NhZ2USCgoCaWQYASABKAQS",
+            "DwoHb3duZXJJZBgCIAEoBBIpCghwb3NpdGlvbhgDIAEoCzIXLnBhY2tldHMu",
+            "VmVjdG9yMk1lc3NhZ2USCgoCaHAYBCABKA0SDwoHYmlvbWFzcxgFIAEoDRIN",
+            "CgVsZXZlbBgGIAEoDRINCgVhbGl2ZRgHIAEoCCJnChFDb3JlRW50aXR5TWVz",
+            "c2FnZRIKCgJpZBgBIAEoBBIPCgdvd25lcklkGAIgASgEEikKCHBvc2l0aW9u",
+            "GAMgASgLMhcucGFja2V0cy5WZWN0b3IyTWVzc2FnZRIKCgJocBgEIAEoDSJt",
+            "ChVOdXRyaWVudEVudGl0eU1lc3NhZ2USCgoCaWQYASABKAQSKQoIcG9zaXRp",
+            "b24YAiABKAsyFy5wYWNrZXRzLlZlY3RvcjJNZXNzYWdlEg0KBXZhbHVlGAMg",
+            "ASgNEg4KBmFjdGl2ZRgEIAEoCCItChFXYWxsRW50aXR5TWVzc2FnZRIKCgJp",
+            "ZBgBIAEoBBIMCgRvcGVuGAIgASgIIrgCChRNYXRjaFNuYXBzaG90TWVzc2Fn",
+            "ZRIPCgdtYXRjaElkGAEgASgEEhIKCnNlcnZlclRpY2sYAiABKAQSIgoFcGhh",
+            "c2UYAyABKA4yEy5wYWNrZXRzLk1hdGNoUGhhc2USFwoPcGhhc2VUaW1lTGVm",
+            "dE1zGAQgASgDEjUKC3BsYXllckNlbGxzGAUgAygLMiAucGFja2V0cy5QbGF5",
+            "ZXJDZWxsRW50aXR5TWVzc2FnZRIpCgVjb3JlcxgGIAMoCzIaLnBhY2tldHMu",
+            "Q29yZUVudGl0eU1lc3NhZ2USMQoJbnV0cmllbnRzGAcgAygLMh4ucGFja2V0",
+            "cy5OdXRyaWVudEVudGl0eU1lc3NhZ2USKQoFd2FsbHMYCCADKAsyGi5wYWNr",
+            "ZXRzLldhbGxFbnRpdHlNZXNzYWdlIhMKEU9rUmVzcG9uc2VNZXNzYWdlIiUK",
+            "E0RlbnlSZXNwb25zZU1lc3NhZ2USDgoGcmVhc29uGAEgASgJIpQLCgZQYWNr",
+            "ZXQSEQoJc2VuZGVyX2lkGAEgASgEEiQKBGNoYXQYAiABKAsyFC5wYWNrZXRz",
+            "LkNoYXRNZXNzYWdlSAASIAoCaWQYAyABKAsyEi5wYWNrZXRzLklkTWVzc2Fn",
+            "ZUgAEjUKDWxvZ2luX3JlcXVlc3QYBCABKAsyHC5wYWNrZXRzLkxvZ2luUmVx",
+            "dWVzdE1lc3NhZ2VIABI7ChByZWdpc3Rlcl9yZXF1ZXN0GAUgASgLMh8ucGFj",
+            "a2V0cy5SZWdpc3RlclJlcXVlc3RNZXNzYWdlSAASMQoLb2tfcmVzcG9uc2UY",
+            "BiABKAsyGi5wYWNrZXRzLk9rUmVzcG9uc2VNZXNzYWdlSAASNQoNZGVueV9y",
+            "ZXNwb25zZRgHIAEoCzIcLnBhY2tldHMuRGVueVJlc3BvbnNlTWVzc2FnZUgA",
+            "EkAKE2NyZWF0ZV9yb29tX3JlcXVlc3QYCCABKAsyIS5wYWNrZXRzLkNyZWF0",
+            "ZVJvb21SZXF1ZXN0TWVzc2FnZUgAEjwKEWpvaW5fcm9vbV9yZXF1ZXN0GAkg",
+            "ASgLMh8ucGFja2V0cy5Kb2luUm9vbVJlcXVlc3RNZXNzYWdlSAASPgoSbGVh",
+            "dmVfcm9vbV9yZXF1ZXN0GAogASgLMiAucGFja2V0cy5MZWF2ZVJvb21SZXF1",
+            "ZXN0TWVzc2FnZUgAEjUKDXJlYWR5X3JlcXVlc3QYCyABKAsyHC5wYWNrZXRz",
+            "LlJlYWR5UmVxdWVzdE1lc3NhZ2VIABI3Cg5yZWFkeV9yZXNwb25zZRgMIAEo",
+            "CzIdLnBhY2tldHMuUmVhZHlSZXNwb25zZU1lc3NhZ2VIABJAChNyb29tX3N0",
+            "YXRlX3NuYXBzaG90GA0gASgLMiEucGFja2V0cy5Sb29tU3RhdGVTbmFwc2hv",
+            "dE1lc3NhZ2VIABIzCg1tYXRjaF9zdGFydGVkGA4gASgLMhoucGFja2V0cy5N",
+            "YXRjaFN0YXJ0TWVzc2FnZUgAEjYKCnN0YXJ0X2dhbWUYDyABKAsyIC5wYWNr",
+            "ZXRzLlN0YXJ0R2FtZVJlcXVlc3RNZXNzYWdlSAASOwoUcm9vbV9zdW1tYXJ5",
+            "X21lc3NhZ2UYECABKAsyGy5wYWNrZXRzLlJvb21TdW1tYXJ5TWVzc2FnZUgA",
+            "Ej4KEnJvb21fbGlzdF9zbmFwc2hvdBgRIAEoCzIgLnBhY2tldHMuUm9vbUxp",
+            "c3RTbmFwc2hvdE1lc3NhZ2VIABIzCgxwbGF5ZXJfaW5wdXQYEiABKAsyGy5w",
+            "YWNrZXRzLlBsYXllcklucHV0TWVzc2FnZUgAEjcKDm1hdGNoX3NuYXBzaG90",
+            "GBMgASgLMh0ucGFja2V0cy5NYXRjaFNuYXBzaG90TWVzc2FnZUgAEjMKEHBs",
+            "YXllcl9raWNrX3Jvb20YFCABKAsyFy5wYWNrZXRzLlBsYXllcktpY2tSb29t",
+            "SAASNwoScGxheWVyX3JlbW92ZV9yb29tGBUgASgLMhkucGFja2V0cy5QbGF5",
+            "ZXJSZW1vdmVSb29tSAASRgoaam9pbl9yb29tX3Jlc3BvbnNlX21lc3NhZ2UY",
+            "FiABKAsyIC5wYWNrZXRzLkpvaW5Sb29tUmVzcG9uc2VNZXNzYWdlSAASQAoX",
+            "cGxheWVyc19pbl9yb29tX3JlcXVlc3QYFyABKAsyHS5wYWNrZXRzLlBsYXll",
+            "cnNJblJvb21SZXF1ZXN0SAASQgoYcGxheWVyc19pbl9yb29tX3Jlc3BvbnNl",
+            "GBggASgLMh4ucGFja2V0cy5QbGF5ZXJzSW5Sb29tUmVzcG9uc2VIABJEChly",
+            "b29tX2xpc3RfcmVxdWVzdF9tZXNzYWdlGBkgASgLMh8ucGFja2V0cy5Sb29t",
+            "TGlzdFJlcXVlc3RNZXNzYWdlSABCBQoDbXNnKj4KClJvb21TdGF0dXMSFwoT",
+            "Uk9PTV9TVEFUVVNfV0FJVElORxAAEhcKE1JPT01fU1RBVFVTX1NUQVJURUQQ",
+            "ASpUCgpNYXRjaFBoYXNlEhcKE01BVENIX1BIQVNFX1BSRVBBUkUQABIWChJN",
+            "QVRDSF9QSEFTRV9BQ1RJVkUQARIVChFNQVRDSF9QSEFTRV9FTkRFRBACQgla",
+            "By4vcHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Packets.RoomStatus), typeof(global::Packets.MatchPhase), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -123,6 +126,7 @@ namespace Packets {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.RoomListSnapshotMessage), global::Packets.RoomListSnapshotMessage.Parser, new[]{ "Rooms" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.LeaveRoomRequestMessage), global::Packets.LeaveRoomRequestMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.ReadyRequestMessage), global::Packets.ReadyRequestMessage.Parser, new[]{ "IsReady" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packets.ReadyResponseMessage), global::Packets.ReadyResponseMessage.Parser, new[]{ "UserId", "IsReady" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.RoomPlayerMessage), global::Packets.RoomPlayerMessage.Parser, new[]{ "UserId", "ClientId", "Username", "IsReady", "Owner" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.JoinRoomResponseMessage), global::Packets.JoinRoomResponseMessage.Parser, new[]{ "Player" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.PlayerKickRoom), global::Packets.PlayerKickRoom.Parser, new[]{ "UserId" }, null, null, null, null),
@@ -140,7 +144,7 @@ namespace Packets {
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.MatchSnapshotMessage), global::Packets.MatchSnapshotMessage.Parser, new[]{ "MatchId", "ServerTick", "Phase", "PhaseTimeLeftMs", "PlayerCells", "Cores", "Nutrients", "Walls" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.OkResponseMessage), global::Packets.OkResponseMessage.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Packets.DenyResponseMessage), global::Packets.DenyResponseMessage.Parser, new[]{ "Reason" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Packets.Packet), global::Packets.Packet.Parser, new[]{ "SenderId", "Chat", "Id", "LoginRequest", "RegisterRequest", "OkResponse", "DenyResponse", "CreateRoomRequest", "JoinRoomRequest", "LeaveRoomRequest", "ReadyRequest", "RoomStateSnapshot", "MatchStarted", "StartGame", "RoomSummaryMessage", "RoomListSnapshot", "PlayerInput", "MatchSnapshot", "PlayerKickRoom", "PlayerRemoveRoom", "JoinRoomResponseMessage", "PlayersInRoomRequest", "PlayersInRoomResponse", "RoomListRequestMessage" }, new[]{ "Msg" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Packets.Packet), global::Packets.Packet.Parser, new[]{ "SenderId", "Chat", "Id", "LoginRequest", "RegisterRequest", "OkResponse", "DenyResponse", "CreateRoomRequest", "JoinRoomRequest", "LeaveRoomRequest", "ReadyRequest", "ReadyResponse", "RoomStateSnapshot", "MatchStarted", "StartGame", "RoomSummaryMessage", "RoomListSnapshot", "PlayerInput", "MatchSnapshot", "PlayerKickRoom", "PlayerRemoveRoom", "JoinRoomResponseMessage", "PlayersInRoomRequest", "PlayersInRoomResponse", "RoomListRequestMessage" }, new[]{ "Msg" }, null, null, null)
           }));
     }
     #endregion
@@ -2664,6 +2668,241 @@ namespace Packets {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class ReadyResponseMessage : pb::IMessage<ReadyResponseMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ReadyResponseMessage> _parser = new pb::MessageParser<ReadyResponseMessage>(() => new ReadyResponseMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<ReadyResponseMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ReadyResponseMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ReadyResponseMessage(ReadyResponseMessage other) : this() {
+      userId_ = other.userId_;
+      isReady_ = other.isReady_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ReadyResponseMessage Clone() {
+      return new ReadyResponseMessage(this);
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 1;
+    private ulong userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public ulong UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isReady" field.</summary>
+    public const int IsReadyFieldNumber = 2;
+    private bool isReady_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsReady {
+      get { return isReady_; }
+      set {
+        isReady_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as ReadyResponseMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(ReadyResponseMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserId != other.UserId) return false;
+      if (IsReady != other.IsReady) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserId != 0UL) hash ^= UserId.GetHashCode();
+      if (IsReady != false) hash ^= IsReady.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (UserId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(UserId);
+      }
+      if (IsReady != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsReady);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (UserId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(UserId);
+      }
+      if (IsReady != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsReady);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(UserId);
+      }
+      if (IsReady != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(ReadyResponseMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserId != 0UL) {
+        UserId = other.UserId;
+      }
+      if (other.IsReady != false) {
+        IsReady = other.IsReady;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            UserId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            IsReady = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            UserId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            IsReady = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class RoomPlayerMessage : pb::IMessage<RoomPlayerMessage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -2678,7 +2917,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3024,7 +3263,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3231,7 +3470,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3429,7 +3668,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3636,7 +3875,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3834,7 +4073,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4021,7 +4260,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4319,7 +4558,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4702,7 +4941,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4937,7 +5176,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5181,7 +5420,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5610,7 +5849,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5928,7 +6167,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6246,7 +6485,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6481,7 +6720,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6894,7 +7133,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[27]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7055,7 +7294,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[28]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7253,7 +7492,7 @@ namespace Packets {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[29]; }
+      get { return global::Packets.PacketsReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7304,6 +7543,9 @@ namespace Packets {
           break;
         case MsgOneofCase.ReadyRequest:
           ReadyRequest = other.ReadyRequest.Clone();
+          break;
+        case MsgOneofCase.ReadyResponse:
+          ReadyResponse = other.ReadyResponse.Clone();
           break;
         case MsgOneofCase.RoomStateSnapshot:
           RoomStateSnapshot = other.RoomStateSnapshot.Clone();
@@ -7487,8 +7729,20 @@ namespace Packets {
       }
     }
 
+    /// <summary>Field number for the "ready_response" field.</summary>
+    public const int ReadyResponseFieldNumber = 12;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Packets.ReadyResponseMessage ReadyResponse {
+      get { return msgCase_ == MsgOneofCase.ReadyResponse ? (global::Packets.ReadyResponseMessage) msg_ : null; }
+      set {
+        msg_ = value;
+        msgCase_ = value == null ? MsgOneofCase.None : MsgOneofCase.ReadyResponse;
+      }
+    }
+
     /// <summary>Field number for the "room_state_snapshot" field.</summary>
-    public const int RoomStateSnapshotFieldNumber = 12;
+    public const int RoomStateSnapshotFieldNumber = 13;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.RoomStateSnapshotMessage RoomStateSnapshot {
@@ -7500,7 +7754,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "match_started" field.</summary>
-    public const int MatchStartedFieldNumber = 13;
+    public const int MatchStartedFieldNumber = 14;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.MatchStartMessage MatchStarted {
@@ -7512,7 +7766,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "start_game" field.</summary>
-    public const int StartGameFieldNumber = 14;
+    public const int StartGameFieldNumber = 15;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.StartGameRequestMessage StartGame {
@@ -7524,7 +7778,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "room_summary_message" field.</summary>
-    public const int RoomSummaryMessageFieldNumber = 15;
+    public const int RoomSummaryMessageFieldNumber = 16;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.RoomSummaryMessage RoomSummaryMessage {
@@ -7536,7 +7790,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "room_list_snapshot" field.</summary>
-    public const int RoomListSnapshotFieldNumber = 16;
+    public const int RoomListSnapshotFieldNumber = 17;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.RoomListSnapshotMessage RoomListSnapshot {
@@ -7548,7 +7802,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "player_input" field.</summary>
-    public const int PlayerInputFieldNumber = 17;
+    public const int PlayerInputFieldNumber = 18;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.PlayerInputMessage PlayerInput {
@@ -7560,7 +7814,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "match_snapshot" field.</summary>
-    public const int MatchSnapshotFieldNumber = 18;
+    public const int MatchSnapshotFieldNumber = 19;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.MatchSnapshotMessage MatchSnapshot {
@@ -7572,7 +7826,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "player_kick_room" field.</summary>
-    public const int PlayerKickRoomFieldNumber = 19;
+    public const int PlayerKickRoomFieldNumber = 20;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.PlayerKickRoom PlayerKickRoom {
@@ -7584,7 +7838,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "player_remove_room" field.</summary>
-    public const int PlayerRemoveRoomFieldNumber = 20;
+    public const int PlayerRemoveRoomFieldNumber = 21;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.PlayerRemoveRoom PlayerRemoveRoom {
@@ -7596,7 +7850,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "join_room_response_message" field.</summary>
-    public const int JoinRoomResponseMessageFieldNumber = 21;
+    public const int JoinRoomResponseMessageFieldNumber = 22;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.JoinRoomResponseMessage JoinRoomResponseMessage {
@@ -7608,7 +7862,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "players_in_room_request" field.</summary>
-    public const int PlayersInRoomRequestFieldNumber = 22;
+    public const int PlayersInRoomRequestFieldNumber = 23;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.PlayersInRoomRequest PlayersInRoomRequest {
@@ -7620,7 +7874,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "players_in_room_response" field.</summary>
-    public const int PlayersInRoomResponseFieldNumber = 23;
+    public const int PlayersInRoomResponseFieldNumber = 24;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.PlayersInRoomResponse PlayersInRoomResponse {
@@ -7632,7 +7886,7 @@ namespace Packets {
     }
 
     /// <summary>Field number for the "room_list_request_message" field.</summary>
-    public const int RoomListRequestMessageFieldNumber = 24;
+    public const int RoomListRequestMessageFieldNumber = 25;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Packets.RoomListRequestMessage RoomListRequestMessage {
@@ -7657,19 +7911,20 @@ namespace Packets {
       JoinRoomRequest = 9,
       LeaveRoomRequest = 10,
       ReadyRequest = 11,
-      RoomStateSnapshot = 12,
-      MatchStarted = 13,
-      StartGame = 14,
-      RoomSummaryMessage = 15,
-      RoomListSnapshot = 16,
-      PlayerInput = 17,
-      MatchSnapshot = 18,
-      PlayerKickRoom = 19,
-      PlayerRemoveRoom = 20,
-      JoinRoomResponseMessage = 21,
-      PlayersInRoomRequest = 22,
-      PlayersInRoomResponse = 23,
-      RoomListRequestMessage = 24,
+      ReadyResponse = 12,
+      RoomStateSnapshot = 13,
+      MatchStarted = 14,
+      StartGame = 15,
+      RoomSummaryMessage = 16,
+      RoomListSnapshot = 17,
+      PlayerInput = 18,
+      MatchSnapshot = 19,
+      PlayerKickRoom = 20,
+      PlayerRemoveRoom = 21,
+      JoinRoomResponseMessage = 22,
+      PlayersInRoomRequest = 23,
+      PlayersInRoomResponse = 24,
+      RoomListRequestMessage = 25,
     }
     private MsgOneofCase msgCase_ = MsgOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7711,6 +7966,7 @@ namespace Packets {
       if (!object.Equals(JoinRoomRequest, other.JoinRoomRequest)) return false;
       if (!object.Equals(LeaveRoomRequest, other.LeaveRoomRequest)) return false;
       if (!object.Equals(ReadyRequest, other.ReadyRequest)) return false;
+      if (!object.Equals(ReadyResponse, other.ReadyResponse)) return false;
       if (!object.Equals(RoomStateSnapshot, other.RoomStateSnapshot)) return false;
       if (!object.Equals(MatchStarted, other.MatchStarted)) return false;
       if (!object.Equals(StartGame, other.StartGame)) return false;
@@ -7743,6 +7999,7 @@ namespace Packets {
       if (msgCase_ == MsgOneofCase.JoinRoomRequest) hash ^= JoinRoomRequest.GetHashCode();
       if (msgCase_ == MsgOneofCase.LeaveRoomRequest) hash ^= LeaveRoomRequest.GetHashCode();
       if (msgCase_ == MsgOneofCase.ReadyRequest) hash ^= ReadyRequest.GetHashCode();
+      if (msgCase_ == MsgOneofCase.ReadyResponse) hash ^= ReadyResponse.GetHashCode();
       if (msgCase_ == MsgOneofCase.RoomStateSnapshot) hash ^= RoomStateSnapshot.GetHashCode();
       if (msgCase_ == MsgOneofCase.MatchStarted) hash ^= MatchStarted.GetHashCode();
       if (msgCase_ == MsgOneofCase.StartGame) hash ^= StartGame.GetHashCode();
@@ -7819,56 +8076,60 @@ namespace Packets {
         output.WriteRawTag(90);
         output.WriteMessage(ReadyRequest);
       }
-      if (msgCase_ == MsgOneofCase.RoomStateSnapshot) {
+      if (msgCase_ == MsgOneofCase.ReadyResponse) {
         output.WriteRawTag(98);
+        output.WriteMessage(ReadyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.RoomStateSnapshot) {
+        output.WriteRawTag(106);
         output.WriteMessage(RoomStateSnapshot);
       }
       if (msgCase_ == MsgOneofCase.MatchStarted) {
-        output.WriteRawTag(106);
+        output.WriteRawTag(114);
         output.WriteMessage(MatchStarted);
       }
       if (msgCase_ == MsgOneofCase.StartGame) {
-        output.WriteRawTag(114);
+        output.WriteRawTag(122);
         output.WriteMessage(StartGame);
       }
       if (msgCase_ == MsgOneofCase.RoomSummaryMessage) {
-        output.WriteRawTag(122);
+        output.WriteRawTag(130, 1);
         output.WriteMessage(RoomSummaryMessage);
       }
       if (msgCase_ == MsgOneofCase.RoomListSnapshot) {
-        output.WriteRawTag(130, 1);
+        output.WriteRawTag(138, 1);
         output.WriteMessage(RoomListSnapshot);
       }
       if (msgCase_ == MsgOneofCase.PlayerInput) {
-        output.WriteRawTag(138, 1);
+        output.WriteRawTag(146, 1);
         output.WriteMessage(PlayerInput);
       }
       if (msgCase_ == MsgOneofCase.MatchSnapshot) {
-        output.WriteRawTag(146, 1);
+        output.WriteRawTag(154, 1);
         output.WriteMessage(MatchSnapshot);
       }
       if (msgCase_ == MsgOneofCase.PlayerKickRoom) {
-        output.WriteRawTag(154, 1);
+        output.WriteRawTag(162, 1);
         output.WriteMessage(PlayerKickRoom);
       }
       if (msgCase_ == MsgOneofCase.PlayerRemoveRoom) {
-        output.WriteRawTag(162, 1);
+        output.WriteRawTag(170, 1);
         output.WriteMessage(PlayerRemoveRoom);
       }
       if (msgCase_ == MsgOneofCase.JoinRoomResponseMessage) {
-        output.WriteRawTag(170, 1);
+        output.WriteRawTag(178, 1);
         output.WriteMessage(JoinRoomResponseMessage);
       }
       if (msgCase_ == MsgOneofCase.PlayersInRoomRequest) {
-        output.WriteRawTag(178, 1);
+        output.WriteRawTag(186, 1);
         output.WriteMessage(PlayersInRoomRequest);
       }
       if (msgCase_ == MsgOneofCase.PlayersInRoomResponse) {
-        output.WriteRawTag(186, 1);
+        output.WriteRawTag(194, 1);
         output.WriteMessage(PlayersInRoomResponse);
       }
       if (msgCase_ == MsgOneofCase.RoomListRequestMessage) {
-        output.WriteRawTag(194, 1);
+        output.WriteRawTag(202, 1);
         output.WriteMessage(RoomListRequestMessage);
       }
       if (_unknownFields != null) {
@@ -7925,56 +8186,60 @@ namespace Packets {
         output.WriteRawTag(90);
         output.WriteMessage(ReadyRequest);
       }
-      if (msgCase_ == MsgOneofCase.RoomStateSnapshot) {
+      if (msgCase_ == MsgOneofCase.ReadyResponse) {
         output.WriteRawTag(98);
+        output.WriteMessage(ReadyResponse);
+      }
+      if (msgCase_ == MsgOneofCase.RoomStateSnapshot) {
+        output.WriteRawTag(106);
         output.WriteMessage(RoomStateSnapshot);
       }
       if (msgCase_ == MsgOneofCase.MatchStarted) {
-        output.WriteRawTag(106);
+        output.WriteRawTag(114);
         output.WriteMessage(MatchStarted);
       }
       if (msgCase_ == MsgOneofCase.StartGame) {
-        output.WriteRawTag(114);
+        output.WriteRawTag(122);
         output.WriteMessage(StartGame);
       }
       if (msgCase_ == MsgOneofCase.RoomSummaryMessage) {
-        output.WriteRawTag(122);
+        output.WriteRawTag(130, 1);
         output.WriteMessage(RoomSummaryMessage);
       }
       if (msgCase_ == MsgOneofCase.RoomListSnapshot) {
-        output.WriteRawTag(130, 1);
+        output.WriteRawTag(138, 1);
         output.WriteMessage(RoomListSnapshot);
       }
       if (msgCase_ == MsgOneofCase.PlayerInput) {
-        output.WriteRawTag(138, 1);
+        output.WriteRawTag(146, 1);
         output.WriteMessage(PlayerInput);
       }
       if (msgCase_ == MsgOneofCase.MatchSnapshot) {
-        output.WriteRawTag(146, 1);
+        output.WriteRawTag(154, 1);
         output.WriteMessage(MatchSnapshot);
       }
       if (msgCase_ == MsgOneofCase.PlayerKickRoom) {
-        output.WriteRawTag(154, 1);
+        output.WriteRawTag(162, 1);
         output.WriteMessage(PlayerKickRoom);
       }
       if (msgCase_ == MsgOneofCase.PlayerRemoveRoom) {
-        output.WriteRawTag(162, 1);
+        output.WriteRawTag(170, 1);
         output.WriteMessage(PlayerRemoveRoom);
       }
       if (msgCase_ == MsgOneofCase.JoinRoomResponseMessage) {
-        output.WriteRawTag(170, 1);
+        output.WriteRawTag(178, 1);
         output.WriteMessage(JoinRoomResponseMessage);
       }
       if (msgCase_ == MsgOneofCase.PlayersInRoomRequest) {
-        output.WriteRawTag(178, 1);
+        output.WriteRawTag(186, 1);
         output.WriteMessage(PlayersInRoomRequest);
       }
       if (msgCase_ == MsgOneofCase.PlayersInRoomResponse) {
-        output.WriteRawTag(186, 1);
+        output.WriteRawTag(194, 1);
         output.WriteMessage(PlayersInRoomResponse);
       }
       if (msgCase_ == MsgOneofCase.RoomListRequestMessage) {
-        output.WriteRawTag(194, 1);
+        output.WriteRawTag(202, 1);
         output.WriteMessage(RoomListRequestMessage);
       }
       if (_unknownFields != null) {
@@ -8020,6 +8285,9 @@ namespace Packets {
       if (msgCase_ == MsgOneofCase.ReadyRequest) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(ReadyRequest);
       }
+      if (msgCase_ == MsgOneofCase.ReadyResponse) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ReadyResponse);
+      }
       if (msgCase_ == MsgOneofCase.RoomStateSnapshot) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(RoomStateSnapshot);
       }
@@ -8030,7 +8298,7 @@ namespace Packets {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(StartGame);
       }
       if (msgCase_ == MsgOneofCase.RoomSummaryMessage) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RoomSummaryMessage);
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RoomSummaryMessage);
       }
       if (msgCase_ == MsgOneofCase.RoomListSnapshot) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(RoomListSnapshot);
@@ -8134,6 +8402,12 @@ namespace Packets {
             ReadyRequest = new global::Packets.ReadyRequestMessage();
           }
           ReadyRequest.MergeFrom(other.ReadyRequest);
+          break;
+        case MsgOneofCase.ReadyResponse:
+          if (ReadyResponse == null) {
+            ReadyResponse = new global::Packets.ReadyResponseMessage();
+          }
+          ReadyResponse.MergeFrom(other.ReadyResponse);
           break;
         case MsgOneofCase.RoomStateSnapshot:
           if (RoomStateSnapshot == null) {
@@ -8329,6 +8603,15 @@ namespace Packets {
             break;
           }
           case 98: {
+            global::Packets.ReadyResponseMessage subBuilder = new global::Packets.ReadyResponseMessage();
+            if (msgCase_ == MsgOneofCase.ReadyResponse) {
+              subBuilder.MergeFrom(ReadyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ReadyResponse = subBuilder;
+            break;
+          }
+          case 106: {
             global::Packets.RoomStateSnapshotMessage subBuilder = new global::Packets.RoomStateSnapshotMessage();
             if (msgCase_ == MsgOneofCase.RoomStateSnapshot) {
               subBuilder.MergeFrom(RoomStateSnapshot);
@@ -8337,7 +8620,7 @@ namespace Packets {
             RoomStateSnapshot = subBuilder;
             break;
           }
-          case 106: {
+          case 114: {
             global::Packets.MatchStartMessage subBuilder = new global::Packets.MatchStartMessage();
             if (msgCase_ == MsgOneofCase.MatchStarted) {
               subBuilder.MergeFrom(MatchStarted);
@@ -8346,7 +8629,7 @@ namespace Packets {
             MatchStarted = subBuilder;
             break;
           }
-          case 114: {
+          case 122: {
             global::Packets.StartGameRequestMessage subBuilder = new global::Packets.StartGameRequestMessage();
             if (msgCase_ == MsgOneofCase.StartGame) {
               subBuilder.MergeFrom(StartGame);
@@ -8355,7 +8638,7 @@ namespace Packets {
             StartGame = subBuilder;
             break;
           }
-          case 122: {
+          case 130: {
             global::Packets.RoomSummaryMessage subBuilder = new global::Packets.RoomSummaryMessage();
             if (msgCase_ == MsgOneofCase.RoomSummaryMessage) {
               subBuilder.MergeFrom(RoomSummaryMessage);
@@ -8364,7 +8647,7 @@ namespace Packets {
             RoomSummaryMessage = subBuilder;
             break;
           }
-          case 130: {
+          case 138: {
             global::Packets.RoomListSnapshotMessage subBuilder = new global::Packets.RoomListSnapshotMessage();
             if (msgCase_ == MsgOneofCase.RoomListSnapshot) {
               subBuilder.MergeFrom(RoomListSnapshot);
@@ -8373,7 +8656,7 @@ namespace Packets {
             RoomListSnapshot = subBuilder;
             break;
           }
-          case 138: {
+          case 146: {
             global::Packets.PlayerInputMessage subBuilder = new global::Packets.PlayerInputMessage();
             if (msgCase_ == MsgOneofCase.PlayerInput) {
               subBuilder.MergeFrom(PlayerInput);
@@ -8382,7 +8665,7 @@ namespace Packets {
             PlayerInput = subBuilder;
             break;
           }
-          case 146: {
+          case 154: {
             global::Packets.MatchSnapshotMessage subBuilder = new global::Packets.MatchSnapshotMessage();
             if (msgCase_ == MsgOneofCase.MatchSnapshot) {
               subBuilder.MergeFrom(MatchSnapshot);
@@ -8391,7 +8674,7 @@ namespace Packets {
             MatchSnapshot = subBuilder;
             break;
           }
-          case 154: {
+          case 162: {
             global::Packets.PlayerKickRoom subBuilder = new global::Packets.PlayerKickRoom();
             if (msgCase_ == MsgOneofCase.PlayerKickRoom) {
               subBuilder.MergeFrom(PlayerKickRoom);
@@ -8400,7 +8683,7 @@ namespace Packets {
             PlayerKickRoom = subBuilder;
             break;
           }
-          case 162: {
+          case 170: {
             global::Packets.PlayerRemoveRoom subBuilder = new global::Packets.PlayerRemoveRoom();
             if (msgCase_ == MsgOneofCase.PlayerRemoveRoom) {
               subBuilder.MergeFrom(PlayerRemoveRoom);
@@ -8409,7 +8692,7 @@ namespace Packets {
             PlayerRemoveRoom = subBuilder;
             break;
           }
-          case 170: {
+          case 178: {
             global::Packets.JoinRoomResponseMessage subBuilder = new global::Packets.JoinRoomResponseMessage();
             if (msgCase_ == MsgOneofCase.JoinRoomResponseMessage) {
               subBuilder.MergeFrom(JoinRoomResponseMessage);
@@ -8418,7 +8701,7 @@ namespace Packets {
             JoinRoomResponseMessage = subBuilder;
             break;
           }
-          case 178: {
+          case 186: {
             global::Packets.PlayersInRoomRequest subBuilder = new global::Packets.PlayersInRoomRequest();
             if (msgCase_ == MsgOneofCase.PlayersInRoomRequest) {
               subBuilder.MergeFrom(PlayersInRoomRequest);
@@ -8427,7 +8710,7 @@ namespace Packets {
             PlayersInRoomRequest = subBuilder;
             break;
           }
-          case 186: {
+          case 194: {
             global::Packets.PlayersInRoomResponse subBuilder = new global::Packets.PlayersInRoomResponse();
             if (msgCase_ == MsgOneofCase.PlayersInRoomResponse) {
               subBuilder.MergeFrom(PlayersInRoomResponse);
@@ -8436,7 +8719,7 @@ namespace Packets {
             PlayersInRoomResponse = subBuilder;
             break;
           }
-          case 194: {
+          case 202: {
             global::Packets.RoomListRequestMessage subBuilder = new global::Packets.RoomListRequestMessage();
             if (msgCase_ == MsgOneofCase.RoomListRequestMessage) {
               subBuilder.MergeFrom(RoomListRequestMessage);
@@ -8559,6 +8842,15 @@ namespace Packets {
             break;
           }
           case 98: {
+            global::Packets.ReadyResponseMessage subBuilder = new global::Packets.ReadyResponseMessage();
+            if (msgCase_ == MsgOneofCase.ReadyResponse) {
+              subBuilder.MergeFrom(ReadyResponse);
+            }
+            input.ReadMessage(subBuilder);
+            ReadyResponse = subBuilder;
+            break;
+          }
+          case 106: {
             global::Packets.RoomStateSnapshotMessage subBuilder = new global::Packets.RoomStateSnapshotMessage();
             if (msgCase_ == MsgOneofCase.RoomStateSnapshot) {
               subBuilder.MergeFrom(RoomStateSnapshot);
@@ -8567,7 +8859,7 @@ namespace Packets {
             RoomStateSnapshot = subBuilder;
             break;
           }
-          case 106: {
+          case 114: {
             global::Packets.MatchStartMessage subBuilder = new global::Packets.MatchStartMessage();
             if (msgCase_ == MsgOneofCase.MatchStarted) {
               subBuilder.MergeFrom(MatchStarted);
@@ -8576,7 +8868,7 @@ namespace Packets {
             MatchStarted = subBuilder;
             break;
           }
-          case 114: {
+          case 122: {
             global::Packets.StartGameRequestMessage subBuilder = new global::Packets.StartGameRequestMessage();
             if (msgCase_ == MsgOneofCase.StartGame) {
               subBuilder.MergeFrom(StartGame);
@@ -8585,7 +8877,7 @@ namespace Packets {
             StartGame = subBuilder;
             break;
           }
-          case 122: {
+          case 130: {
             global::Packets.RoomSummaryMessage subBuilder = new global::Packets.RoomSummaryMessage();
             if (msgCase_ == MsgOneofCase.RoomSummaryMessage) {
               subBuilder.MergeFrom(RoomSummaryMessage);
@@ -8594,7 +8886,7 @@ namespace Packets {
             RoomSummaryMessage = subBuilder;
             break;
           }
-          case 130: {
+          case 138: {
             global::Packets.RoomListSnapshotMessage subBuilder = new global::Packets.RoomListSnapshotMessage();
             if (msgCase_ == MsgOneofCase.RoomListSnapshot) {
               subBuilder.MergeFrom(RoomListSnapshot);
@@ -8603,7 +8895,7 @@ namespace Packets {
             RoomListSnapshot = subBuilder;
             break;
           }
-          case 138: {
+          case 146: {
             global::Packets.PlayerInputMessage subBuilder = new global::Packets.PlayerInputMessage();
             if (msgCase_ == MsgOneofCase.PlayerInput) {
               subBuilder.MergeFrom(PlayerInput);
@@ -8612,7 +8904,7 @@ namespace Packets {
             PlayerInput = subBuilder;
             break;
           }
-          case 146: {
+          case 154: {
             global::Packets.MatchSnapshotMessage subBuilder = new global::Packets.MatchSnapshotMessage();
             if (msgCase_ == MsgOneofCase.MatchSnapshot) {
               subBuilder.MergeFrom(MatchSnapshot);
@@ -8621,7 +8913,7 @@ namespace Packets {
             MatchSnapshot = subBuilder;
             break;
           }
-          case 154: {
+          case 162: {
             global::Packets.PlayerKickRoom subBuilder = new global::Packets.PlayerKickRoom();
             if (msgCase_ == MsgOneofCase.PlayerKickRoom) {
               subBuilder.MergeFrom(PlayerKickRoom);
@@ -8630,7 +8922,7 @@ namespace Packets {
             PlayerKickRoom = subBuilder;
             break;
           }
-          case 162: {
+          case 170: {
             global::Packets.PlayerRemoveRoom subBuilder = new global::Packets.PlayerRemoveRoom();
             if (msgCase_ == MsgOneofCase.PlayerRemoveRoom) {
               subBuilder.MergeFrom(PlayerRemoveRoom);
@@ -8639,7 +8931,7 @@ namespace Packets {
             PlayerRemoveRoom = subBuilder;
             break;
           }
-          case 170: {
+          case 178: {
             global::Packets.JoinRoomResponseMessage subBuilder = new global::Packets.JoinRoomResponseMessage();
             if (msgCase_ == MsgOneofCase.JoinRoomResponseMessage) {
               subBuilder.MergeFrom(JoinRoomResponseMessage);
@@ -8648,7 +8940,7 @@ namespace Packets {
             JoinRoomResponseMessage = subBuilder;
             break;
           }
-          case 178: {
+          case 186: {
             global::Packets.PlayersInRoomRequest subBuilder = new global::Packets.PlayersInRoomRequest();
             if (msgCase_ == MsgOneofCase.PlayersInRoomRequest) {
               subBuilder.MergeFrom(PlayersInRoomRequest);
@@ -8657,7 +8949,7 @@ namespace Packets {
             PlayersInRoomRequest = subBuilder;
             break;
           }
-          case 186: {
+          case 194: {
             global::Packets.PlayersInRoomResponse subBuilder = new global::Packets.PlayersInRoomResponse();
             if (msgCase_ == MsgOneofCase.PlayersInRoomResponse) {
               subBuilder.MergeFrom(PlayersInRoomResponse);
@@ -8666,7 +8958,7 @@ namespace Packets {
             PlayersInRoomResponse = subBuilder;
             break;
           }
-          case 194: {
+          case 202: {
             global::Packets.RoomListRequestMessage subBuilder = new global::Packets.RoomListRequestMessage();
             if (msgCase_ == MsgOneofCase.RoomListRequestMessage) {
               subBuilder.MergeFrom(RoomListRequestMessage);
